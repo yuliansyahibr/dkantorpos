@@ -1,0 +1,1 @@
+django-env\Scripts\python manage.py runserver 9000

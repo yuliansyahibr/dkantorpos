@@ -1,0 +1,52 @@
+{% include 'header.html' %}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+	<div class="container">
+		<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+			<li><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+			<li class="active">Halaman Masuk</li>
+		</ol>
+	</div>
+</div>
+<!-- //breadcrumbs -->
+<!-- login -->
+<div class="login">
+	<div class="container">
+		<h2>Masuk </h2>
+			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+				{% if form.errors %}
+					<p>Your username and password didn't match. Please try again.</p>
+				{% endif %}
+				
+				{% if next %}
+					{% if user.is_authenticated %}
+						<p>Your account doesn't have access to this page. To proceed,
+						please login with an account that has access.</p>
+					{% else %}
+						<p>Please login to see this page.</p>
+					{% endif %}
+				{% endif %}
+			  
+				<form method="post" action="{% url 'login' %}">
+					{% csrf_token %}
+					<div class="form-row">
+						{{ form.username.errors }}
+						{{ form.username.label_tag }} {{ form.username }}
+					</div>
+					<div class="form-row">
+						{{ form.password.errors }}
+						{{ form.password.label_tag }} {{ form.password }}
+						<input type="hidden" name="next" value="{{ next }}">
+					</div>
+					<div class="forgot">
+						<a href="{% url 'password_reset' %}">Forgot Password?</a>
+					</div>
+					<input type="submit" value="Login">
+				</form>
+		</div>
+		<h4>Belum Punya Akun?</h4>
+		<p><a href="{% url 'register' %}">Registrasi Disini</a> (atau) Kembali ke <a href="{% url 'index' %}">Home<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
+	</div>
+</div>
+<!-- //login -->
+{% include 'footer.html' %}
