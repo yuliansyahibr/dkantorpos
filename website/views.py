@@ -34,6 +34,9 @@ def register(request):
      # return render(request, 'registered.html')
      return render(request, 'registration/register.html', {'form': form})
 
+def profile(request):
+     return render(request, 'user/profile.html')
+     
 def checkout(request):
      return render(request, 'checkout.html')
 
