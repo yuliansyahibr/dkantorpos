@@ -141,7 +141,7 @@ class Item(models.Model):
     harga = models.IntegerField()
     deskripsi = models.TextField()
     jumlah_tersedia = models.IntegerField()
-    foto = models.ManyToManyField(Image)
+    foto = models.ImageField()
     # foto = models.ImageField(upload_to=path_and_rename('images/item'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

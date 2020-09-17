@@ -25,8 +25,7 @@ SECRET_KEY = 'tcl)$t0+v9tl$1yn@l89-*nuxj)#8ha7@i*l0g55=e%4&4d#tu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -128,8 +127,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+import os
+
+# DataFlair Static Files Settings
 STATIC_URL = '/static/'
+
+# DataFlair #Uploaded_Files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

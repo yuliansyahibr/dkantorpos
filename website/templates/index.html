@@ -29,10 +29,12 @@
 	<!-- //top-header and slider -->
 	
 	<!-- new -->
+	{% block content %}
 	<div class="newproducts-w3agile">
 		<div class="container">
 			<h3 class="mb-5">Produk Baru</h3>
 			<div class="row">
+				{% for item in shelf %}
 				<div class="col-md-3 top_brand_left-1 mb-4">
 					<div class="hover14 column">
 						<div class="agile_top_brand_left_grid">
@@ -40,8 +42,8 @@
 								<figure>
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
-											<a href="#"><img title=" " alt=" " src="{% static 'website/images/Materai 1.jpg' %}"></a>		
-											<p>Materai 6000</p>
+											<a href="#"><img title=" " alt=" " src="{{ item.foto.url }}"></a>		
+											<p>{{ item.nama_item }}</p>
 											<div class="stars">
 												<i class="fa fa-star gold-star" aria-hidden="true"></i>
 												<i class="fa fa-star gold-star" aria-hidden="true"></i>
@@ -49,19 +51,19 @@
 												<i class="fa fa-star gold-star" aria-hidden="true"></i>
 												<i class="fa fa-star gray-star" aria-hidden="true"></i>
 											</div>
-											<h4>Rp. 8,000</h4>
+											<h4>Rp.{{ item.harga }}</h4>
 										</div>
 										<div class="snipcart-details top_brand_home_details">
 											<form action="#" method="post">
 												<fieldset>
 													<input type="hidden" name="cmd" value="_cart">
 													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="business" value=" ">
-													<input type="hidden" name="item_name" value="Materai 6000">
-													<input type="hidden" name="amount" value="8000">
+													<!-- <input type="hidden" name="business" value=" "> -->
+													<input type="hidden" name="item_name" value="{{ item.nama_item }}">
+													<input type="hidden" name="amount" value="{{ item.harga }}">
 													<input type="hidden" name="currency_code" value="IDR">
-													<input type="hidden" name="return" value=" ">
-													<input type="hidden" name="cancel_return" value=" ">
+													<!-- <input type="hidden" name="return" value=" ">
+													<input type="hidden" name="cancel_return" value=" "> -->
 													<input type="submit" name="submit" value="Beli" class="button">
 												</fieldset>
 											</form>
@@ -72,284 +74,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 top_brand_left-1">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="#"><img title=" " alt=" " src="{% static 'website/images/Materai 2.jpg' %}"></a>		
-											<p>Materai 3000</p>
-											<div class="stars">
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gray-star" aria-hidden="true"></i>
-											</div>
-											<h4>Rp. 5,000</h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<form action="#" method="post">
-												<fieldset>
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="business" value=" ">
-													<input type="hidden" name="item_name" value="Materai 3000">
-													<input type="hidden" name="amount" value="5000">
-													<input type="hidden" name="currency_code" value="IDR">
-													<input type="hidden" name="return" value=" ">
-													<input type="hidden" name="cancel_return" value=" ">
-													<input type="submit" name="submit" value="Beli" class="button">
-												</fieldset>
-											</form>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left-1">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="#"><img src="{% static 'website/images/Prangko 2.jpg' %}" alt=" " class="img-responsive"></a>
-											<p>Prangko</p>
-											<div class="stars">
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gray-star" aria-hidden="true"></i>
-											</div>
-											<h4>Rp. 8,000</h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<form action="#" method="post">
-												<fieldset>
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="business" value=" ">
-													<input type="hidden" name="item_name" value="Prangko">
-													<input type="hidden" name="amount" value="8000">
-													<input type="hidden" name="currency_code" value="IDR">
-													<input type="hidden" name="return" value=" ">
-													<input type="hidden" name="cancel_return" value=" ">
-													<input type="submit" name="submit" value="Beli" class="button">
-												</fieldset>
-											</form>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left-1">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="#"><img title=" " alt=" " src="{% static 'website/images/Prangko 3.jpg' %}"></a>		
-											<p>Prangko</p>
-											<div class="stars">
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gray-star" aria-hidden="true"></i>
-											</div>
-											<h4>Rp. 8,000</h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<form action="#" method="post">
-												<fieldset>
-													<input type="hidden" name="cmd" value="_cart">
-													<input type="hidden" name="add" value="1">
-													<input type="hidden" name="business" value=" ">
-													<input type="hidden" name="item_name" value="Prangko">
-													<input type="hidden" name="amount" value="8000">
-													<input type="hidden" name="currency_code" value="IDR">
-													<input type="hidden" name="return" value=" ">
-													<input type="hidden" name="cancel_return" value=" ">
-													<input type="submit" name="submit" value="Beli" class="button">
-												</fieldset>
-											</form>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- <div class="clearfix"> </div> -->
-				<div class="clearfix"> </div>
+				{% endfor %}
+				{% endblock %}
 			</div>
-			<div class="row">
-					<div class="col-md-3 top_brand_left-1">
-						<div class="hover14 column">
-							<div class="agile_top_brand_left_grid">
-								<div class="agile_top_brand_left_grid1">
-									<figure>
-										<div class="snipcart-item block">
-											<div class="snipcart-thumb">
-												<a href="{% url 'detail_product' %}"><img title=" " alt=" " src="{% static 'website/images/prangko 1.jpg' %}"></a>		
-												<p>Prangko</p>
-												<div class="stars">
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-												<h4>Rp. 7,000</h4>
-											</div>
-											<div class="snipcart-details top_brand_home_details">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Prangko">
-														<input type="hidden" name="amount" value="7000">
-														<input type="hidden" name="currency_code" value="IDR">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Beli" class="button">
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</figure>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 top_brand_left-1">
-						<div class="hover14 column">
-							<div class="agile_top_brand_left_grid">
-								<div class="agile_top_brand_left_grid1">
-									<figure>
-										<div class="snipcart-item block">
-											<div class="snipcart-thumb">
-												<a href="#"><img title=" " alt=" " src="{% static 'website/images/images.jpg' %}"></a>		
-												<p>Private Space</p>
-												<div class="stars">
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-												<h4>Rp. 500,000</h4>
-											</div>
-											<div class="snipcart-details top_brand_home_details">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Private Space">
-														<input type="hidden" name="amount" value="500000">
-														<input type="hidden" name="currency_code" value="IDR">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Beli" class="button">
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</figure>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 top_brand_left-1">
-						<div class="hover14 column">
-							<div class="agile_top_brand_left_grid">
-								<div class="agile_top_brand_left_grid1">
-									<figure>
-										<div class="snipcart-item block">
-											<div class="snipcart-thumb">
-												<a href="#"><img src="{% static 'website/images/index1.jpg' %}" alt=" " class="img-responsive"></a>
-												<p>Open Space</p>
-												<div class="stars">
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-												<h4>Rp. 100,000</h4>
-											</div>
-											<div class="snipcart-details top_brand_home_details">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Open Space">
-														<input type="hidden" name="amount" value="100000">
-														<input type="hidden" name="currency_code" value="IDR">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Beli" class="button">
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</figure>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 top_brand_left-1">
-						<div class="hover14 column">
-							<div class="agile_top_brand_left_grid">
-								<div class="agile_top_brand_left_grid1">
-									<figure>
-										<div class="snipcart-item block">
-											<div class="snipcart-thumb">
-												<a href="#"><img title=" " alt=" " src="{% static 'website/images/index.jpg' %}"></a>		
-												<p>Event Space</p>
-												<div class="stars">
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gold-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-												<h4>Rp. 500,000</h4>
-											</div>
-											<div class="snipcart-details top_brand_home_details">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Event Space">
-														<input type="hidden" name="amount" value="500000">
-														<input type="hidden" name="currency_code" value="IDR">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
-														<input type="submit" name="submit" value="Beli" class="button">
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</figure>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 		</div>
 	</div>
 	<!-- //new -->

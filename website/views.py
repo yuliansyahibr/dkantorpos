@@ -1,8 +1,13 @@
-from django.shortcuts import render
 from django.contrib.auth import login as authlogin, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
+from .models import Item
+from django.http import HttpResponse
+
+def index(request):
+    shelf = Item.objects.all()
+    return render(request, 'index.html', {'shelf': shelf})
 
 def register(request):
      if request.method == 'POST':
@@ -38,11 +43,6 @@ def contact(request):
 def detail_product(request):
      return render(request, 'detail_product.html')
 
-def index(request):
-     return render(request, 'index.html')
-
 def kategori(request):
      return render(request, 'kategoribendapos.html')
 
-def konfirmasi_pembayaran(request):
-     return render(request, 'konfirmasi_pembayaran.html')

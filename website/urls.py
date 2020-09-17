@@ -1,5 +1,8 @@
 from django.urls import path, include
 from . import views
+from django.conf import settings
+from django.contrib import admin
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -9,5 +12,4 @@ urlpatterns = [
     path('kategori/', views.kategori, name='kategori'),
     path('accounts/', include("django.contrib.auth.urls")),
     path('register/', views.register, name='register'),
-    path('konfirmasi_pembayaran/', views.register, name='konfirmasi_pembayaran'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
