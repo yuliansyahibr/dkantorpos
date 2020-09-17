@@ -36,12 +36,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-class CustomEmailField(models.CharField):
-    def __init__(self, *args, **kwargs):
-        super(CustomEmailField, self).__init__(*args, **kwargs)
-
-    def get_prep_value(self, value):
-        return str(value).lower()
 
 class User(AbstractUser):
     """User model."""
@@ -50,9 +44,9 @@ class User(AbstractUser):
     # first_name = None
     # last_name = None
     # email = models.EmailField(_('email address'), unique=True)
-    email = CustomEmailField(_('email'), unique=True, max_length=64)
-    first_name = models.CharField(_('nama depan'), max_length=64)
-    last_name = models.CharField(_('nama belakang'), max_length=64)
+    email = models.CharField(_('email'), unique=True, max_length=64)
+    first_name = models.CharField(_('nama depan'), unique=True, max_length=64)
+    last_name = models.CharField(_('nama belakang'), unique=True, max_length=64)
     password = models.CharField(_('password'), unique=True, max_length=64)
 
     USERNAME_FIELD = 'email'

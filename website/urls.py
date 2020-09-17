@@ -9,5 +9,5 @@ urlpatterns = [
     path('kategori/', views.kategori, name='kategori'),
     path('accounts/', include("django.contrib.auth.urls")),
     path('register/', views.register, name='register'),
-    path('profile/', views.profile, name='profile'),
+    path('konfirmasi_pembayaran/', views.register, name='konfirmasi_pembayaran'),
 ]

@@ -4,21 +4,20 @@
 		<div class="container">
 			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
 				<li><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-				<li class="active">Halaman Registrasi</li>
+				<li class="active">Halaman Konfirmasi Pembayaran</li>
 			</ol>
 		</div>
 	</div>
 	<!-- //breadcrumbs -->
-	<!-- register -->
+	<!-- Konfirmasi Pembayaran -->
 	<div class="register">
 		<div class="container">
-			<h2>Registrasi</h2>
+			<h2>Konfirmasi Pembayaran</h2>
 			<div class="login-form-grids">
 				<form action="#" method="post">
 					{% csrf_token %}
-
 					{% for field in form %}
-					<div class="form-group">
+					<p>
 						{{ field.label_tag }}<br>
 						{{ field }}
 						{% if field.help_text %}
@@ -27,8 +26,19 @@
 						{% for error in field.errors %}
 						<p style="color: red">{{ error }}</p>
 						{% endfor %}
-					</div>
+					</p>
 					{% endfor %}
+					<!-- <input type="text" placeholder="Nama Lengkap" required=" " >
+					<input type="text" placeholder="No. Handphone" required=" " >
+					<input type="email" placeholder="Alamat Email" required=" " >
+					<input type="text" placeholder="Alamat Rumah" required=" " >
+					<input type="password" placeholder="Password" required=" " >
+					<input type="password" placeholder="Password Confirmation" required=" " > -->
+					<div class="register-check-box">
+						<div class="check">
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>I accept the terms and conditions</label>
+						</div>
+					</div>
 					<input type="submit" value="Register">
 				</form>
 			</div>
@@ -37,5 +47,5 @@
 			</div>
 		</div>
 	</div>
-	<!-- //register -->
+	<!-- //Konfirmasi Pembayaran -->
 {% include 'footer.html' %}

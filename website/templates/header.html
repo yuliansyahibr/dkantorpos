@@ -49,7 +49,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-md-4 w3ls_logo_products_left">
-					<h1><a href="{% url 'index' %}">Di Kantor POS</a></h1>
+					<h1><a href="{% url 'index' %}">D'Kantor POS</a></h1>
 				</div>
 				<div class="col-sm-12 col-md-4  w3l_search">
 					<form action="#" method="post">
@@ -71,7 +71,80 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	</div>
 	<!-- //header -->
 	<!-- navigation -->
-	<nav class="navbar navbar-expand-lg navigation-agileits navbar-dark py-1 px-5">
+	<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-light">
+
+  <a class="navbar-brand" href="#!">
+    <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="30" alt="mdb logo">
+  </a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav11"
+    aria-controls="basicExampleNav11" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Breadcrumbs -->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="waves-effect" href="#!">Home</a></li>
+    <li class="breadcrumb-item"><a class="waves-effect" href="#!">Templates</a></li>
+    <li class="breadcrumb-item active"><a class="waves-effect" href="#!">E-commerce</a></li>
+  </ol>
+  <!-- Breadcrumbs -->
+
+  <!-- Links -->
+  <div class="collapse navbar-collapse" id="basicExampleNav11">
+
+    <!-- Right -->
+    <ul class="navbar-nav ml-auto list-inline">
+      <li class="nav-item list-inline-item">
+        <a href="#!" class="nav-link navbar-link-2 waves-effect">
+          <span class="badge badge-pill red">1</span>
+          <i class="fas fa-shopping-cart pl-0"></i>
+        </a>
+      </li>
+      <li class="nav-item dropdown list-inline-item">
+        <a class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink3" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="true">
+          <i class="united kingdom flag m-0"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#!">Action</a>
+          <a class="dropdown-item" href="#!">Another action</a>
+          <a class="dropdown-item" href="#!">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item list-inline-item">
+        <a href="#!" class="nav-link waves-effect">
+          Shop
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#!" class="nav-link waves-effect">
+          Contact
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#!" class="nav-link waves-effect">
+          Sign in
+        </a>
+      </li>
+      <li class="nav-item pl-2 mb-2 mb-md-0">
+        <a href="#!" type="button"
+          class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">Sign up</a>
+      </li>
+    </ul>
+
+  </div>
+  <!-- Links -->
+
+</nav>
+<!-- Navbar -->
+
+
+
+
+	<nav class="navbar navbar-expand-lg navigation-agileits navbar-dark py-1 px-4">
 		<!-- <a class="navbar-brand" href="#">_LogoPos_</a> -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,14 +177,14 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<a class="nav-link text-white" href="#">Belanja</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white" href="#">Konfirmasi Pembayaran</a>
+					<a class="nav-link text-white" href="{% url 'konfirmasi_pembayaran' %}">Konfirmasi Pembayaran</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white" href="#">Kontak</a>
 				</li>
 			</ul>
 		</div>
-		<ul class="nav navbar-nav mr-5">
+		<ul class="nav navbar-nav ml-auto">
 			<li class="nav-item">  
 				<form action="#" method="post" class="last"> 
 					<input type="hidden" name="cmd" value="_cart">
@@ -122,13 +195,13 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			{% if user.is_authenticated %}
 			<li class="dropdown nav-item">
 				<a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown">
-					{{ user }}<b class="caret"></b>
+					{{ user.get_username }}<b class="caret"></b>
 				</a>
-				<ul class="dropdown-menu multi-column columns-3 dropdown-menu-right">
+				<ul class="dropdown-menu multi-column columns-3">
 					<div class="row">
 						<div class="multi-gd-img">
 							<ul class="multi-column-dropdown">
-								<a class="" href="{% url 'profile' %}"><h6>Profile</h6></a>
+								<h6>Profile</h6>
 								<li><a href="#">Pengaturan</a></li>
 								<li><a href="{% url 'logout' %}">Log out</a></li>
 							</ul>
@@ -246,4 +319,4 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		</div>
 	</nav> -->
 
-<!-- //navigation  -->
+<!-- //navigation 
