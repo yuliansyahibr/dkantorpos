@@ -8,14 +8,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Super Market an E-Commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Registered :: w3layouts</title>
+	<title>D'Kantor Pos</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Super Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
 <!-- <link href="{% static 'website/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" /> -->
 <link href="{% static 'website/css/bootstrap_margin_padding.css' %}" rel="stylesheet" type="text/css" media="all" />
@@ -44,206 +42,80 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- start-smoth-scrolling -->
 </head>
 <body>
-	<!-- header -->
-	<div class="logo_products"> 
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-md-4 w3ls_logo_products_left">
-					<h1><a href="{% url 'index' %}">Di Kantor POS</a></h1>
-				</div>
-				<div class="col-sm-12 col-md-4  w3l_search">
-					<form action="#" method="post">
-						<input type="search" name="Search" placeholder="Search for a Product..." required="">
-						<button type="submit" class="btn btn-default search" aria-label="Left Align">
-							<i class="fa fa-search" aria-hidden="true"> </i>
-						</button>
-						<div class="clearfix"></div>
-					</form>
-				</div>
-				<div class="col-sm-12 col-md-4   w3ls_logo_products_left1">
-					<ul class="phone_email">
-						<li class="ml-5 mr-3"><i class="fa fa-phone" aria-hidden="true"></i>Order online or call us : (0711) 350228</li>	
-					</ul>
-				</div>	
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-	<!-- //header -->
 	<!-- navigation -->
+	<form class="form-inline my-2 my-lg-0 right">
+   		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+   		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+    <div class="nav-item right">  
+		<form action="#" method="post" class="last"> 
+			<input type="hidden" name="cmd" value="_cart">
+			<input type="hidden" name="display" value="1">
+			<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+		</form>  
+	</div>
 	<nav class="navbar navbar-expand-lg navigation-agileits navbar-dark py-1 px-4">
 		<!-- <a class="navbar-brand" href="#">_LogoPos_</a> -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
-						Kategori
-					</a>
-					<div class="dropdown-menu multi-column columns-3">
-						<div class="row">
-							<div class="multi-gd-img">
-								<ul class="multi-column-dropdown">
-									<h6>Semua Kategori</h6>
-									<li><a href="#">Benda POS</a></li>
-									<li><a href="#">Co-Working Space</a></li>
-								</ul>
-							</div>	
-						</div>
-					</div>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white" href="#">Belanja</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white" href="#">Konfirmasi Pembayaran</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white" href="{% url 'contact' %}">Kontak</a>
-				</li>
-			</ul>
-		</div>
-		<ul class="nav navbar-nav ml-auto">
-			<li class="nav-item">  
-				<form action="#" method="post" class="last"> 
-					<input type="hidden" name="cmd" value="_cart">
-					<input type="hidden" name="display" value="1">
-					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-				</form>  
+	<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
 			</li>
-			{% if user.is_authenticated %}
-			<li class="dropdown nav-item">
-				<a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown">
-					{{ user.get_username }}<b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu multi-column columns-3">
-					<div class="row">
-						<div class="multi-gd-img">
-							<ul class="multi-column-dropdown">
-								<h6>Profile</h6>
-								<li><a href="#">Pengaturan</a></li>
-								<li><a href="{% url 'logout' %}">Log out</a></li>
-							</ul>
-						</div>	
-
-					</div>
-				</ul>
-			</li>
-			{% else %}
-			<li class="nav-item"><a class="nav-link text-white" href="{% url 'register' %}">Registrasi</a></li>
-			<li class="ml-0 nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Masuk</a></li>
-			{% endif %}
-		</ul>
-	</nav>
-
-
-	<!-- <div class="navigation-agileits">
-		<div class="container">
-			<nav class="navbar navbar-expand">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<!-- <div class="navbar-header nav_2">
-					<button type="button" class="navbar-toggler collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div> 
-				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-					<ul class="nav navbar-nav text-white">
-						<li class="nav-item active"><a href="{% url 'index' %}" class="text-white nav-link">Home</a></li>	
-						<!-- Mega Menu -->
-						<!--<li class="nav-item dropdown">
-							<a href="#" class="text-white nav-link dropdown-toggle" data-toggle="dropdown">Kategori<b class="caret"></b></a>
-							<div class="dropdown-menu multi-column columns-3">
-								<div class="row">
-									<div class="multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<h6>Semua Kategori</h6>
-											<li><a href="#">Benda POS</a></li>
-											<li><a href="#">Co-Working Space</a></li>
-										</ul>
-									</div>	
-								</div>
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link text-white" href="#">Belanja</a></li>
-						<li class="nav-item"><a class="nav-link text-white" href="#">Konfirmasi Pembayaran</a></li>
-						<li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Kontak</a></li>
-					</ul>
-					<ul class="nav navbar-nav ml-auto">
-						{% if user.is_authenticated %}
-						<li class="dropdown nav-item">
-							<a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown">
-								{{ user.get_username }}<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu multi-column columns-3">
-								<div class="row">
-									<div class="multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<h6>Profile</h6>
-											<li><a href="#">Pengaturan</a></li>
-											<li><a href="{% url 'logout' %}">Log out</a></li>
-										</ul>
-									</div>	
-
-								</div>
-							</ul>
-						</li>
-						{% else %}
-						<li class="nav-item"><a class="nav-link text-white" href="{% url 'register' %}">Registrasi</a></li>
-						<li class="ml-0 nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Masuk</a></li>
-						{% endif %}
-						<li class="nav-item">  
-							<form action="#" method="post" class="last"> 
-								<input type="hidden" name="cmd" value="_cart">
-								<input type="hidden" name="display" value="1">
-								<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-							</form>  
-						</li>
-					</ul>
-					<div class="clearfix"> </div>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false">
+				Kategori
+			</a>
+			<div class="dropdown-menu multi-column columns-3">
+				<div class="row">
+					<div class="multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<h6>Semua Kategori</h6>
+							<li><a href="#">Benda POS</a></li>
+							<li><a href="#">Co-Working Space</a></li>
+						</ul>
+					</div>	
 				</div>
-			</nav>
-		</div>
-	</div>
+			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-white" href="#">Belanja</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-white" href="#">Konfirmasi Pembayaran</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-white" href="{% url 'contact' %}">Kontak</a>
+		</li>
 
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark  navigation-agileits">
-		<a class="navbar-brand" href="{% url 'register' %}">Navbar</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Features</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Dropdown link
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Action</a>
-						<a class="dropdown-item" href="#">Another action</a>
-						<a class="dropdown-item" href="#">Something else here</a>
-					</div>
-				</li>
+		{% if user.is_authenticated %}
+		<li class="dropdown nav-item">
+			<a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown">
+				{{ user.get_username }}<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu multi-column columns-3">
+				<div class="row">
+					<div class="multi-gd-img">
+						<ul class="multi-column-dropdown">
+							<h6>Profile</h6>
+							<li><a href="#">Pengaturan</a></li>
+							<li><a href="{% url 'logout' %}">Log out</a></li>
+						</ul>
+					</div>	
+
+				</div>
 			</ul>
-		</div>
-	</nav> -->
-
+		</li>
+		{% else %}
+		<li class="nav-item"><a class="nav-link text-white" href="{% url 'register' %}">Registrasi</a></li>
+		<li class="ml-0 nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Masuk</a></li>
+		{% endif %}
+	</ul>
+</div>
+</nav>
 <!-- //navigation 

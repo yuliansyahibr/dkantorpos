@@ -45,4 +45,5 @@ def detail_product(request):
 
 def kategori(request):
      return render(request, 'kategoribendapos.html')
-
+def nextcheckout(request):
+     return render(request, 'nextcheckout.html')
