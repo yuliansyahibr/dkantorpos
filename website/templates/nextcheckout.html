@@ -1,0 +1,180 @@
+{% include 'header.html' %}
+<!--Main layout-->
+<main class="mt-5 pt-4">
+  <div class="container wow fadeIn">
+    <!-- Heading -->
+    <h2 class="my-5 text-center">Checkout</h2>
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-md-4 mb-4 right">
+        <!-- Heading -->
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Keranjang</span>
+          <span class="badge badge-secondary badge-pill">3</span>
+        </h4>
+        <!-- Cart -->
+        <ul class="list-group mb-3 z-depth-1">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Nama Produk</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">Rp.100,000</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Produk Kedua</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">RP.100,000</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Produk Ketiga</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">Rp.100,000</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (Rp.)</span>
+            <strong>Rp.300,000</strong>
+          </li>
+        </ul>
+        <!-- Cart -->
+
+        <!-- Promo code -->
+        <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Masukan Kode Promo" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-success btn-md waves-effect m-0" type="button">Klaim</button>
+            </div>
+          </div>
+        </form>
+        <!-- Promo code -->
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-8 mb-4">
+        <!--Card-->
+        <div class="card">
+          <!--Card content-->
+          <form class="card-body">
+            <!--Grid row-->
+            <div class="row">
+              <!--Grid column-->
+              <div class="col-md-6 mb-2">
+                <!--firstName-->
+                <div class="md-form">
+                  <label for="NamaDepan" class="">Nama Depan</label>
+                  <input type="text" id="firstName" class="form-control">
+                </div>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-md-6 mb-2">
+                <!--lastName-->
+                <div class="md-form">
+                  <label for="NamaBelakang" class="">Nama Belakang</label>
+                  <input type="text" id="lastName" class="form-control">
+                </div>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+            <!--Username-->
+            <div class="md-form input-group pl-0 mb-5">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+              </div>
+              <input type="text" class="form-control py-0" placeholder="Username" aria-describedby="basic-addon1">
+            </div>
+            <!--email-->
+            <div class="md-form mb-5">
+              <label for="email" class="">Email</label>
+              <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
+            </div>
+            <!--alamat-->
+            <div class="md-form mb-5">
+              <label for="alamat" class="">Alamat Pengiriman</label>
+              <textarea type="text" id="alamat" class="form-control" placeholder="1234 Main St"></textarea>
+            </div>
+            <!--Grid row-->
+            <div class="row">
+              <!--Grid column-->
+              <div class="col-lg-12 col-md-12 mb-4">
+                <label for="country">Negara</label>
+                <select class="custom-select d-block w-100" id="country" required>
+                  <option value="">Pilih...</option>
+                  <option>Indonesia</option>
+                </select>
+                <div class="invalid-feedback">
+                  Harap Pilih Negara Tujuan
+                </div>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-lg-12 col-md-12 mb-4">
+                <label for="state">Provinsi</label>
+                <select class="custom-select d-block w-100" id="state" required>
+                  <option value="">Pilih...</option>
+                  <option>Sumatera Selatan</option>
+                </select>
+                <div class="invalid-feedback">
+                  Harap Pilih Provinsi Tujuan.
+                </div>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-lg-12 col-md-12 mb-4">
+                <label for="zip">Kode Pos</label>
+                <input type="text" class="form-control" id="zip" placeholder="" required>
+                <div class="invalid-feedback">
+                  Harap isi Kode Pos.
+                </div>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+            <hr>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="same-address">
+              <label class="custom-control-label" for="same-address">Alamat Pengiriman sama dengan Alamat Tagihan</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="save-info">
+              <label class="custom-control-label" for="save-info">Simpan Informasi ini untuk Order Selanjutnya</label>
+            </div>
+            <hr>
+           <!--Grid column-->
+              <div class="col-lg-12 col-md-12 mb-4">
+                <label for="state">Metode Pembayaran</label>
+                <select class="custom-select d-block w-100" id="state" required>
+                  <option value="">Pilih...</option>
+                  <option>Giro Pos</option>
+                </select>
+                <div class="invalid-feedback">
+                  Harap Pilih Provinsi Tujuan.
+                </div>
+              </div>
+              <!--Grid column-->
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Order</button>
+
+          </form>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+     
+    </div>
+    <!--Grid row-->
+  </div>
+</main>
+<!--Main layout-->
+{% include 'footer.html' %}

@@ -1,1 +1,8 @@
 hello!
+
+
+git add .
+git commit -m "Pesan"
+git push
+
+git pull

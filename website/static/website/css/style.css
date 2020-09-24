@@ -2249,17 +2249,17 @@ span.minicart-price {
 /*Header Responsive 375px*/
 @media (max-width: 375px){
 	.login-form-grids {
-    width: 100%;
-}
-.checkout h2 {
-    font-size: 0.875em;
-}
-.agileinfo_single_left {
-    padding: 1em 1em;
-}
-.agileinfo_single h2 {
-    font-size: 1.1em;
-}
+        width: 100%;
+    }
+    .checkout h2 {
+        font-size: 0.875em;
+    }
+    .agileinfo_single_left {
+        padding: 1em 1em;
+    }
+    .agileinfo_single h2 {
+        font-size: 1.1em;
+    }
 }
 /*Header Responsive 375px*/
 
@@ -2292,9 +2292,9 @@ span.minicart-price {
     .top-brands h2, .newproducts-w3agile h3, .login h2, .register h2, .faq-w3agile h3, .brands h3 {
         font-size: 1.4em;
     }
-    /* .nav-tabs>li>a {
+    .nav-tabs>li>a {
         font-size: 12px;
-    } */
+    }
     div#myTabContent {
         padding: 20px 20px;
     }
@@ -2312,7 +2312,7 @@ span.minicart-price {
         max-height: 200px;
     }
     .snipcart-thumb img {
-        max-width: 100px;
+        width: 100px;
         height: 70px;
         object-fit: cover;
 
@@ -2492,13 +2492,62 @@ span.minicart-price {
     .agile_top_brand_left_grid1 h4{ /*Penentu besar kecil cardfile*/
         font-size: 10px;
     }
-    /*Header Responsive 320px*/
+}
+/*Header Responsive 320px*/
 
 
 
+/*Header Responsive 320px*/
+@media (max-width: 320px){
+    #PPMiniCart form {
+        width: 285px !important;
+    }
+    #PPMiniCart ul {
+        width: 263px !important;
+    }
+    #PPMiniCart {
+        left: 69% !important;
+    }
+    #PPMiniCart .minicart-subtotal {
+        padding-left: 5px !important;
+        font-size: 13px !important;
+    }
+    .agile-login {
+        width: 79%;
+    }
+    .w3ls_logo_products_left {
+        margin: 3px 0 12px;
+    }
+    .w3l_search input[type="search"] {
+        width: 83%;
+    }
+    .top-brands h2, .newproducts-w3agile h3, .login h2, .register h2, .faq-w3agile h3, .brands h3 {
+        font-size: 1.4em;
+    }
+    /* .nav-tabs>li>a {
+        font-size: 12px;
+    } */
+    div#myTabContent {
+        padding: 20px 20px;
+    }
+    p.w3l-ad {
+        font-size: 13px;
+        line-height: 24px;
+    }
+    .top_brand_left {
+        padding: 0;
+    }
 
 
 
+    figure {
+        max-height: 200px;
+    }
+    .snipcart-thumb img {
+        max-width: 100px;
+        height: 70px;
+        object-fit: cover;
+    }
 
     /*Detail Produk*/
     .product-content {
@@ -2790,30 +2839,30 @@ span.minicart-price {
         width: calc(100% - 70px)
     }
 
-    @media only screen and (min-width:1024px) {
-        .product-content div[class*=col-md-4] {
-            padding-right: 0
-        }
-        .product-content div[class*=col-md-8] {
-            padding: 0 13px 0 0
-        }
-        .product-wrap div[class*=col-md-5] {
-            padding-right: 0
-        }
-        .product-wrap div[class*=col-md-7] {
-            padding: 0 13px 0 0
-        }
-        .product-content .product-image {
-            border-right: 1px solid #dfe5e9
-        }
-        .product-content .product-info {
-            position: relative
-        }
-    }
-
     .message img.online {
         width:40px;
         height:40px;
+    }
+}
+
+@media only screen and (min-width:1024px) {
+    .product-content div[class*=col-md-4] {
+        padding-right: 0
+    }
+    .product-content div[class*=col-md-8] {
+        padding: 0 13px 0 0
+    }
+    .product-wrap div[class*=col-md-5] {
+        padding-right: 0
+    }
+    .product-wrap div[class*=col-md-7] {
+        padding: 0 13px 0 0
+    }
+    .product-content .product-image {
+        border-right: 1px solid #dfe5e9
+    }
+    .product-content .product-info {
+        position: relative
     }
 }
 
@@ -2840,4 +2889,8 @@ span.minicart-price {
    loader element will be visible */
 body.loading .loader {
     display: block;
+}
+.message img.online {
+    width:40px;
+    height:40px;
 }
