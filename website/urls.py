@@ -9,6 +9,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('contact/', views.contact, name='contact'),
     path('produk/<uuid:id_item>', views.produk, name='produk'),
+    path('item/<pk>', views.detail_product, name='detail_product'),
     path('kategori/', views.kategori, name='kategori'),
     path('accounts/', include("django.contrib.auth.urls")),
     path('register/', views.register, name='register'),

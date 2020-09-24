@@ -2267,233 +2267,235 @@ span.minicart-price {
 
 /*Header Responsive 320px*/
 @media (max-width: 320px){
-    #PPMiniCart form {
-        width: 285px !important;
-    }
-    #PPMiniCart ul {
-        width: 263px !important;
-    }
-    #PPMiniCart {
-        left: 69% !important;
-    }
-    #PPMiniCart .minicart-subtotal {
-        padding-left: 5px !important;
-        font-size: 13px !important;
-    }
-    .agile-login {
-        width: 79%;
-    }
-    .w3ls_logo_products_left {
-        margin: 3px 0 12px;
-    }
-    .w3l_search input[type="search"] {
-        width: 83%;
-    }
-    .top-brands h2, .newproducts-w3agile h3, .login h2, .register h2, .faq-w3agile h3, .brands h3 {
-        font-size: 1.4em;
-    }
-    .nav-tabs>li>a {
-        font-size: 12px;
-    }
-    div#myTabContent {
-        padding: 20px 20px;
-    }
-    p.w3l-ad {
-        font-size: 13px;
-        line-height: 24px;
-    }
-    .top_brand_left {
-        padding: 0;
-    }
+#PPMiniCart form {
+	width: 285px !important;
+}
+#PPMiniCart ul {
+	width: 263px !important;
+}
+#PPMiniCart {
+	left: 69% !important;
+}
+#PPMiniCart .minicart-subtotal {
+	padding-left: 5px !important;
+	font-size: 13px !important;
+}
+.agile-login {
+    width: 79%;
+}
+.w3ls_logo_products_left {
+    margin: 3px 0 12px;
+}
+.w3l_search input[type="search"] {
+    width: 83%;
+}
+.top-brands h2, .newproducts-w3agile h3, .login h2, .register h2, .faq-w3agile h3, .brands h3 {
+    font-size: 1.4em;
+}
+.nav-tabs>li>a {
+    font-size: 12px;
+}
+div#myTabContent {
+    padding: 20px 20px;
+}
+p.w3l-ad {
+    font-size: 13px;
+    line-height: 24px;
+}
+.top_brand_left {
+    padding: 0;
+}
 
 
 
-    figure {
-        max-height: 200px;
-    }
-    .snipcart-thumb img {
-        width: 100px;
-        height: 70px;
-        object-fit: cover;
+figure {
+    max-height: 200px;
+}
+.snipcart-thumb img {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
 
-    }
-    .snipcart-thumb p {
-        padding-top: 30px;
+}
+.snipcart-thumb p {
+    padding-top: 30px;
 
-    }
-    .stars i {
-        font-size: .55em; 
-    }       
-    .snipcart-details input.button {
-        font-size: 8px;
-        width: 100%;
-        text-transform: uppercase;
-        padding: .5em 0;
-        outline: none;
-    }
-    .ban-text1 h4 {
-        font-size: 14px;
-    }
-    .ban-text1 {
-        left: 17%;
-        padding: 8px 18px;
-    }
-    .top-brands {
-        padding: 2em 0;
-    }
-    .grid_3.grid_5 {
-        margin-top: 2em;
-    }
-    .ban-bottom-w3l {
-        padding: 2em 0;
-    }
-    .brands {
-        padding: 2em 0;
-    }
-    .w3layouts-brand {
-        width: 46%;
-        padding: 0;
-        margin: 2%;
-    }
-    .brands-agile {
-        margin-top: 2em;
-    }
-    .newproducts-w3agile {
-        padding: 2em 0 1em;
-    }
-    .footer-copy p {
-        margin: 0 0 0;
-    }
-    .footer {
-        padding: 2em 0 1.5em;
-    }
-    .w3_footer_grid h3 {
-        font-size: 1.3em;
-    }
-    .w3_footer_grid {
-        padding: 0;
-    }
-    .sorting-left {
-        width: 47%;
-        margin-right: 2%;
-    }
-    .sorting {
-        width: 51%;
-    }
-    .products {
-        padding: 2em 0;
-    }
-    .categories ul.cate, .new-products-grids {
-        padding: 1em;
-    }
-    ul.cate ul {
-        margin-left: 1.5em;
-    }
-    .about, .about-team, .contact, .codes {
-        padding: 2em 0;
-    }
-    .agileits_w3layouts_map_pos1 {
-        padding: 1em;
-    }
-    .agileits_w3layouts_map_pos {
-        padding: 1em;
-    }
-    .agileits_w3layouts_map_pos {
-        top: 13%;
-    }
-    .agile_map	iframe {
-        width: 200px;
-        height: 100px;
-    }
-    h3.w3_agile_header, h2.w3_agile_header {
-        font-size: 1.4em;
-    }
-    .about-agileinfo {
-        margin-top: 2em;
-    }
-    .about-wthree-grids {
-        padding: 0;
-    }
-    .about .grid-top h4 {
-        font-size: 1em;
-        letter-spacing: 1px;
-    }
-    .time-top h4 {
-        font-size: 1.5em;
-    }
-    .about-slid {
-        padding: 3em 0;
-    }
-    .about-slid h2 {
-        font-size: 1.3em;
-    }
-    .about-team-grids {
-        width: 100%;
-    }
-    .register {
-        padding: 2em 0;
-    }
-    .login-form-grids {
-        margin: 2em auto 0;
-    }
-    .login-form-grids {
-        padding: 1.2em;
-    }
-    .register-check-box label {
-        font-size: 13px;
-    }
-    .checkbox {
-        padding-left: 30px !important;
-    }
-    .login {
-        padding: 2em 0;
-    }
-    .login p a {
-        font-size: 1em;
-    }
-    .checkout h2 {
-        font-size: 0.875em;
-        line-height: 22px;
-    }
-    .checkout {
-        padding: 2em 0;
-    }
-    .value-minus, .value-plus {
-        margin: 4px 10px;
-    }
-    .quantity-select .entry.value-minus {
-        margin-left: 10px;
-    }
-    .value {
-        margin: 4px 10px;
-    }
-    td.invert-image a img {
-        width: 72%;
-    }
-    .agileinfo_single h2 {
-        font-size: 0.95em;
-    }
-    .w3agile_description h4 {
-        font-size: 0.875em;
-    }
-    .w3agile_description {
-        margin: 1em 0;
-    }
-    .w3agile_description p {
-        font-size: 13px;
-    }
-    .agile_top_brand_left_grid1 p{ /*Penentu besar kecil cardfile*/ 
-        margin:-1.5em 0 0.5em;
-        line-height:-1em;
-        text-transform:capitalize;
-        font-size:10px;
-        text-align: center;
-    }
-    .agile_top_brand_left_grid1 h4{ /*Penentu besar kecil cardfile*/
-        font-size: 10px;
-    }
+}
+.stars i {
+    font-size: .55em; 
+}       
+.snipcart-details input.button {
+    font-size: 8px;
+    width: 100%;
+    text-transform: uppercase;
+    padding: .5em 0;
+    outline: none;
+}
+.ban-text1 h4 {
+    font-size: 14px;
+}
+.ban-text1 {
+    left: 17%;
+	padding: 8px 18px;
+}
+.top-brands {
+    padding: 2em 0;
+}
+.grid_3.grid_5 {
+    margin-top: 2em;
+}
+.ban-bottom-w3l {
+    padding: 2em 0;
+}
+.brands {
+    padding: 2em 0;
+}
+.w3layouts-brand {
+    width: 46%;
+    padding: 0;
+    margin: 2%;
+}
+.brands-agile {
+    margin-top: 2em;
+}
+.newproducts-w3agile {
+    padding: 2em 0 1em;
+}
+.footer-copy p {
+    margin: 0 0 0;
+}
+.footer {
+    padding: 2em 0 1.5em;
+}
+.w3_footer_grid h3 {
+    font-size: 1.3em;
+}
+.w3_footer_grid {
+    padding: 0;
+}
+.sorting-left {
+    width: 47%;
+	margin-right: 2%;
+}
+.sorting {
+    width: 51%;
+}
+.products {
+    padding: 2em 0;
+}
+.categories ul.cate, .new-products-grids {
+    padding: 1em;
+}
+ul.cate ul {
+    margin-left: 1.5em;
+}
+.about, .about-team, .contact, .codes {
+    padding: 2em 0;
+}
+.agileits_w3layouts_map_pos1 {
+    padding: 1em;
+}
+.agileits_w3layouts_map_pos {
+    padding: 1em;
+}
+.agileits_w3layouts_map_pos {
+    top: 13%;
+}
+.agile_map	iframe {
+    width: 200px;
+    height: 100px;
+}
+h3.w3_agile_header, h2.w3_agile_header {
+    font-size: 1.4em;
+}
+.about-agileinfo {
+    margin-top: 2em;
+}
+.about-wthree-grids {
+    padding: 0;
+}
+.about .grid-top h4 {
+    font-size: 1em;
+	letter-spacing: 1px;
+}
+.time-top h4 {
+    font-size: 1.5em;
+}
+.about-slid {
+    padding: 3em 0;
+}
+.about-slid h2 {
+    font-size: 1.3em;
+}
+.about-team-grids {
+    width: 100%;
+}
+.register {
+    padding: 2em 0;
+}
+.login-form-grids {
+    margin: 2em auto 0;
+}
+.login-form-grids {
+    padding: 1.2em;
+}
+.register-check-box label {
+    font-size: 13px;
+}
+.checkbox {
+	padding-left: 30px !important;
+}
+.login {
+    padding: 2em 0;
+}
+.login p a {
+    font-size: 1em;
+}
+.checkout h2 {
+    font-size: 0.875em;
+    line-height: 22px;
+}
+.checkout {
+    padding: 2em 0;
+}
+.value-minus, .value-plus {
+    margin: 4px 10px;
+}
+.quantity-select .entry.value-minus {
+    margin-left: 10px;
+}
+.value {
+    margin: 4px 10px;
+}
+td.invert-image a img {
+    width: 72%;
+}
+.agileinfo_single h2 {
+    font-size: 0.95em;
+}
+.w3agile_description h4 {
+    font-size: 0.875em;
+}
+.w3agile_description {
+    margin: 1em 0;
+}
+.w3agile_description p {
+    font-size: 13px;
+}
+.agile_top_brand_left_grid1 p{ /*Penentu besar kecil cardfile*/ 
+    margin:-1.5em 0 0.5em;
+    line-height:-1em;
+    text-transform:capitalize;
+    font-size:10px;
+    text-align: center;
+}
+.agile_top_brand_left_grid1 h4{ /*Penentu besar kecil cardfile*/
+    font-size: 10px;
 }
 /*Header Responsive 320px*/
+
+
+
 
 
 
@@ -2538,53 +2540,36 @@ span.minicart-price {
         padding: 0;
     }
 
-
-
-    figure {
-        max-height: 200px;
-    }
-    .snipcart-thumb img {
-        max-width: 100px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    /*Detail Produk*/
-    .product-content {
-        background: #fff
-    }
-    .product-content .carousel-control.left {
-        margin-left: 0
-    }
-    .product-content .product-image {
-        background-color: #fff;
-        display: block;
-        min-height: 238px;
-        overflow: hidden;
-        position: relative
-    }
-    .product-content .product-deatil {
-        border-bottom: 1px solid #dfe5e9;
-        padding-bottom: 17px;
-        padding-left: 16px;
-        padding-top: 16px;
-        position: relative;
-        background: #fff
-    }
-    .product-content .product-deatil h5 a {
-        color: #2f383d;
-        font-size: 15px;
-        line-height: 19px;
-        text-decoration: none;
-        padding-left: 0;
-        margin-left: 0
-    }
-
-    .product-content .product-deatil h5 a span {
-        color: #9aa7af;
-        display: block;
-        font-size: 13px
-    }
+/*Detail Produk*/
+.product-content {
+    background: #fff
+}
+.product-content .carousel-control.left {
+    margin-left: 0
+}
+.product-content .product-image {
+    background-color: #fff;
+    display: block;
+    min-height: 238px;
+    overflow: hidden;
+    position: relative
+}
+.product-content .product-deatil {
+    border-bottom: 1px solid #dfe5e9;
+    padding-bottom: 17px;
+    padding-left: 16px;
+    padding-top: 16px;
+    position: relative;
+    background: #fff
+}
+.product-content .product-deatil h5 a {
+    color: #2f383d;
+    font-size: 15px;
+    line-height: 19px;
+    text-decoration: none;
+    padding-left: 0;
+    margin-left: 0
+}
 
     .product-content .product-deatil span.tag1 {
         border-radius: 50%;

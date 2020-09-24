@@ -136,12 +136,21 @@ def profile(request):
      return render(request, 'user/profile.html')
      
 def checkout(request):
-     return render(request, 'checkout.html')
+    return render(request, 'checkout.html')
 
 def contact(request):
-     return render(request, 'contact.html')
+    return render(request, 'contact.html')
 
 def kategori(request):
      return render(request, 'kategoribendapos.html')
 def nextcheckout(request):
      return render(request, 'nextcheckout.html')
+def detail_product(request, pk):
+    try:
+        item = Item.objects.get(pk=pk)
+    except Item.DoesNotExist:
+        raise Http404('Item does not exist')
+    
+    return render(request, 'detail_product.html', {'item': item})
+
+
