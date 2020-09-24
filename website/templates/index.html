@@ -42,7 +42,7 @@
 								<figure>
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
-											<a href="#"><img title=" " alt=" " src="{{ item.foto.url }}"></a>		
+											<a href="{% url 'detail_product' item.id %}"><img title=" " alt=" " src="{{ item.foto.url }}"></a>
 											<p>{{ item.nama_item }}</p>
 											<div class="stars">
 												<i class="fa fa-star gold-star" aria-hidden="true"></i>
@@ -75,9 +75,9 @@
 					</div>
 				</div>
 				{% endfor %}
-				{% endblock %}
 			</div>
 		</div>
 	</div>
+	{% endblock %}
 	<!-- //new -->
 {% include 'footer.html' %}

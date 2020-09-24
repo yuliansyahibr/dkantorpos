@@ -83,7 +83,7 @@ text-decoration:underline;
 }
 
 .skdslider a.prev{
-    background: url("../images/") no-repeat scroll 0 0 transparent;
+    background: url("") no-repeat scroll 0 0 transparent;
 	width:35px;
 	height:35px;
 	display:block;
@@ -95,7 +95,7 @@ text-decoration:underline;
 }
 
 .skdslider a.next{
-    background: url("../images/") no-repeat scroll 0 0 transparent;
+    background: url("") no-repeat scroll 0 0 transparent;
 	width:35px;
 	height:35px;
 	display:block;
@@ -113,7 +113,7 @@ text-decoration:underline;
 }
 
 .skdslider a.play{
-    background: url("../images/") no-repeat scroll center center transparent;
+    background: url("") no-repeat scroll center center transparent;
 	width:35px;
 	height:35px;
 	display:none;
@@ -125,7 +125,7 @@ text-decoration:underline;
 }
 
 .skdslider a.pause{
-    background: url(../images/) no-repeat scroll center center transparent;
+    background: url("") no-repeat scroll center center transparent;
     width: 35px;
     height: 35px;
     display: none;
