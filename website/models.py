@@ -23,6 +23,16 @@ class PathAndRename(object):
 
 path_and_rename = PathAndRename("images/item")
 
+"""
+    Custom Fields
+"""
+class CustomEmailField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        super(CustomEmailField, self).__init__(*args, **kwargs)
+
+    def get_prep_value(self, value):
+        return str(value).lower()
+
 
 
 """ 
@@ -37,17 +47,30 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+class Keranjang(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    total = models.IntegerField(default=0)
+
 class User(AbstractUser):
     """User model."""
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = None
     # first_name = None
     # last_name = None
-    # email = models.EmailField(_('email address'), unique=True)
+
+    # email = CustomEmailField(_('email'), unique=True, max_length=64)
+    # sementara email jadi char, untuk mempermudah register/login
     email = models.CharField(_('email'), unique=True, max_length=64)
-    first_name = models.CharField(_('nama depan'), unique=True, max_length=64)
-    last_name = models.CharField(_('nama belakang'), unique=True, max_length=64)
-    password = models.CharField(_('password'), unique=True, max_length=64)
+    first_name = models.CharField(_('nama depan'), max_length=64)
+    last_name = models.CharField(_('nama belakang'), max_length=64)
+    password = models.CharField(_('password'), max_length=64)
+
+    keranjang = models.ForeignKey(
+        Keranjang,
+        default=None,
+        on_delete=models.CASCADE,
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -152,23 +175,10 @@ class Item(models.Model):
     class Meta:
         verbose_name_plural = 'Item'
 
-
-class Keranjang(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(
-        # settings.AUTH_USER_MODEL,
-        User,
-        # Profile,
-        on_delete=models.CASCADE,
-    )
-    total = models.IntegerField()
-
 class IsiKeranjang(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     keranjang = models.ForeignKey(
-        # settings.AUTH_USER_MODEL,
-        User,
-        # Profile,
+        Keranjang,
         on_delete=models.CASCADE,
     )
     item=models.ForeignKey(
@@ -204,8 +214,7 @@ class Transaksi(models.Model):
 class DetailTransaksi(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     transaksi = models.ForeignKey(
-        # settings.AUTH_USER_MODEL,
-        User,
+        Transaksi,
         # Profile,
         on_delete=models.CASCADE
     )

@@ -1,0 +1,192 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="loader"></div>
+<div class="container py-5">
+    <div class="row py-5">
+        <div class="col-8 py-3">
+            <!-- <div class="row">
+                <div class="col">
+                    <h6>Nama produk</h6>
+                </div>
+            </div> -->
+
+            {% for item_keranjang in items %}
+            <div id="row-item-keranjang-{{ item_keranjang.id }}" class="row border-bottom py-3 mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-3 text-center">
+                            <img class="img-fluid" src="{{ item_keranjang.item.foto.url }}" alt="" style="object-fit: cover; max-height:120px">
+                        </div>
+                        <div class="col pb-2">
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <h6>{{ item_keranjang.item.nama_item }}</h6>
+                                </div>
+                                <div class="col-2 ml-auto">
+                                    <button id="" class="btn btn-sm btn-danger btn_hapus" data-item-keranjang="{{ item_keranjang.id }}">Hapus</button>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <span class="text-red1 font-weight-bold">
+                                        <span class="convert-rupiah">{{ item_keranjang.item.harga}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group flex-nowrap ml-auto" style="width: 120px;">
+                                        <div class="input-group-prepend">
+                                          <button id="btn-qty-1" class="btn-qty-{{item_keranjang.id}} btn-kurang-qty btn btn-light border" onclick="changeQty(this, -1)" data-item-keranjang="{{item_keranjang.id}}"> − </button>
+                                          <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
+                                        </div>
+                                        <input id='qty-{{item_keranjang.id}}' type="text" class="form-control text-center px-2 bg-white" value="{{item_keranjang.qty }}" data-server-qty="{{ item_keranjang.qty}}" disabled>
+                                        <div class="input-group-append">
+                                          <button id="" class="btn-qty-{{item_keranjang.id}} btn-tambah-qty btn btn-light border" onclick="changeQty(this, 1)" data-item-keranjang="{{item_keranjang.id}}"> + </button>
+                                          <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="col py-3 border rounded ml-4 align-self-start">
+            <div class="row mb-4">
+                <div class="col">
+                    <h6>Ringkasan belanja</h6>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <span>Total Harga</span>
+                </div>
+                <div class="col text-right">
+                    <span id='total-keranjang' class="convert-rupiah">{{ total }}</span>
+                </div>
+            </div>
+
+            <div class="row my-2">
+                <a id='btn-checkout' class="btn btn-yellow col-8 mx-auto font-weight-bold" href="{% url 'checkout' %}">Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% csrf_token %}
+
+<script>
+    // Pisah ribuan dengan titik
+    function convertRupiah(x) {
+        x = x.toString().replace('Rp', '')
+        let parts = x.split(",");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return 'Rp'+parts.join(",");
+    }
+    // update total harga keranjang
+    function updateRupiah(element, new_total) {
+        let tot = convertRupiah(new_total)
+        $(element).text(tot)
+    }
+
+    // QTY
+    function updateQty(btn){
+        let btn_checkout = $('#btn-checkout')
+        $(btn_checkout).addClass("disabled");
+        setTimeout(function () {
+            let csrfmiddlewaretoken = $('input[name="csrfmiddlewaretoken"]').val()
+            let id_item_keranjang = $(btn).data('item-keranjang')
+            let qty = $(`#qty-${id_item_keranjang}`).val()
+
+            $.ajax({
+                url: `{% url 'keranjang_ajax' 'update_qty' %}`,
+                type: 'POST',
+                data:{
+                    csrfmiddlewaretoken: csrfmiddlewaretoken,
+                    id_item_keranjang: id_item_keranjang,
+                    qty: qty
+                },
+                success: function(data) {
+                    console.log(data)
+                    updateRupiah($('#total-keranjang'), data['total'])
+                },
+                error: function(data){
+                    alert("Terjadi kesalahan saat mengubah kuantitas")
+                }
+            });
+            $(btn_checkout).removeClass("disabled");
+        }, 400)        
+    }
+    function changeQty(btn, num) {
+        let id_item_keranjang = $(btn).data('item-keranjang')
+        let qty_field = $(`#qty-${id_item_keranjang}`)
+        let qty = parseInt($(qty_field).val())
+
+        // jika qty < 1, do nothing
+        if (qty+num < 1) {
+            return
+        }
+
+        // Ubah field qty
+        $(qty_field).val(qty+num)
+
+        // disable button qty
+        $(`.btn-qty-${id_item_keranjang}`).each(function () {
+            $(this).attr("disabled", true);
+        }); 
+
+        // ubah qty di database
+        updateQty(btn)
+
+        $(document).ajaxStop(function(){
+            // enable btn qty
+            $(`.btn-qty-${id_item_keranjang}`).each(function () {
+                $(this).attr("disabled", false);
+            }); 
+        })
+    }
+
+    $('document').ready(function (){
+        // init
+        // convert semua harga ke format rupiah
+        $(this).find(".convert-rupiah").each(function () {
+            updateRupiah(this, $(this).text())
+        });
+
+        // delete item di keranjang
+        $('.btn_hapus').on('click', function(){
+            $('body').addClass("loading");
+            let csrfmiddlewaretoken = $('input[name="csrfmiddlewaretoken"]').val()
+            let id_item_keranjang = $(this).data('item-keranjang')
+            setTimeout(function () {
+                $.ajax({
+                    url: `{% url 'keranjang_ajax' 'delete' %}`,
+                    type: 'POST',
+                    data:{
+                        csrfmiddlewaretoken: csrfmiddlewaretoken,
+                        id_item_keranjang: id_item_keranjang
+                    },
+                    success: function(data) {
+                        console.log(data)
+                        if (data['status'] === 200) {
+                            $(`#row-item-keranjang-${id_item_keranjang}`).remove()
+                        }
+                        updateRupiah($('#total-keranjang'), data['total'])
+                    },
+                    error: function(){
+                        alert('Terjadi kesalahan saat menghapus item')
+                    }
+                });
+                $('body').removeClass("loading");
+            }, 800)
+        })
+
+    })
+</script>
+{% include 'footer.html' %}

@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new class is imported. ##
-from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
+from . import models as md
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -17,7 +16,13 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
+        
+        keranjang = md.Keranjang(total=0)
+        keranjang.save(using=self._db)
+
+        user.keranjang = keranjang
         user.save(using=self._db)
+
         return user
 
     def create_user(self, email, password=None, **extra_fields):

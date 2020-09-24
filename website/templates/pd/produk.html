@@ -1,0 +1,135 @@
+{% load static %}
+{% include 'header.html' %}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+      <li><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+      <li class="active">Detail Produk</li>
+    </ol>
+  </div>
+</div>
+<!-- //breadcrumbs -->
+
+<!--Product Page-->
+<div class="container py-5 mb-4">
+  <div class="row">
+    <div class="col">
+      <div class="row border-bottom py-4">
+        <div class="col-5">
+          <img src="{{ item.foto.url }}" class="img-fluid" alt="Responsive image"
+            style="object-fit: cover;" />
+        </div>
+        <div class="col-6 ml-3">
+
+          <!-- Judul, rating produk -->
+          <div class="row align-items-start">
+            <div class="col ">
+              <div class="mb-2">
+                <span class="h3 ">{{ item.nama_item }}</span>
+              </div>
+
+              <div>
+                <span>4.0</span>
+                <i class="fa fa-star gold-star"></i>
+                <i class="fa fa-star gold-star"></i>
+                <i class="fa fa-star gold-star"></i>
+                <i class="fa fa-star gold-star"></i>
+                <i class="fa fa-star greystar"></i>
+                (10)
+              </div>
+            </div>
+          </div>
+
+          <!-- Harga -->
+          <div class="row mt-4 border-top py-4">
+            <div class="col-3 ">
+              <span class="text-secondary">
+                Harga
+              </span>
+            </div>
+            <div class="col">
+              <span class="h5 text-danger">{{ item.harga }}</span>
+            </div>
+          </div>
+
+          <div class="row border-top py-4 ">
+            <div class="col-3 ">
+              <span class="text-secondary">
+                Deskripsi
+              </span>
+            </div>
+            <div class="col">
+              <span class="">{{ item.deskripsi }}</span>
+            </div>
+          </div>
+
+          <div class="row border-top border-bottom py-4 mb-5">
+            <div class="col-3 ">
+              <span class="text-secondary">
+                Qty
+              </span>
+            </div>
+            <div class="input-group flex-nowrap col-3">
+              <div class="input-group-prepend">
+                <button id="btn-kurang-qty" class="btn btn-light border"> − </button>
+                <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
+              </div>
+              <input id="qty" type="text" class="form-control text-center px-2" value="1" disabled>
+              <div class="input-group-append">
+                <button id="btn-tambah-qty" class="btn btn-light border"> + </button>
+                <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Button -->
+          <div class="row align-items-end">
+
+            <button id="btn-keranjang" class="btn btn-warning shadow-sm col-4 ml-2" href=""> Tambah ke keranjang</button>
+            <button class="btn btn-orange shadow-sm col-4 ml-4 disabled"> Beli sekarang</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="form-keranjang" action="{% url 'keranjang' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="action" id="" value="add" hidden>
+  <input type="number" name="qty" id="input-qty" value="" hidden>
+  <input type="text" name="id_item" id="input-id-item" value="{{ item.id }}" hidden>
+  <input type="submit" hidden>
+</form>
+
+<script>
+  $('document').ready(function () {
+    $('#btn-keranjang').on('click', function() {
+      // jika qty negatif atau 0, qty dijadikan 1
+      let qty = $('#qty').val()
+      if (qty < 1){
+        qty = 1
+      }
+      $('#input-qty').val(qty)
+      $('#form-keranjang').submit()
+    })
+
+    $('#btn-tambah-qty').on('click', function() {
+      let qty = parseInt($('#qty').val())+1
+      $('#qty').val(qty)
+    })
+    $('#btn-kurang-qty').on('click', function() {
+      let qty = parseInt($('#qty').val())
+      if (qty <= 1) {
+        return
+      }
+      qty = qty-1
+      $('#qty').val(qty)
+    })
+  })
+</script>
+<!--Product Page-->
+{% include 'footer.html' %}
