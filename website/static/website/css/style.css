@@ -253,9 +253,9 @@ ul.multi-column-dropdown h6 {
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     background-color: transparent;
 }
-.nav > li > a:hover, .nav > li > a:focus {
+/*.nav > li > a:hover, .nav > li > a:focus {
     background: none;
-	color:#fff !important;
+	color:#fff !important;*/
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     color: #fff;
@@ -515,7 +515,7 @@ figure {
 div#myTabContent {
     padding: 40px 40px;
 }
-.nav-tabs > li {
+/*.nav-tabs > li {
     width: 50%;
 }
 .nav-tabs>li>a {
@@ -543,7 +543,7 @@ div#myTabContent {
 }
 .nav-tabs {
     border-bottom: 1px solid #fff;
-}
+}*/
 .grid_3.grid_5 {
     margin-top: 5em;
 	border: 1px solid #BEBEBE;
@@ -2815,4 +2815,4 @@ td.invert-image a img {
     width:40px;
     height:40px;
 }
-                                    
+          
