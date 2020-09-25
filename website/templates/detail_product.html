@@ -175,32 +175,68 @@
               </div>
             </div>
             <hr />
-            <div class="row">
-              <div class="snipcart-details top_brand_home_details col-sm-12 col-md-4 col-lg-12">
-                <form action="#" method="post">
-                  <fieldset>
-					<input type="hidden" name="cmd" value="_cart">
-					<input type="hidden" name="add" value="1">
-					<!-- <input type="hidden" name="business" value=""> -->
-					<input type="hidden" name="item_name" value="{{ item.nama_item }}">
-					<input type="hidden" name="amount" value="{{ item.harga }}">
-					<!-- <input type="hidden" name="discount_amount" value=""> -->
-					<input type="hidden" name="currency_code" value="IDR">
-					<!-- <input type="hidden" name="return" value="">
-					<input type="hidden" name="cancel_return" value=""> -->
-					<input type="submit" name="submit" value="Beli" class="button">
-                  </fieldset>
-                </form>
+            <div class="row mb-4">
+
+              <div class="input-group flex-nowrap col-3">
+                <div class="input-group-prepend">
+                  <button id="btn-kurang-qty" class="btn btn-light border"> − </button>
+                  <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
+                </div>
+                <input id="qty" type="text" class="form-control text-center px-2" value="1" disabled>
+                <div class="input-group-append">
+                  <button id="btn-tambah-qty" class="btn btn-light border"> + </button>
+                  <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
+                </div>
+              </div>
+
+              <div class="snipcart-details top_brand_home_details col-sm-12 col-md-4 col-lg-8" style="margin:0">
+                <input id="btn-keranjang" class="btn button shadow-sm ml-2" value="Beli">
               </div>
             </div>
             <button class="btn btn-white btn-default pull-right col-lg-6"><i class="fa fa-star"></i> Add to wishlist</button>
-			<button class="btn btn-white btn-default col-lg-6"><i class="fa fa-envelope"></i> Contact Seller</button>
+			      <button class="btn btn-white btn-default col-lg-6"><i class="fa fa-envelope"></i> Contact Seller</button>
           </div>
         </div>
       </div>
     </div> 
   </div>
 </div>
+
+<form id="form-keranjang" action="{% url 'keranjang' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="action" id="" value="add" hidden>
+  <input type="number" name="qty" id="input-qty" value="" hidden>
+  <input type="text" name="id_item" id="input-id-item" value="{{ item.id }}" hidden>
+  <input type="submit" hidden>
+</form>
+
+<script>
+  $('document').ready(function () {
+    $('#btn-keranjang').on('click', function() {
+      // jika qty negatif atau 0, qty dijadikan 1
+      let qty = $('#qty').val()
+      if (qty < 1){
+        qty = 1
+      }
+      $('#input-qty').val(qty)
+      $('#form-keranjang').submit()
+    })
+
+    $('#btn-tambah-qty').on('click', function() {
+      let qty = parseInt($('#qty').val())+1
+      $('#qty').val(qty)
+    })
+    $('#btn-kurang-qty').on('click', function() {
+      let qty = parseInt($('#qty').val())
+      if (qty <= 1) {
+        return
+      }
+      qty = qty-1
+      $('#qty').val(qty)
+    })
+  })
+</script>
+
 {% endblock %} 
 <!-- end product -->
 {% include 'footer.html' %}

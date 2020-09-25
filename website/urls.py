@@ -16,5 +16,4 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('keranjang/', views.keranjang, name='keranjang'),
     path('keranjang/ajax/<str:action>', views.keranjangAjax, name='keranjang_ajax'),
-    path('nextcheckout/', views.nextcheckout, name='nextcheckout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

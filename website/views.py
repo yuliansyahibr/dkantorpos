@@ -88,6 +88,7 @@ def keranjangAjax(request, action):
                item_keranjang.save()
 
                data['qty'] = item_keranjang.qty
+               data['subtotal'] = item_keranjang.subtotal
           else:
                return http.HttpResponseNotFound('Not Found')
 
@@ -143,13 +144,12 @@ def contact(request):
 
 def kategori(request):
      return render(request, 'kategoribendapos.html')
-def nextcheckout(request):
-     return render(request, 'nextcheckout.html')
+
 def detail_product(request, pk):
     try:
         item = Item.objects.get(pk=pk)
     except Item.DoesNotExist:
-        raise Http404('Item does not exist')
+        raise http.Http404('Item does not exist')
     
     return render(request, 'detail_product.html', {'item': item})
 
