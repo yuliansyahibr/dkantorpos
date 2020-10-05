@@ -1,0 +1,17 @@
+{% load static %}
+{% include 'header.html' %}
+	<!-- item -->
+	{% block content %}
+	<div class="newproducts-w3agile">
+		<div class="container">
+			<h3 class="mb-5">Hasil Pencarian</h3>
+			<div class="row">
+				{% for item in results %}
+					{% include 'konten.html' %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	<!-- //new -->
+{% include 'footer.html' %}
