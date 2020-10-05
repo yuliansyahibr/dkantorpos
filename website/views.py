@@ -111,7 +111,7 @@ def keranjang(request):
                item = models.Item.objects.get(id=id_item)
                qty = int(request.POST['qty'])
 
-               if models.IsiKeranjang.objects.filter(item=id_item):
+               if models.IsiKeranjang.objects.filter(keranjang=keranjang, item=id_item):
                     item_keranjang = models.IsiKeranjang.objects.filter(keranjang=keranjang, item=item).first()
                     item_keranjang.qty += qty
                     item_keranjang.subtotal = item.harga*item_keranjang.qty

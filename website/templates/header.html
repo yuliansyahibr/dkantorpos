@@ -1,9 +1,3 @@
-
-<!--author: W3layouts
-author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -31,49 +25,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- start-smoth-scrolling -->
 	<script type="text/javascript" src="{% static 'website/js/move-top.js' %}"></script>
 	<script type="text/javascript" src="{% static 'website/js/easing.js' %}"></script>
-	<!-- start-smoth-scrolling -->
-	</head>
-	<body>
-		<!-- navigation -->
-		<nav class="navbar navbar-expand-lg navigation-agileits navbar-dark py-1 px-4">
-			<!-- <a class="navbar-brand" href="#">_LogoPos_</a> -->
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<!-- navigation -->
+	<nav class="navbar navbar-expand-lg navigation-agileits navbar-dark">
+		<div class="container">
+			<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'website/images/dkantorpos.png' %}" alt="" style="width: 200px; height: 40px;"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-					</li>
+			<div class="collapse navbar-collapse" id="main_nav">
+				<ul class="navbar-nav">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
-						Kategori
-						</a>
-						<div class="dropdown-menu multi-column columns-3">
-							<div class="row">
-								<div class="multi-gd-img">
-									<ul class="multi-column-dropdown">
-										<h6>Semua Kategori</h6>
-										<li><a href="#">Benda POS</a></li>
-										<li><a href="#">Co-Working Space</a></li>
-									</ul>
-								</div>	
-							</div>
+					Kategori</a>
+					<div class="dropdown-menu multi-column columns-3">
+						<div class="row">
+							<div class="multi-gd-img">
+								<ul class="multi-column-dropdown">
+									<h6>Semua Kategori</h6>
+									<li><a href="#">Benda POS</a></li>
+									<li><a href="#">Co-Working Space</a></li>
+								</ul>
+							</div>	
 						</div>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-white" href="#">Belanja</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-white" href="{% url 'contact' %}">Kontak</a>
-					</li>
-
-					{% if user.is_authenticated %}
-					<li class="dropdown nav-item">
-						<a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown">
-							{{ user }}<b class="caret"></b>
-						</a>
+					</div>
+				</li>
+				<li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Kontak</a></li>
+				<li class="nav-item"><a class="nav-link text-white" href="#"> Konfirmasi Pembayaran</a></li>
+			</ul>
+			<form class="form-inline ml-4 lg-form my-2 my-lg-0" >
+        		<input class="form-control mr-sm-2" type="search" placeholder="Cari" aria-label="Cari">
+        		<button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+      		</form>
+			<ul class="navbar-nav ml-auto">
+				{% if user.is_authenticated %}
+				<li class="dropdown nav-item">
+					<a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown">
+						{{ user }}<b class="caret"></b></a>
 						<ul class="dropdown-menu multi-column columns-3">
 							<div class="row">
 								<div class="multi-gd-img">
@@ -83,7 +76,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<li><a href="{% url 'logout' %}">Log out</a></li>
 									</ul>
 								</div>	
-
 							</div>
 						</ul>
 					</li>
@@ -91,21 +83,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li class="nav-item"><a class="nav-link text-white" href="{% url 'register' %}">Registrasi</a></li>
 					<li class="ml-0 nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Masuk</a></li>
 					{% endif %}
-				</ul>
-				<ul class="navbar-nav ml-auto right">
-					<li><form class="form-inline my-2 my-lg-0 right">
-						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-					</form></li>
-
 					<li class="nav-item">  
 						<form action="{% url 'keranjang' %}" method="get" class="last"> 
-							<!-- <input type="hidden" name="cmd" value="_cart">
-							<input type="hidden" name="display" value="1"> -->
-							<button class="w3view-cart" type="submit" ><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+							<button class="w3view-cart" type="submit"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
 						</form>  
 					</li>
 				</ul>
 			</div>
-		</nav>
-
+		</div> <!-- navbar-collapse.// -->
+	</nav>
