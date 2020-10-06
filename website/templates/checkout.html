@@ -1,6 +1,9 @@
 {% include 'header.html' %}
+{% load static %}
+
+<div class="loader"></div>
 <!--Main layout-->
-<main class="mt-5 pt-4">
+<main class="mb-3 py-4">
   <div class="container wow fadeIn">
     <!-- Heading -->
     <h2 class="my-5 text-center">Checkout</h2>
@@ -11,34 +14,22 @@
         <!-- Heading -->
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-muted">Keranjang</span>
-          <span class="badge badge-secondary badge-pill">3</span>
+          <span class="badge badge-secondary badge-pill">{{ items|length }}</span>
         </h4>
         <!-- Cart -->
         <ul class="list-group mb-3 z-depth-1">
+          {% for item_keranjang in items %}
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
-              <h6 class="my-0">Nama Produk</h6>
-              <small class="text-muted">Brief description</small>
+              <h6 class="my-0">{{ item_keranjang.item.nama_item }}</h6>
+              <small class="text-muted">{{ item_keranjang.item.deskripsi }}</small>
             </div>
-            <span class="text-muted">Rp.100,000</span>
+            <span class="text-muted convert-rupiah">{{ item_keranjang.subtotal }}</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Produk Kedua</h6>
-              <small class="text-muted">Brief description</small>
-            </div>
-            <span class="text-muted">RP.100,000</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Produk Ketiga</h6>
-              <small class="text-muted">Brief description</small>
-            </div>
-            <span class="text-muted">Rp.100,000</span>
-          </li>
+          {% endfor %}
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (Rp.)</span>
-            <strong>Rp.300,000</strong>
+            <span>Total</span>
+            <strong class="convert-rupiah">{{total}}</strong>
           </li>
         </ul>
         <!-- Cart -->
@@ -46,7 +37,8 @@
         <!-- Promo code -->
         <form class="card p-2">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Masukan Kode Promo" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Masukan Kode Promo" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
             <div class="input-group-append">
               <button class="btn btn-success btn-md waves-effect m-0" type="button">Klaim</button>
             </div>
@@ -68,101 +60,135 @@
               <div class="col-md-6 mb-2">
                 <!--firstName-->
                 <div class="md-form">
-                  <label for="NamaDepan" class="">Nama Depan</label>
-                  <input type="text" id="firstName" class="form-control">
+                  <label for="NamaDepan" class="">Nama</label>
+                  <input type="text" id="input-nama" data-name="nama" class="user-input form-control" value="{{ user.first_name }}">
                 </div>
               </div>
-              <!--Grid column-->
-              <!--Grid column-->
-              <div class="col-md-6 mb-2">
-                <!--lastName-->
-                <div class="md-form">
-                  <label for="NamaBelakang" class="">Nama Belakang</label>
-                  <input type="text" id="lastName" class="form-control">
+              <!--Grid column-->  
+
+              <div class="col">
+                <div class="md-form mb-2">
+                  <label class="">Nomor Telepon</label>
+                  <input type="text" id="input-telepon" data-name="telepon" class="user-input form-control" placeholder="Contoh: 081234567890" >
                 </div>
               </div>
-              <!--Grid column-->
             </div>
             <!--Grid row-->
-            <!--Username-->
-            <div class="md-form input-group pl-0 mb-5">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">@</span>
-              </div>
-              <input type="text" class="form-control py-0" placeholder="Username" aria-describedby="basic-addon1">
-            </div>
-            <!--email-->
-            <div class="md-form mb-5">
-              <label for="email" class="">Email</label>
-              <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
-            </div>
+
             <!--alamat-->
-            <div class="md-form mb-5">
-              <label for="alamat" class="">Alamat Pengiriman</label>
-              <textarea type="text" id="alamat" class="form-control" placeholder="1234 Main St"></textarea>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 mb-4">
+                <div class="md-form mb-5">
+                  <label for="alamat" class="">Alamat</label>
+                  <textarea id="input-alamat" data-name="alamat" class="user-input form-control" placeholder="Masukkan alamat..." ></textarea>
+                </div>
+              </div>
             </div>
+
+            {% if not SEWA %}
             <!--Grid row-->
             <div class="row">
-              <!--Grid column-->
+              <!-- Grid column-->
               <div class="col-lg-12 col-md-12 mb-4">
                 <label for="country">Negara</label>
-                <select class="custom-select d-block w-100" id="country" required>
-                  <option value="">Pilih...</option>
+                <select class="custom-select d-block w-100" id="country" disabled>
                   <option>Indonesia</option>
                 </select>
                 <div class="invalid-feedback">
                   Harap Pilih Negara Tujuan
                 </div>
               </div>
-              <!--Grid column-->
-              <!--Grid column-->
-              <div class="col-lg-12 col-md-12 mb-4">
-                <label for="state">Provinsi</label>
-                <select class="custom-select d-block w-100" id="state" required>
-                  <option value="">Pilih...</option>
-                  <option>Sumatera Selatan</option>
-                </select>
-                <div class="invalid-feedback">
-                  Harap Pilih Provinsi Tujuan.
-                </div>
-              </div>
-              <!--Grid column-->
-              <!--Grid column-->
-              <div class="col-lg-12 col-md-12 mb-4">
-                <label for="zip">Kode Pos</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
-                <div class="invalid-feedback">
-                  Harap isi Kode Pos.
-                </div>
-              </div>
-              <!--Grid column-->
+              <!--Grid column -->
             </div>
             <!--Grid row-->
+
+            <div class="row">
+              <div class="col-lg-12 col-md-12 mb-4">
+                <label for="state">Provinsi</label>
+                <select class="user-input custom-select d-block w-100" id="select-provinsi" data-name='id-provinsi' required>
+                  <option value="" selected disabled>Pilih provinsi...</option>
+                  {% for prov in provinsi %}
+                  <option value="{{prov.province_id}}">{{prov.province}}</option>
+                  {% endfor %}
+                </select>
+                <div class="invalid-feedback">
+                  Harap pilih Provinsi Tujuan.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg col-md-12 mb-4 pr-1">
+                <label for="state">Kabupaten/Kota</label>
+                <select class="user-input custom-select d-block w-100" id="select-kota" data-name='id-kota' required>
+                  <option value="" selected disabled>Pilih kabupaten/kota...</option>
+                </select>
+                <div class="invalid-feedback">
+                  Harap pilih kabupaten/kota Tujuan.
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-12 mb-4 pl-1">
+                <label for="zip">Kode Pos</label>
+                <input type="text" class="user-input form-control" id="input-kodepos" data-name='kodepos' placeholder="" disabled
+                  required>
+                <div class="invalid-feedback">
+                  Harap isi kode pos.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-8 mb-4">
+                <label>Pilih durasi pengiriman</label>
+                <input type="text" class="user-input" id="input-service" data-name='service' required hidden>
+                <div class="dropdown" id="dropdown-durasi">
+                  <button class="btn btn-yellow w-100 dropdown-toggle" type="button" id="btn-dropdown-durasi"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Durasi Pengiriman
+                  </button>
+                  <div class="dropdown-menu w-100" id='dropdown-menu-durasi' aria-labelledby="dropdownMenuButton">
+                  </div>
+                </div>
+                <!-- <select class="custom-select d-block w-100" id="select-durasi" name='durasi' required>
+                  <option value="">Pilih durasi pengiriman...</option>
+                </select> -->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-8 mb-4">
+                <p class="mb-2"> Biaya ongkir dari Palembang: </p>
+                <p id='harga-ongkir' class="h5 font-weight-bold ml-2"></p>
+              </div>
+            </div>
+            {% endif %}
+
             <hr>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="same-address">
-              <label class="custom-control-label" for="same-address">Alamat Pengiriman sama dengan Alamat Tagihan</label>
+              <input type="checkbox" class="custom-control-input" id="same-address" disabled>
+              <label class="custom-control-label" for="same-address">Alamat Pengiriman sama dengan Alamat
+                Tagihan</label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="save-info">
+              <input type="checkbox" class="custom-control-input" id="save-info" disabled>
               <label class="custom-control-label" for="save-info">Simpan Informasi ini untuk Order Selanjutnya</label>
             </div>
             <hr>
-           <!--Grid column-->
-              <div class="col-lg-12 col-md-12 mb-4">
-                <label for="state">Metode Pembayaran</label>
-                <select class="custom-select d-block w-100" id="state" required>
-                  <option value="">Pilih...</option>
-                  <option>Giro Pos</option>
-                </select>
-                <div class="invalid-feedback">
-                  Harap Pilih Provinsi Tujuan.
-                </div>
+            <div class="col-lg-12 col-md-12 mb-4">
+              <label for="state">Metode Pembayaran</label>
+              <select id="input-metode" class="user-input custom-select d-block w-100" data-name="metode-pembayaran" required>
+                <option value="" disabled>Pilih metode</option>
+                {% for x in metode_pembayaran %}
+                  <option value="{{x.id}}">{{x.nama_metode}}</option>
+                {% endfor %}
+              </select>
+              <div class="invalid-feedback">
+                Harap pilih metode pembayaran.
               </div>
-              <!--Grid column-->
+            </div>
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Order</button>
-
+            <button class="col-8 mx-auto btn btn-primary btn-block" type="button" id="btn-order">Order</button>
           </form>
 
         </div>
@@ -171,10 +197,154 @@
       </div>
       <!--Grid column-->
 
-     
+
     </div>
     <!--Grid row-->
   </div>
 </main>
+
+<form id='form-checkout' action="{% url 'order' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="nama" id="nama" hidden>
+  <input type="text" name="telepon" id="telepon" hidden>
+  <input type="text" name="alamat" id="alamat" hidden>
+  <input type="text" name="id_provinsi" id="id-provinsi" hidden>
+  <input type="text" name="id_kota" id="id-kota" hidden>
+  <input type="text" name="kodepos" id="kodepos" hidden>
+  <input type="text" name="service" id="service" hidden>
+  <input type="text" name="metode_pembayaran" id="metode-pembayaran" hidden>
+  <input type="text" name="" id="" hidden>
+</form>
+
 <!--Main layout-->
+
+<script src="{% static 'website/js/format-rupiah.js' %}"></script>
+
+<script>
+
+  const csrfmiddlewaretoken = $('input[name="csrfmiddlewaretoken"]').val()
+
+  $('document').ready(function() {
+
+    $('#btn-order').on('click', function() {
+      // ambil semua value dari class user-input
+      $('.user-input').each(function () {
+          console.log($(this).val())
+          let id = $(this).data('name')
+          $('#'+id).val($(this).val())
+      });
+      $('form').submit()
+    })
+
+    $('#select-provinsi').on('change', function(e) {
+      let select_field = $('#select-kota')
+      let id_provinsi = $(e.target).val()
+      $('#input-kodepos').val('')
+      select_field.empty();
+      select_field.append(new Option('Pilih kabupaten/kota...', null))
+      $('body').addClass("loading");
+      $.ajax({
+        url: '/api/kota',
+        type: 'POST',
+        data:{
+          csrfmiddlewaretoken: csrfmiddlewaretoken,
+          id_provinsi: id_provinsi
+        },
+        success: function(data) {
+          for (x in data) {
+            let opt = new Option(data[x]['type']+' '+data[x]['city_name'], data[x]['city_id']);
+            select_field.append(opt);
+            $(opt).attr('data-kodepos', data[x]['postal_code']);
+          }
+        },
+        error: function(){
+          alert('error');
+        }
+      }).done(function() {
+        $('body').removeClass("loading");
+      });
+
+    })
+
+    $('#select-kota').on('change', function(e) {
+      $('#input-kodepos').val($(this).children(':selected').data('kodepos'))
+      let id_kota = $(e.target).val()
+      let dropdown_menu = $('#dropdown-menu-durasi')
+      dropdown_menu.empty();
+      $('body').addClass("loading");
+      $.ajax({
+        url: '/api/ongkir',
+        type: 'POST',
+        data:{
+          csrfmiddlewaretoken: csrfmiddlewaretoken,
+          id_kota: id_kota
+        },
+        success: function(data) {
+          data = data[0]['costs'];
+          console.log(data);
+          if (data.length === 0) {
+            let html = `
+            <div class="dropdown-item col px-2">
+              <div class="row py-2">
+                <div class="col h6 text-red1 font-weight-bold">
+                  Pengiriman tidak tersedia di daerah ini
+                </div>
+              </div>
+            </div>
+            `;
+            dropdown_menu.append(html)
+            return;
+          }
+          for (x in data) {
+            let opt = `
+            <a class="dropdown-item col durasi-opt py-2" href="javascript:void(0);" 
+                data-service="${data[x]['service']}" data-harga="${data[x]['cost'][0]['value']}" data-etd="${data[x]['cost'][0]['etd']}">
+              <div class="row">
+                <div class="col h6">
+                  <span class="service">${data[x]['service']}</span>
+                </div>
+                <div class="col text-right harga">
+                  ${convertRupiah(data[x]['cost'][0]['value'])}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <span>${data[x]['cost'][0]['etd']}</span>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            `;
+            //${data[x]['description']}
+            dropdown_menu.append(opt)
+          }
+        },
+        error: function(){
+          alert('error');
+        }
+      }).done(function() {
+        $('body').removeClass("loading");
+      });
+
+    })
+
+    $('.dropdown').on('show.bs.dropdown', function(e) {
+      console.log('show.bs.dropdown')
+      $('.durasi-opt').off('click').on('click', function(e) {
+        console.log('aaaa')
+        console.log(this)
+        let service = $(this).data('service')
+        let harga = $(this).data('harga')
+        let etd = $(this).data('etd')
+        $('#btn-dropdown-durasi').text(`${service} (${etd})`)
+        $('#harga-ongkir').text(convertRupiah(harga))
+        // FILL INPUT
+        $('#input-service').val(service)
+      })
+    })
+    
+  })
+
+</script>
+
 {% include 'footer.html' %}

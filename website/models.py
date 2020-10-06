@@ -190,6 +190,14 @@ class IsiKeranjang(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class MetodePembayaran(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    nama_metode = models.CharField(max_length=32)
+    deskripsi = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name_plural='metode pembayaran'
+
 class Transaksi(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(
@@ -198,14 +206,26 @@ class Transaksi(models.Model):
         # Profile,
         on_delete=models.CASCADE
     )
-    # metode_pembayaran
+    metode_pembayaran = models.ForeignKey(
+        MetodePembayaran,
+        on_delete=models.CASCADE
+    )
+    nama = models.CharField(max_length=64)
+    telepon = models.CharField(max_length=64)
+    alamat = models.CharField(max_length=64)
     subtotal = models.IntegerField()
-    ongkos_kirim = models.IntegerField
-    total = models.IntegerField()
     status_pembayaran = models.IntegerField()
-    kecamatan_pengiriman = models.CharField(max_length=32)
-    kota_pengiriman = models.CharField(max_length=32)
-    alamat_pengiriman = models.CharField(max_length=32)
+
+    kodepos = models.CharField(max_length=6)
+    id_kota = models.IntegerField()
+    id_provinsi = models.IntegerField()
+    nama_kota = models.CharField(max_length=32)
+    nama_provinsi = models.CharField(max_length=32)
+    service = models.CharField(max_length=32)
+
+    ongkos_kirim = models.IntegerField()
+    total = models.IntegerField()
+    # catatan
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -225,27 +245,3 @@ class DetailTransaksi(models.Model):
     qty = models.IntegerField()
     subtotal = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    
-
-
-# class Produk(models.Model):
-#     kategori = models.ForeignKey(
-#         Kategori,
-#         on_delete=models.CASCADE
-#     )
-#     nama = models.CharField(max_length=64)
-#     harga = models.IntegerField()
-#     deskripsi = models.CharField(max_length=128)
-#     jumlah = models.IntegerField()
-#     foto = models.CharField(max_length=64)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-# class Kantor(models.Model):
-#     jenis = models.CharField(max_length=32)
-#     deskripsi = models.CharField(max_length=128)
-#     harga = models.IntegerField()
-#     unit = models.IntegerField()
-#     foto = models.CharField(max_length=64)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)

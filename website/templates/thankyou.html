@@ -1,0 +1,43 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="loader"></div>
+<div class="container py-5">
+    <div class="row py-5">
+        <div class="col-10 px-4 py-3 mx-auto bg-light">
+            <div class="row">
+                <div class="col text-center pt-2 pb-3">
+                    <p class="text-success mb-2 h5 font-weight-bold">
+                        <span class="mr-2"><i class="fa fa-check fa-2x"></i></span>
+                        <span class="h5 font-weight-bold"></span>Terima kasih, pesanan Anda sedang diproses...
+                    </p>
+                    <p>
+                        <!-- Mohon selesaikan pembayaran dengan rincian sebagai berikut -->
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7 mx-auto py-4">
+                    <p class="font-weight-bold">
+                        Nomor pesanan: {{id_transaksi}}
+                    </p>
+                        <ul style="list-style-position: inside;">
+                            <li>__produk Rp__harga</li>
+                            <li>__produk Rp__harga</li>
+                        </ul>
+                    </p>
+                    <span class="my-3">
+                        Total: {{total}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% csrf_token %}
+
+<script>
+
+</script>
+{% include 'footer.html' %}

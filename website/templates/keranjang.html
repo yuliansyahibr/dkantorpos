@@ -1,6 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'header.html' %}
 
+{% block css %}
+<link href="{% static 'website/css/keranjang.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
 <div class="loader"></div>
 
 <!-- breadcrumbs -->
@@ -16,33 +21,34 @@
 <!-- checkout -->
 <div class="checkout">
 	<div class="container">
-		<h2>Your shopping cart contains: <span>3 Products</span></h2>
+		<!-- <h2>Your shopping cart contains: <span>3 Products</span></h2> -->
 		<div class="checkout-right table-responsive">
-			<table class="table table-striped">
+			<table class="table table-striped table-sm">
 				<thead>
 					<tr>
-						<th scope="col" class="text-center">Produk</th>
-						<th scope="col" class="text-center">Harga</th>
-						<th scope="col" class="text-center" style="width:90px">Qty</th>
-						<th scope="col" class="text-center">Total</th>
-						<th scope="col" style="width:60px">&nbsp;</th>
+                        <td scope="col" class="text-center"></td>
+                        <td scope="col" class="pl-4" style="max-width:360px">Deskripsi produk</td>
+						<td scope="col" class="text-center" style="width:100px">Harga</td>
+						<td scope="col" class="text-center" style="width:120px">Qty</td>
+						<!-- <th scope="col" class="text-center">Total</th> -->
+						<td scope="col" style="min-width:70px">&nbsp;</td>
 					</tr>
 				</thead>
 				<tbody>
                     {% for item_keranjang in items %}
-					<tr id="row-item-keranjang-{{ item_keranjang.id }}">
-						<td scope="col" class="hidden-xs">
-							<img src="{{ item_keranjang.item.foto.url }}" alt="..." class="img-responsive" style="object-fit: cover; max-height:75px" />
-							<div class="col-sm-10">
-								<h4 class="nomargin">{{ item_keranjang.item.nama_item }}</h4>
-								<p>{{ item_keranjang.item.deskripsi}}</p>
-							</div>
-						</td>
-						<td>
-                            <span class="convert-rupiah">{{ item_keranjang.item.harga}}</span>
+					<tr id="row-item-keranjang-{{ item_keranjang.id }}" class="padded-row">
+						<td scope="col" class="hidden-xs text-center" style="width:200px">
+							<a href="{% url 'detail_product' item_keranjang.item.id %}"><img src="{{ item_keranjang.item.foto.url }}" alt="..." class="img-responsive" style="object-fit: cover; max-height:180px;max-width:180px" /></a>
                         </td>
-						<td>
-							<div class="input-group flex-nowrap" style="width: 90px;">
+                        <td class="pl-4">
+                            <a href="{% url 'detail_product' item_keranjang.item.id %}"><h5 class="nomargin">{{ item_keranjang.item.nama_item }}</h5></a>
+                            <p>{{ item_keranjang.item.deskripsi}}</p>
+                        </td>
+						<td class="text-center">
+                            <span class="convert-rupiah font-weight-bold">{{ item_keranjang.item.harga}}</span>
+                        </td>
+						<td class="text-center">
+							<div class="input-group flex-nowrap mx-auto" style="width: 90px;">
 								<div class="input-group-prepend">
 								  <button id="" class="btn-qty-{{item_keranjang.id}} btn-kurang-qty btn btn-sm btn-light border" onclick="changeQty(this, -1)" data-item-keranjang="{{item_keranjang.id}}"> − </button>
 								  <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
@@ -54,10 +60,10 @@
 								</div>
 							</div>
 						</td>
-						<td>
+						<!-- <td>
                             <span  id='total-item-{{item_keranjang.id}}' class="convert-rupiah">{{ item_keranjang.subtotal }}</span>
-                        </td>
-						<td>
+                        </td> -->
+						<td class="text-right pr-4">
 							<button class="btn btn-danger btn_hapus" data-item-keranjang="{{ item_keranjang.id }}"><i class="fa fa-trash"></i></button>
 						</td>
                     </tr>
@@ -66,8 +72,8 @@
 				<br>
 				<thead>
 					<tr>
-						<th scope="col" colspan="3" class="text-right">Sub Total</th>
-                        <th scope="col" id='total-keranjang'  class="h4 text-center convert-rupiah font-weight-bold">{{ total }}</th>
+						<th scope="col" colspan="3" class="text-right pr-3">Subtotal ({{ items|length }} item): </th>
+                        <th scope="col" id='total-keranjang'  class="h5 text-center convert-rupiah font-weight-bold">{{ total }}</th>
                         <th scope="col" class="text-center">&nbsp;</th>
 					</tr>
 				</thead>
@@ -91,20 +97,8 @@
 
 {% csrf_token %}
 
+<script src="{% static 'website/js/format-rupiah.js' %}"></script>
 <script>
-    // Pisah ribuan dengan titik
-    function convertRupiah(x) {
-        x = x.toString().replace('Rp', '')
-        let parts = x.split(",");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        return 'Rp'+parts.join(",");
-    }
-    // update total harga keranjang
-    function updateRupiah(element, new_total) {
-        let tot = convertRupiah(new_total)
-        $(element).text(tot)
-    }
-
     // QTY
     function updateQty(btn){
         let btn_checkout = $('#btn-checkout')
@@ -132,7 +126,7 @@
                 }
             });
             $(btn_checkout).removeClass("disabled");
-        }, 400)        
+        }, 200)        
     }
     function changeQty(btn, num) {
         let id_item_keranjang = $(btn).data('item-keranjang')
@@ -164,12 +158,6 @@
     }
 
     $('document').ready(function (){
-        // init
-        // convert semua harga ke format rupiah
-        $(this).find(".convert-rupiah").each(function () {
-            updateRupiah(this, $(this).text())
-        });
-
         // delete item di keranjang
         $('.btn_hapus').on('click', function(){
             $('body').addClass("loading");
@@ -195,10 +183,9 @@
                     }
                 });
                 $('body').removeClass("loading");
-            }, 800)
+            }, 600)
         })
 
     })
 </script>
-
-{% include 'footer.html' %}
+{% endblock %}

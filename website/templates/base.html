@@ -1,0 +1,217 @@
+<!--author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D'Kantor Pos</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Super Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <!-- //for-mobile-apps -->
+    <!-- <link href="{% static 'website/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" /> -->
+    <link href="{% static 'website/bootstrap-4.5.2/css/bootstrap.css' %}" rel="stylesheet" type="text/css"
+        media="all" />
+    <link href="{% static 'website/css/bootstrap_extra.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'website/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- font-awesome icons -->
+    <link href="{% static 'website/css/font-awesome.css' %}" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="{% static 'website/js/jquery-3.5.1.min.js' %}"></script>
+    <!-- //js -->
+    <link
+        href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic'
+        rel='stylesheet' type='text/css'>
+    <link
+        href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+        rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="{% static 'website/js/move-top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'website/js/easing.js' %}"></script>
+    <!-- start-smoth-scrolling -->
+
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <!-- navigation -->
+    <nav class="navbar navbar-expand-lg navigation-agileits navbar-dark py-1 px-4">
+        <!-- <a class="navbar-brand" href="#">_LogoPos_</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Kategori
+                    </a>
+                    <div class="dropdown-menu multi-column columns-3">
+                        <div class="row">
+                            <div class="multi-gd-img">
+                                <ul class="multi-column-dropdown">
+                                    <h6>Semua Kategori</h6>
+                                    <li><a href="#">Benda POS</a></li>
+                                    <li><a href="#">Co-Working Space</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Belanja</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'contact' %}">Kontak</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link text-white" data-toggle="dropdown">
+                        {{ user }}<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu multi-column columns-3">
+                        <div class="row">
+                            <div class="multi-gd-img">
+                                <ul class="multi-column-dropdown">
+                                    <a class="" href="{% url 'profile' %}">
+                                        <h6>Profile</h6>
+                                    </a>
+                                    <li><a href="#">Pengaturan</a></li>
+                                    <li><a href="{% url 'logout' %}">Log out</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link text-white" href="{% url 'register' %}">Registrasi</a></li>
+                <li class="ml-0 nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Masuk</a></li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto right">
+                <li>
+                    <form class="form-inline my-2 my-lg-0 right">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+
+                <li class="nav-item">
+                    <form action="{% url 'keranjang' %}" method="get" class="last">
+                        <!-- <input type="hidden" name="cmd" value="_cart">
+							<input type="hidden" name="display" value="1"> -->
+                        <button class="w3view-cart" type="submit"><i class="fa fa-shopping-cart"
+                                aria-hidden="true"></i></button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row ml-3">
+                <div class="col-sm-12 col-md-3 w3_footer_grid">
+                    <h3>Kontak</h3>
+                    <ul class="address">
+                        <li><i class="fa fa-map-marker" style="font-size: 22px;" aria-hidden="true"></i>Jln. K. A. Rivai
+                            No. 63, <span>Palembang 30135.</span></li>
+                        <li><i class="fa fa-phone" style="font-size: 20px;" aria-hidden="true"></i>0711-350228</li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-3 w3_footer_grid">
+                    <h3>Informasi</h3>
+                    <ul class="info">
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Tentang Kami</a></li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="{% url 'contact' %}">Hubungi
+                                Kami</a></li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Short Codes</a></li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">FAQ's</a></li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Produk Spesial</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-3 w3_footer_grid">
+                    <h3>Kategori</h3>
+                    <ul class="info">
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Benda POS</a></li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Co-Working Space</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Profil</h3>
+                    <ul class="info">
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Toko</a></li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a
+                                href="{% url 'checkout' %}">Keranjang</a></li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a
+                                href="{% url 'register' %}">Registrasi</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+
+        <div class="footer-copy">
+
+            <div class="container">
+                <p>© 2020 Di Kantor POS. All rights reserved | Design by <a href="#">Pakem</a></p>
+            </div>
+        </div>
+    </div>
+    <!--div class="footer-bottom">
+                <div class="container">
+                    <div class="w3layouts-foot">
+                        <ul>
+                            <li><a href="https://www.facebook.com/252949941427014/posts/pt-pos-indonesia-persero-salurkan-blsm-2013nomor-26pr0613bandung-22-juni-2013-pt/521604657894873/" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="https://twitter.com/PosIndonesia?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.instagram.com/posindonesia.ig/?hl=id" class="w3_agile_dribble"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="payment-w3ls">	
+                        <img src="" alt=" " class="img-responsive">
+                    </div>
+                </div>
+            </div-->
+    <!-- //footer -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'website/bootstrap-4.5.2/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- <script src="{% static 'website/js/bootstrap.min.js' %}"></script> -->
+
+    <!-- main slider-banner -->
+    <script src="{% static 'website/js/skdslider.min.js' %}"></script>
+    <link href="{% static 'website/css/skdslider.css' %}" rel="stylesheet">
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#demo1').skdslider({ 'delay': 5000, 'animationSpeed': 2000, 'showNextPrev': true, 'showPlayButton': true, 'autoSlide': true, 'animationType': 'fading' });
+
+            jQuery('#responsive').change(function () {
+                $('#responsive_wrapper').width(jQuery(this).val());
+            });
+
+        });
+    </script>
+    <!-- //main slider-banner -->
+</body>
+
+</html>

@@ -55,7 +55,7 @@
               <a href="javascript:void(0);">109 customer reviews</a>
             <hr />
             <h3 class="price-container">
-              Rp. {{ item.harga }}
+              <span class="convert-rupiah" >{{ item.harga }}</span>
               <small>*includes tax</small>
             </h3>
 			<br />
@@ -210,6 +210,7 @@
   <input type="submit" hidden>
 </form>
 
+<script src="{% static 'website/js/format-rupiah.js' %}"></script>
 <script>
   $('document').ready(function () {
     $('#btn-keranjang').on('click', function() {
