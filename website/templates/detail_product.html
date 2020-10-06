@@ -190,7 +190,18 @@
               </div>
 
               <div class="snipcart-details top_brand_home_details col-sm-12 col-md-4 col-lg-8" style="margin:0">
-                <input id="btn-keranjang" class="btn button shadow-sm ml-2" value="Beli">
+                {% if user.is_authenticated %}
+				<input id="btn-keranjang" class="btn button shadow-sm ml-2" value="Beli">
+				{% else %}
+				<form action="{% url 'login' %}">
+					<input id="btn-keranjang" class="btn button shadow-sm ml-2" type="submit" value="Beli" onclick="alertBox()" >
+						<script>
+							function alertBox() {
+							alert("Login terlebih dahulu untuk melanjutkan pembelian...");
+							}
+						</script>
+				</form>
+				{% endif %}
               </div>
             </div>
             <button class="btn btn-white btn-default pull-right col-lg-6"><i class="fa fa-star"></i> Add to wishlist</button>
@@ -238,6 +249,18 @@
   })
 </script>
 
+{% if item_list %}
+	<div class="newproducts-w3agile">
+		<div class="container">
+			<h3 class="mb-5">Produk List</h3>
+			<div class="row">
+				{% for item in item_list %}
+					{% include 'konten.html' %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endif %}
 {% endblock %} 
 <!-- end product -->
 {% include 'footer.html' %}

@@ -1,5 +1,20 @@
 {% load static %}
 {% include 'header.html' %}
+	
+	<!-- new -->
+	{% block content %}
+	{% if item_list %}
+	<div class="newproducts-w3agile">
+		<div class="container">
+			<h3 class="mb-5">Produk List</h3>
+			<div class="row">
+				{% for item in item_list %}
+					{% include 'konten.html' %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>	
+	{% else %}
 	<!-- main-slider -->
 	<div class="mx-auto">
 		<ul id="demo1">
@@ -16,7 +31,7 @@
 					<h3>Whole Spices Products Are Now On Line With Us</h3>
 				</div>
 			</li>
-	
+
 			<li>
 				<img src="{% static 'website/images/kantorpos1.jpg' %}" alt="" />
 				<div class="slide-desc">
@@ -27,51 +42,17 @@
 	</div>
 	<!-- //main-slider -->
 	<!-- //top-header and slider -->
-	
-	<!-- new -->
-	{% block content %}
 	<div class="newproducts-w3agile">
 		<div class="container">
 			<h3 class="mb-5">Produk Baru</h3>
 			<div class="row">
 				{% for item in shelf %}
-				<div class="col-md-3 top_brand_left-1 mb-4">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="{% url 'detail_product' item.id %}"><img title=" " alt=" " src="{{ item.foto.url }}"></a>
-											<p>{{ item.nama_item }}</p>
-											<div class="stars">
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gold-star" aria-hidden="true"></i>
-												<i class="fa fa-star gray-star" aria-hidden="true"></i>
-											</div>
-											<h4>Rp{{ item.harga }}</h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<form id="form-keranjang" action="{% url 'keranjang' %}" method="post">
-												{% csrf_token %}
-												<input type="text" name="action" id="" value="add" hidden>
-												<input type="number" name="qty" id="input-qty" value="1" hidden>
-												<input type="text" name="id_item" id="input-id-item" value="{{ item.id }}" hidden>
-												<input type="submit" name="submit" value="Beli" class="btn btn-primary col-9">
-											</form>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
+					{% include 'konten.html' %}
 				{% endfor %}
 			</div>
 		</div>
 	</div>
+	{% endif %}
 	{% endblock %}
 	<!-- //new -->
 {% include 'footer.html' %}

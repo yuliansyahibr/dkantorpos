@@ -11,7 +11,7 @@ from django.http import JsonResponse
 
 def index(request):
     shelf = Item.objects.all()
-#     request.session.flush()
+	#	request.session.flush()
     return render(request, 'index.html', {'shelf': shelf})
 
 def register(request):
@@ -40,7 +40,7 @@ def register(request):
                authlogin(request, user)
                return redirect('index')
      else:
-     #    form = UserCreationForm()
+     # form = UserCreationForm()
           form = SignUpForm()
      # return render(request, 'registered.html')
           return render(request, 'registration/register.html', {'form': form})
@@ -278,7 +278,7 @@ def contact(request):
 def kategori(request):
      return render(request, 'kategoribendapos.html')
 
-def detail_product(request, pk):
+def detail_product(request, pk):			
     try:
         item = Item.objects.get(pk=pk)
     except Item.DoesNotExist:
@@ -286,4 +286,17 @@ def detail_product(request, pk):
     
     return render(request, 'detail_product.html', {'item': item})
 
+def kategori_list(request, kategori):
+    item_list = models.Item.objects.filter(kategori__nama_kategori=kategori)
+	
+    return render(request,'index.html', {'item_list': item_list})
+	
+def search_product(request):
+    #	""" search function  """
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            results = Item.objects.filter(nama_item__contains=query_name)
+            return render(request, 'product_search.html', {"results":results})
 
+    return render(request, 'product_search.html')
