@@ -1,4 +1,7 @@
-{% include 'header.html' %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <!-- breadcrumbs -->
 <div class="breadcrumbs">
 	<div class="container">
@@ -77,4 +80,4 @@
 		</div>
 	</div>
 	contact -->
-	{% include 'footer.html' %}
+{% endblock %}

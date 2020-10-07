@@ -49,6 +49,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class Keranjang(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    jumlah_item = models.IntegerField(default=0)
     total = models.IntegerField(default=0)
 
 class User(AbstractUser):
@@ -198,6 +199,9 @@ class MetodePembayaran(models.Model):
     class Meta:
         verbose_name_plural='metode pembayaran'
 
+class Alamat(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
 class Transaksi(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(
@@ -215,15 +219,16 @@ class Transaksi(models.Model):
     alamat = models.CharField(max_length=64)
     subtotal = models.IntegerField()
     status_pembayaran = models.IntegerField()
+    jumlah_item = models.IntegerField(default=0)
 
-    kodepos = models.CharField(max_length=6)
-    id_kota = models.IntegerField()
-    id_provinsi = models.IntegerField()
-    nama_kota = models.CharField(max_length=32)
-    nama_provinsi = models.CharField(max_length=32)
-    service = models.CharField(max_length=32)
+    kodepos = models.CharField(max_length=6, null=True)
+    id_kota = models.IntegerField(null=True)
+    id_provinsi = models.IntegerField(null=True)
+    nama_kota = models.CharField(max_length=32, null=True)
+    nama_provinsi = models.CharField(max_length=32, null=True)
+    service = models.CharField(max_length=32, null=True)
 
-    ongkos_kirim = models.IntegerField()
+    ongkos_kirim = models.IntegerField(null=True)
     total = models.IntegerField()
     # catatan
     created_at = models.DateTimeField(auto_now_add=True)

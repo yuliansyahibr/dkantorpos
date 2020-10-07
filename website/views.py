@@ -7,23 +7,22 @@ from .models import Item
 from django import http
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 def index(request):
-    shelf = Item.objects.all()
+     shelf_barang = Item.objects.filter(jenis_item__jenis='barang').order_by('created_at').all()[:6]
+     shelf_workspace = Item.objects.filter(jenis_item__jenis='workspace').order_by('created_at').all()[:6]
 	#	request.session.flush()
-    return render(request, 'index.html', {'shelf': shelf})
+     data = {
+          'shelf_barang': shelf_barang,
+          'shelf_workspace': shelf_workspace
+     }
+     return render(request, 'index.html', data)
 
 def register(request):
+     if request.user.is_authenticated:
+          return http.HttpResponseRedirect('/')
      if request.method == 'POST':
-     #    form = UserCreationForm(request.POST)
-     #    if form.is_valid():
-     #        form.save()
-     #        username = form.cleaned_data.get('username')
-     #        raw_password = form.cleaned_data.get('password1')
-     #        user = authenticate(username=username, password=raw_password)
-     #        authlogin(request, user)
-     #        return redirect('index')
           form = SignUpForm(request.POST)
           if form.is_valid():
                user = form.save(commit=False)
@@ -40,18 +39,40 @@ def register(request):
                authlogin(request, user)
                return redirect('index')
      else:
-     # form = UserCreationForm()
           form = SignUpForm()
-     # return render(request, 'registered.html')
           return render(request, 'registration/register.html', {'form': form})
 
-def profile(request):
-     return render(request, 'user/profile.html')
+def profil(request):
+     return render(request, 'user/profil.html')
 
-def updateTotal(keranjang):
+def detail_product(request, pk):			
+    try:
+        item = Item.objects.get(pk=pk)
+    except Item.DoesNotExist:
+        raise http.Http404('Item does not exist')
+    
+    return render(request, 'detail_product.html', {'item': item})
+
+def kategori_list(request, nama_kategori):
+    item_list = models.Item.objects.filter(kategori__nama_kategori=nama_kategori)
+	
+    return render(request,'index.html', {'item_list': item_list})
+	
+""" search function  """
+def search_product(request):
+    if request.method == "POST":
+          query_name = request.POST.get('name', None)
+          if query_name:
+            results = Item.objects.filter(nama_item__contains=query_name)
+            return render(request, 'product_search.html', {"results":results})
+
+    return render(request, 'product_search.html')
+
+def updateKeranjang(keranjang):
      items = models.IsiKeranjang.objects.filter(keranjang=keranjang)
      #  update harga, sementara di luar if
      keranjang.total = sum([item.subtotal for item in items])
+     keranjang.jumlah_item = sum([item.qty for item in items])
      keranjang.save()
 def keranjangAjax(request, action):
      user = request.user
@@ -87,13 +108,15 @@ def keranjangAjax(request, action):
                return http.HttpResponseNotFound('Not Found')
 
           # update total di db
-          updateTotal(keranjang)
+          updateKeranjang(keranjang)
 
           data['status']= 200
           data['total']= item_keranjang.keranjang.total
+          data['jumlah_item']= item_keranjang.keranjang.jumlah_item
 
-          return JsonResponse(data)
+          return http.JsonResponse(data)
 
+@login_required
 def keranjang(request):
      user = request.user
      keranjang = user.keranjang
@@ -113,16 +136,17 @@ def keranjang(request):
                     item_keranjang = models.IsiKeranjang(keranjang=keranjang, item=item, qty=qty, subtotal=item.harga*qty)
                     item_keranjang.save()
                
-               updateTotal(keranjang)
-
-               return HttpResponseRedirect('/keranjang')
+               updateKeranjang(keranjang)
+               
+               return http.HttpResponseRedirect('/keranjang')
      items = models.IsiKeranjang.objects.filter(keranjang=keranjang)
      data = {
           'items': items,
-          'total': keranjang.total
+          'keranjang': keranjang,
      }
      return render(request, 'keranjang.html', data)
 
+@login_required
 def checkout(request):
      user = request.user
      keranjang = user.keranjang
@@ -134,14 +158,14 @@ def checkout(request):
           return http.HttpResponseRedirect('/')
      
      # flag item workspace di keranjang
-     SEWA = True if 'workspace' in [str(item_keranjang.item.jenis_item).lower() for item_keranjang in items] else False
+     SEWA = True if 'workspace' in [str(item_keranjang.item.jenis_item.jenis).lower() for item_keranjang in items] else False
      request.session['SEWA'] = SEWA
 
      data = {
           'items': items,
-          'total': keranjang.total,
+          'keranjang': keranjang,
           'provinsi': [] if SEWA else rajaOngkirAPI('provinsi'),
-          'sewa': SEWA,
+          'SEWA': SEWA,
           'metode_pembayaran': models.MetodePembayaran.objects.all()
      }
      return render(request, 'checkout.html', data)
@@ -205,12 +229,14 @@ def rajaOngkirAPI(param, **kwargs):
           return data['rajaongkir']['results']
      return None
 
+@login_required
 def order(request):
      if request.method == 'POST':
           print(request.POST)
           user = request.user
           keranjang = user.keranjang
           total =  keranjang.total
+          jumlah_item = keranjang.jumlah_item
           data = {
                'user': request.user,
                'nama': request.POST['nama'],
@@ -220,6 +246,7 @@ def order(request):
                'subtotal': total,
                'total': total,
                'status_pembayaran': 0,
+               'jumlah_item': jumlah_item, 
           }
           if not request.session.get('SEWA', False):
                # Belum cek kosong
@@ -251,6 +278,12 @@ def order(request):
           transaksi = models.Transaksi(**data)
           transaksi.save()
 
+          # HAPUS KERANJANG
+          models.IsiKeranjang.objects.filter(keranjang=keranjang).all().delete()
+          keranjang.total=0
+          keranjang.jumlah_item=0
+          keranjang.save()
+
           request.session['id_transaksi'] = str(transaksi.id)
           request.session['total'] = transaksi.total
 
@@ -259,44 +292,22 @@ def order(request):
           
           print(data)
           print('==SAVED==')
-          # return http.HttpResponseRedirect('/thankyou')
-          return redirect('/thankyou', permanent=True)
+          # return http.HttpResponseRedirect('/terimakasih')
+          return redirect('/terimakasih', permanent=True)
      
      # return http.HttpResponseNotFound()
 
-def thankyou(request):
+@login_required
+def terimakasih(request):
      print('pesanan:', request.session.get('id_transaksi', ''))
      data = {
           'id_transaksi': request.session.get('id_transaksi', ''),
           'total': request.session.get('total', '')
      }
-     return render(request, 'thankyou.html', data)
+     return render(request, 'terimakasih.html', data)
 
 def contact(request):
     return render(request, 'contact.html')
 
 def kategori(request):
      return render(request, 'kategoribendapos.html')
-
-def detail_product(request, pk):			
-    try:
-        item = Item.objects.get(pk=pk)
-    except Item.DoesNotExist:
-        raise http.Http404('Item does not exist')
-    
-    return render(request, 'detail_product.html', {'item': item})
-
-def kategori_list(request, kategori):
-    item_list = models.Item.objects.filter(kategori__nama_kategori=kategori)
-	
-    return render(request,'index.html', {'item_list': item_list})
-	
-def search_product(request):
-    #	""" search function  """
-    if request.method == "POST":
-        query_name = request.POST.get('name', None)
-        if query_name:
-            results = Item.objects.filter(nama_item__contains=query_name)
-            return render(request, 'product_search.html', {"results":results})
-
-    return render(request, 'product_search.html')

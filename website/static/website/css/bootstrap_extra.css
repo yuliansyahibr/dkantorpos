@@ -142,6 +142,149 @@ a.text-orange:hover, a.text-orange:focus {
     color: #e88a00 !important;
 }
 
+/*------------------------------------
+- COLOR orange2
+------------------------------------*/
+.alert-orange2 {
+    color: #8a4306;
+    background-color: #fdead9;
+    border-color: #fcdfc6;
+}
+
+.alert-orange2 hr {
+    border-top-color: #fbd1ad;
+}
+
+.alert-orange2 .alert-link {
+    color: #592b04;
+}
+
+.badge-orange2 {
+    color: #212529;
+    background-color: #F47E17;
+}
+
+.badge-orange2[href]:hover, .badge-orange2[href]:focus {
+    color: #212529;
+    background-color: #ce6509;
+}
+
+.bg-orange2 {
+    background-color: #F47E17 !important;
+}
+
+a.bg-orange2:hover, a.bg-orange2:focus,
+button.bg-orange2:hover,
+button.bg-orange2:focus {
+    background-color: #ce6509 !important;
+}
+
+.border-orange2 {
+    border-color: #F47E17 !important;
+}
+
+.btn-orange2 {
+    color: #212529;
+    background-color: #F47E17;
+    border-color: #F47E17;
+}
+
+.btn-orange2:hover {
+    color: #212529;
+    background-color: #dc6c0a;
+    border-color: #ce6509;
+}
+
+.btn-orange2:focus, .btn-orange2.focus {
+    box-shadow: 0 0 0 0.2rem rgba(244, 126, 23, 0.5);
+}
+
+.btn-orange2.disabled, .btn-orange2:disabled {
+    color: #212529;
+    background-color: #F47E17;
+    border-color: #F47E17;
+}
+
+.btn-orange2:not(:disabled):not(.disabled):active, .btn-orange2:not(:disabled):not(.disabled).active, .show > .btn-orange2.dropdown-toggle {
+    color: #212529;
+    background-color: #ce6509;
+    border-color: #bf5e09;
+}
+
+.btn-orange2:not(:disabled):not(.disabled):active:focus, .btn-orange2:not(:disabled):not(.disabled).active:focus, .show > .btn-orange2.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(244, 126, 23, 0.5);
+}
+
+.btn-outline-orange2 {
+    color: #F47E17;
+    background-color: transparent;
+    border-color: #F47E17;
+}
+
+.btn-outline-orange2:hover {
+    color: #212529;
+    background-color: #F47E17;
+    border-color: #F47E17;
+}
+
+.btn-outline-orange2:focus, .btn-outline-orange2.focus {
+    box-shadow: 0 0 0 0.2rem rgba(244, 126, 23, 0.5);
+}
+
+.btn-outline-orange2.disabled, .btn-outline-orange2:disabled {
+    color: #F47E17;
+    background-color: transparent;
+}
+
+.btn-outline-orange2:not(:disabled):not(.disabled):active, .btn-outline-orange2:not(:disabled):not(.disabled).active, .show > .btn-outline-orange2.dropdown-toggle {
+    color: #212529;
+    background-color: #F47E17;
+    border-color: #F47E17;
+}
+
+.btn-outline-orange2:not(:disabled):not(.disabled):active:focus, .btn-outline-orange2:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-orange2.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(244, 126, 23, 0.5);
+}
+
+.list-group-item-orange2 {
+    color: #8a4306;
+    background-color: #fcdfc6;
+}
+
+.list-group-item-orange2.list-group-item-action:hover, .list-group-item-orange2.list-group-item-action:focus {
+    color: #8a4306;
+    background-color: #fbd1ad;
+}
+
+.list-group-item-orange2.list-group-item-action.active {
+    color: #212529;
+    background-color: #8a4306;
+    border-color: #8a4306;
+}
+
+.table-orange2,
+.table-orange2 > th,
+.table-orange2 > td {
+    background-color: #fcdfc6;
+}
+
+.table-hover .table-orange2:hover {
+    background-color: #fbd1ad;
+}
+
+.table-hover .table-orange2:hover > td,
+.table-hover .table-orange2:hover > th {
+    background-color: #fbd1ad;
+}
+
+.text-orange2 {
+    color: #F47E17 !important;
+}
+
+a.text-orange2:hover, a.text-orange2:focus {
+    color: #ce6509 !important;
+}
+
 
 /*------------------------------------
 - COLOR yellow

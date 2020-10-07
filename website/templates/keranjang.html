@@ -72,8 +72,8 @@
 				<br>
 				<thead>
 					<tr>
-						<th scope="col" colspan="3" class="text-right pr-3">Subtotal ({{ items|length }} item): </th>
-                        <th scope="col" id='total-keranjang'  class="h5 text-center convert-rupiah font-weight-bold">{{ total }}</th>
+						<th scope="col" colspan="3" class="text-right pr-3">Subtotal (<span id="jumlah-item">{{ keranjang.jumlah_item }}</span> item): </th>
+                        <th scope="col" id='total-keranjang'  class="h5 text-center convert-rupiah font-weight-bold">{{ keranjang.total }}</th>
                         <th scope="col" class="text-center">&nbsp;</th>
 					</tr>
 				</thead>
@@ -117,9 +117,10 @@
                     qty: qty
                 },
                 success: function(data) {
-                    console.log(data)
+                    //console.log(data)
                     updateRupiah($('#total-keranjang'), data['total'])
                     updateRupiah($(`#total-item-${id_item_keranjang}`), data['subtotal'])
+                    $('#jumlah-item').text(data['jumlah_item'])
                 },
                 error: function(data){
                     alert("Terjadi kesalahan saat mengubah kuantitas")

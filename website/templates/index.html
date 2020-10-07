@@ -1,8 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'header.html' %}
-	
-	<!-- new -->
-	{% block content %}
+
+{% block css %}
+<link href="{% static 'website/css/produk.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
 	{% if item_list %}
 	<div class="newproducts-w3agile">
 		<div class="container">
@@ -22,13 +25,13 @@
 				<img src="{% static 'website/images/kantorpos1.jpg' %}" alt="" />
 				<!--Slider Description example-->
 				<div class="slide-desc">
-					<!--<h3>Buy Rice Products Are Now On Line With Us</h3>-->
+					<h3>----------</h3>
 				</div>
 			</li>
-			<li>
+			<!-- <li>
 				<img src="{% static 'website/images/kantorpos1.jpg' %}" alt="" />
 				<div class="slide-desc">
-					<!--<h3>Whole Spices Products Are Now On Line With Us</h3>-->
+					<h3>Whole Spices Products Are Now On Line With Us</h3>
 				</div>
 			</li>
 
@@ -37,22 +40,38 @@
 				<div class="slide-desc">
 					<h3>Whole Spices Products Are Now On Line With Us</h3>
 				</div>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 	<!-- //main-slider -->
 	<!-- //top-header and slider -->
 	<div class="newproducts-w3agile">
 		<div class="container">
-			<h3 class="mb-5">Produk Baru</h3>
 			<div class="row">
-				{% for item in shelf %}
-					{% include 'konten.html' %}
-				{% endfor %}
+				<div class="col pb-5">
+					<h3 class="mb-3">Produk</h3>
+					<div class="row">
+						{% for item in shelf_barang %}
+							{% include 'konten.html' %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col pb-5">
+					<h3 class="mb-3">Work space</h3>
+					<div class="row">
+						{% for item in shelf_workspace %}
+							{% include 'konten.html' %}
+						{% endfor %}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	{% endif %}
-	{% endblock %}
-	<!-- //new -->
-{% include 'footer.html' %}
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'website/js/format-rupiah.js' %}"></script>
+{% endblock %}

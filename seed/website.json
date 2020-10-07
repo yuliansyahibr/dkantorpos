@@ -53,49 +53,42 @@
     "model": "website.jenisitem",
     "pk": "872ba526-e128-42eb-9b07-2c12f0201ee3",
     "fields": {
-        "jenis": "Workspace"
+        "jenis": "workspace"
     }
 },
 {
     "model": "website.jenisitem",
     "pk": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
     "fields": {
-        "jenis": "Prangko"
-    }
-},
-{
-    "model": "website.jenisitem",
-    "pk": "ae473958-ce42-4941-b7dc-cf48ca14f810",
-    "fields": {
-        "jenis": "Materai"
+        "jenis": "barang"
     }
 },
 {
     "model": "website.kategori",
     "pk": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
     "fields": {
-        "nama_kategori": "Prangko"
+        "nama_kategori": "prangko"
     }
 },
 {
     "model": "website.kategori",
     "pk": "c89f36a7-f92f-4403-9328-a0c696549e68",
     "fields": {
-        "nama_kategori": "Materai"
+        "nama_kategori": "materai"
     }
 },
 {
     "model": "website.kategori",
     "pk": "d32a57e1-dc25-480e-bf1b-3e94078fc5f0",
     "fields": {
-        "nama_kategori": "Workspace"
+        "nama_kategori": "workspace"
     }
 },
 {
     "model": "website.item",
     "pk": "f9090229-a2f0-48f8-983b-d45f15dfdb5c",
     "fields": {
-        "jenis_item": "ae473958-ce42-4941-b7dc-cf48ca14f810",
+        "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
         "kategori": "c89f36a7-f92f-4403-9328-a0c696549e68",
         "nama_item": "Materai 6000",
         "harga": 8000,
@@ -112,9 +105,9 @@
     "fields": {
         "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
         "kategori": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
-        "nama_item": "Prangko",
+        "nama_item": "Prangko Dilan",
         "harga": 8000,
-        "deskripsi": "Prangko 3",
+        "deskripsi": "Prangko dilan",
         "jumlah_tersedia": 99,
         "foto": "Prangko_3.jpg",
         "created_at": "2020-09-16T06:24:58.134Z",
@@ -127,9 +120,9 @@
     "fields": {
         "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
         "kategori": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
-        "nama_item": "Prangko",
+        "nama_item": "Prangko Keraton Ratu Boko",
         "harga": 7500,
-        "deskripsi": "Prangko 2",
+        "deskripsi": "Prangko keraton",
         "jumlah_tersedia": 99,
         "foto": "Prangko_2.jpg",
         "created_at": "2020-09-16T06:24:28.912Z",
@@ -142,9 +135,9 @@
     "fields": {
         "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
         "kategori": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
-        "nama_item": "Prangko",
+        "nama_item": "Prangko Andong 1000",
         "harga": 7500,
-        "deskripsi": "Prangko 1",
+        "deskripsi": "Prangko Andong 1000 tahun 2001",
         "jumlah_tersedia": 99,
         "foto": "Prangko_1.jpg",
         "created_at": "2020-09-16T06:23:11.583Z",
@@ -155,7 +148,7 @@
     "model": "website.item",
     "pk": "a0a54561-90ce-4841-bfe6-8a100b6278b6",
     "fields": {
-        "jenis_item": "ae473958-ce42-4941-b7dc-cf48ca14f810",
+        "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
         "kategori": "c89f36a7-f92f-4403-9328-a0c696549e68",
         "nama_item": "Materai 3000",
         "harga": 5000,

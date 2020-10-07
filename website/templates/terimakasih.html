@@ -1,5 +1,8 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'header.html' %}
+
+
+{% block content %}
 
 <div class="loader"></div>
 <div class="container py-5">
@@ -21,14 +24,15 @@
                     <p class="font-weight-bold">
                         Nomor pesanan: {{id_transaksi}}
                     </p>
+                    <!-- <p>
                         <ul style="list-style-position: inside;">
                             <li>__produk Rp__harga</li>
                             <li>__produk Rp__harga</li>
                         </ul>
-                    </p>
-                    <span class="my-3">
+                    </p> -->
+                    <p class="my-3">
                         Total: {{total}}
-                    </span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -40,4 +44,4 @@
 <script>
 
 </script>
-{% include 'footer.html' %}
+{% endblock %}

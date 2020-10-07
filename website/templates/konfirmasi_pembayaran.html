@@ -1,51 +1,54 @@
-{% include 'header.html' %}
-	<!-- breadcrumbs -->
-	<div class="breadcrumbs">
-		<div class="container">
-			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-				<li class="breadcrumb-item"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-				<li class="breadcrumb-item active">Halaman Konfirmasi Pembayaran</li>
-			</ol>
-		</div>
+{% extends 'base.html' %}
+{% load static %}
+	
+{% block content %}
+<!-- breadcrumbs -->
+<div class="breadcrumbs">
+	<div class="container">
+		<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+			<li class="breadcrumb-item"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+			<li class="breadcrumb-item active">Halaman Konfirmasi Pembayaran</li>
+		</ol>
 	</div>
-	<!-- //breadcrumbs -->
-	<!-- Konfirmasi Pembayaran -->
-	<div class="register">
-		<div class="container">
-			<h2>Konfirmasi Pembayaran</h2>
-			<div class="login-form-grids">
-				<form action="#" method="post">
-					{% csrf_token %}
-					{% for field in form %}
-					<p>
-						{{ field.label_tag }}<br>
-						{{ field }}
-						{% if field.help_text %}
-						<small style="color: grey">{{ field.help_text }}</small>
-						{% endif %}
-						{% for error in field.errors %}
-						<p style="color: red">{{ error }}</p>
-						{% endfor %}
-					</p>
+</div>
+<!-- //breadcrumbs -->
+<!-- Konfirmasi Pembayaran -->
+<div class="register">
+	<div class="container">
+		<h2>Konfirmasi Pembayaran</h2>
+		<div class="login-form-grids">
+			<form action="#" method="post">
+				{% csrf_token %}
+				{% for field in form %}
+				<p>
+					{{ field.label_tag }}<br>
+					{{ field }}
+					{% if field.help_text %}
+					<small style="color: grey">{{ field.help_text }}</small>
+					{% endif %}
+					{% for error in field.errors %}
+					<p style="color: red">{{ error }}</p>
 					{% endfor %}
-					<!-- <input type="text" placeholder="Nama Lengkap" required=" " >
-					<input type="text" placeholder="No. Handphone" required=" " >
-					<input type="email" placeholder="Alamat Email" required=" " >
-					<input type="text" placeholder="Alamat Rumah" required=" " >
-					<input type="password" placeholder="Password" required=" " >
-					<input type="password" placeholder="Password Confirmation" required=" " > -->
-					<div class="register-check-box">
-						<div class="check">
-							<label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>I accept the terms and conditions</label>
-						</div>
+				</p>
+				{% endfor %}
+				<!-- <input type="text" placeholder="Nama Lengkap" required=" " >
+				<input type="text" placeholder="No. Handphone" required=" " >
+				<input type="email" placeholder="Alamat Email" required=" " >
+				<input type="text" placeholder="Alamat Rumah" required=" " >
+				<input type="password" placeholder="Password" required=" " >
+				<input type="password" placeholder="Password Confirmation" required=" " > -->
+				<div class="register-check-box">
+					<div class="check">
+						<label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>I accept the terms and conditions</label>
 					</div>
-					<input type="submit" value="Register">
-				</form>
-			</div>
-			<div class="register-home">
-				<a href="{% url 'index' %}">Home</a>
-			</div>
+				</div>
+				<input type="submit" value="Register">
+			</form>
+		</div>
+		<div class="register-home">
+			<a href="{% url 'index' %}">Home</a>
 		</div>
 	</div>
-	<!-- //Konfirmasi Pembayaran -->
-{% include 'footer.html' %}
+</div>
+<!-- //Konfirmasi Pembayaran -->
+{% endblock %}

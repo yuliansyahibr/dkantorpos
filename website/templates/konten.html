@@ -1,44 +1,29 @@
-<div class="col-md-3 top_brand_left-1 mb-4">
-	<div class="hover14 column">
-		<div class="agile_top_brand_left_grid">
-			<div class="agile_top_brand_left_grid1">
-				<figure>
-					<div class="snipcart-item block">
-						<div class="snipcart-thumb">
-							<a href="{% url 'detail_product' item.id %}"><img title=" " alt=" " src="{{ item.foto.url }}"></a>
-							<p>{{ item.nama_item }}</p>
-								<div class="stars">
-									<i class="fa fa-star gold-star" aria-hidden="true"></i>
-									<i class="fa fa-star gold-star" aria-hidden="true"></i>
-									<i class="fa fa-star gold-star" aria-hidden="true"></i>
-									<i class="fa fa-star gold-star" aria-hidden="true"></i>
-									<i class="fa fa-star gray-star" aria-hidden="true"></i>
-								</div>
-							<h4>Rp.{{ item.harga }}</h4>
-						</div>
-					<div class="snipcart-details top_brand_home_details">
-						{% if user.is_authenticated %}
-						<form id="form-keranjang" action="{% url 'keranjang' %}" method="POST">
-							{% csrf_token %}
-							<input type="text" name="action" id="" value="add" hidden>
-							<input type="number" name="qty" id="input-qty" value="1" hidden>
-							<input type="text" name="id_item" id="input-id-item" value="{{ item.id }}" hidden>
-							<input type="submit" name="submit" value="Beli" class="btn btn-primary">
-						</form>
-						{% else %}
-						<form action="{% url 'login' %}">
-							<input type="submit" name="submit" value="Beli" class="btn btn-primary" onclick="alertBox()">
-							<script>
-								function alertBox() {
-								alert("Login terlebih dahulu untuk melanjutkan pembelian...");
-								}
-							</script>
-						</form>
-						{% endif %}
-						</div>
-					</div>
-				</figure>
-			</div>
+<div class="produk col-lg-2 col-md-3 col-sm-4 col-6 mb-4 py-3" >
+	<a href="{% url 'detail_product' item.id %}">
+		<div class="img-wrapper">
+			<img src="{{ item.foto.url }}" style="object-fit: cover;">
 		</div>
-	</div>
+		<div class="text-center">
+			<p class="text-dark nama-produk">{{ item.nama_item }}</p>
+			<p class="stars" style="font-size: 11px;">
+				<i class="fa fa-star gold-star" aria-hidden="true"></i>
+				<i class="fa fa-star gold-star" aria-hidden="true"></i>
+				<i class="fa fa-star gray-star" aria-hidden="true"></i>
+				<i class="fa fa-star gray-star" aria-hidden="true"></i>
+				<i class="fa fa-star gray-star" aria-hidden="true"></i>
+			</p>
+			<p class="text-danger font-weight-bold" style="font-size: 14px;">
+				<span class="convert-rupiah">{{ item.harga }}</span>
+			</p>
+		</div>
+		<div class="d-block">
+			<form id="form-keranjang" action="{% url 'keranjang' %}" method="POST">
+				{% csrf_token %}
+				<input type="text" name="action" id="" value="add" hidden>
+				<input type="number" name="qty" id="input-qty" value="1" hidden>
+				<input type="text" name="id_item" id="input-id-item" value="{{ item.id }}" hidden>
+				<input type="submit" name="submit" value="Beli" class="btn btn-orange2 btn-beli col-9 mx-auto">
+			</form>
+		</div>
+	</a>
 </div>
