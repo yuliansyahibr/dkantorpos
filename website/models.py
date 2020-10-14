@@ -60,11 +60,12 @@ class User(AbstractUser):
     # first_name = None
     # last_name = None
 
-    # email = CustomEmailField(_('email'), unique=True, max_length=64)
-    # sementara email jadi char, untuk mempermudah register/login
-    email = models.CharField(_('email'), unique=True, max_length=64)
+    email = CustomEmailField(_('email'), unique=True, max_length=64)
+    # uncomment kode dibawah supaya email jadi char, untuk mempermudah register/login
+    # email = models.CharField(_('email'), unique=True, max_length=64)
     first_name = models.CharField(_('nama depan'), max_length=64)
     last_name = models.CharField(_('nama belakang'), max_length=64)
+    hp = models.CharField(_('hp'), max_length=14)
     password = models.CharField(_('password'), max_length=64)
 
     keranjang = models.ForeignKey(

@@ -16,19 +16,18 @@ class SignUpForm(UserCreationForm):
     t_password1 = 'Password '
     t_password2 = 'Konfirmasi Password '
 
-    # email = forms.EmailField(max_length=64, label=_(t_email), widget=forms.TextInput(attrs={'placeholder': t_email}))
-    email = forms.CharField(max_length=64, label=_(t_email), widget=forms.TextInput(attrs={'placeholder': t_email}))
+    email = forms.EmailField(max_length=64, label=_(t_email), widget=forms.TextInput(attrs={'placeholder': t_email}))
+    # email = forms.CharField(max_length=64, label=_(t_email), widget=forms.TextInput(attrs={'placeholder': t_email}))
 
     first_name = forms.CharField(max_length=32, label=_(t_fname), widget=forms.TextInput(attrs={'placeholder': t_fname}))
     last_name = forms.CharField(max_length=32, label=_(t_lname), required=False, widget=forms.TextInput(attrs={'placeholder': t_lname}))
     password1 = forms.CharField(max_length=64, label=_(t_password1), widget=forms.PasswordInput(attrs={'placeholder': t_password1}))
     password2 = forms.CharField(max_length=64, label=_(t_password2), widget=forms.PasswordInput(attrs={'placeholder': t_password2}))
 
-    class Meta:
-        # model = User
-        model = models.User
-        # fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
-        fields = ('email', 'first_name', 'last_name', 'password1', 'password2')
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+        self.fields['hp'].widget.attrs['placeholder'] = 'No. HP'
 
-# class TagStatusForm(forms.Form):
-#     id_produk = {'tag': forms.HiddenInput()}
+    class Meta:
+        model = models.User
+        fields = ('email', 'first_name', 'last_name', 'hp', 'password1', 'password2')

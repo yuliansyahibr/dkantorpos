@@ -38,9 +38,11 @@ def register(request):
                user = authenticate(username=email, password=raw_password)
                authlogin(request, user)
                return redirect('index')
+
      else:
           form = SignUpForm()
-          return render(request, 'registration/register.html', {'form': form})
+
+     return render(request, 'registration/register.html', {'form': form})
 
 def profil(request):
      return render(request, 'user/profil.html')
@@ -63,8 +65,10 @@ def search_product(request):
     if request.method == "POST":
           query_name = request.POST.get('name', None)
           if query_name:
-            results = Item.objects.filter(nama_item__contains=query_name)
-            return render(request, 'product_search.html', {"results":results})
+               # contains = case sensitive
+               # icontains = case insensitive
+               results = Item.objects.filter(nama_item__icontains=query_name)
+               return render(request, 'product_search.html', {"results":results})
 
     return render(request, 'product_search.html')
 
@@ -118,6 +122,7 @@ def keranjangAjax(request, action):
 
 @login_required
 def keranjang(request):
+     request.session['keranjang'] = True
      user = request.user
      keranjang = user.keranjang
      if request.method == 'POST':
@@ -126,6 +131,11 @@ def keranjang(request):
                id_item = request.POST['id_item']
                item = models.Item.objects.get(id=id_item)
                qty = int(request.POST['qty'])
+               # jika item workspace
+               if item.jenis_item.jenis == 'workspace':
+                    request.session['WORKSPACE'] = True
+                    request.session['id_item'] = id_item
+                    return http.HttpResponseRedirect('/checkout')
 
                if models.IsiKeranjang.objects.filter(keranjang=keranjang, item=item):
                     item_keranjang = models.IsiKeranjang.objects.filter(keranjang=keranjang, item=item).first()
@@ -146,26 +156,42 @@ def keranjang(request):
      }
      return render(request, 'keranjang.html', data)
 
+"""return object yg sama seperti itemkeranjang model obj"""
+def get_item_keranjang_workspace(id_item, qty=1):
+     if id_item is None:
+          return None
+     from collections import namedtuple
+     item = models.Item.objects.get(id=id_item)
+     # IsiKeranjang = namedtuple('IsiKeranjang', ['item','qty','subtotal'])
+     args = {'item':item, 'qty':qty, 'subtotal':item.harga}
+     return models.IsiKeranjang(**args)
+     
 @login_required
 def checkout(request):
-     user = request.user
-     keranjang = user.keranjang
-     # get isi keranjang
-     items = models.IsiKeranjang.objects.filter(keranjang=keranjang)
-
-     # if keranjang kosong, redirect
-     if not items: 
-          return http.HttpResponseRedirect('/')
+     WORKSPACE = request.session.get('WORKSPACE')
+     if WORKSPACE:
+          item_keranjang = get_item_keranjang_workspace(request.session.get('id_item'))
+          items = [item_keranjang]
+          keranjang = {'total':item_keranjang.item.harga, 'jumlah_item':item_keranjang.qty}
+          provinsi = []
+     else:
+          user = request.user
+          keranjang = user.keranjang
+          items = models.IsiKeranjang.objects.filter(keranjang=keranjang)
+          # if keranjang kosong, redirect
+          if not items: 
+               return http.HttpResponseRedirect('/keranjang')
+          provinsi = rajaOngkirAPI('provinsi')
      
      # flag item workspace di keranjang
-     SEWA = True if 'workspace' in [str(item_keranjang.item.jenis_item.jenis).lower() for item_keranjang in items] else False
-     request.session['SEWA'] = SEWA
+     # SEWA = True if 'workspace' in [str(item_keranjang.item.jenis_item.jenis).lower() for item_keranjang in items] else False
+     # request.session['SEWA'] = SEWA
 
      data = {
           'items': items,
           'keranjang': keranjang,
-          'provinsi': [] if SEWA else rajaOngkirAPI('provinsi'),
-          'SEWA': SEWA,
+          'provinsi': provinsi,
+          'WORKSPACE': WORKSPACE,
           'metode_pembayaran': models.MetodePembayaran.objects.all()
      }
      return render(request, 'checkout.html', data)
@@ -186,7 +212,7 @@ doc: https://rajaongkir.com/dokumentasi/starter
 def rajaOngkirAPI(param, **kwargs):
      """
      Note: 
-     request.POST values are list, get the 1st index [0] only
+     request.POST values are in list, get the 1st index [0] only
      """
      from http import client
      import ast, json
@@ -234,21 +260,18 @@ def order(request):
      if request.method == 'POST':
           print(request.POST)
           user = request.user
-          keranjang = user.keranjang
-          total =  keranjang.total
-          jumlah_item = keranjang.jumlah_item
-          data = {
-               'user': request.user,
-               'nama': request.POST['nama'],
-               'telepon': request.POST['telepon'],
-               'alamat': request.POST['alamat'],
-               'metode_pembayaran': models.MetodePembayaran.objects.filter(id=request.POST['metode_pembayaran']).first(),
-               'subtotal': total,
-               'total': total,
-               'status_pembayaran': 0,
-               'jumlah_item': jumlah_item, 
-          }
-          if not request.session.get('SEWA', False):
+
+          WORKSPACE = request.session.get('WORKSPACE')
+          if WORKSPACE:
+               id_item = request.session.get('id_item')
+               item_keranjang = get_item_keranjang_workspace(request.session.get('id_item'))
+               # items = [item_keranjang]
+               keranjang = models.Keranjang(**{'total':item_keranjang.item.harga, 'jumlah_item':item_keranjang.qty})
+               _data = {
+                    'total': keranjang.total
+               }
+          else:
+               keranjang = user.keranjang
                # Belum cek kosong
                id_provinsi = request.POST['id_provinsi']
                nama_provinsi = rajaOngkirAPI('provinsi', id_provinsi=id_provinsi)['province']
@@ -262,8 +285,7 @@ def order(request):
                     return http.HttpResponseBadRequest()
                ongkos_kirim = cost['cost'][0]['value']
                estimasi = cost['cost'][0]['etd']
-               data = {
-                    **data,
+               _data = {
                     'id_provinsi': id_provinsi,
                     'nama_provinsi': nama_provinsi,
                     'id_kota': id_kota,
@@ -271,35 +293,74 @@ def order(request):
                     'kodepos': request.POST['kodepos'],
                     'service': service,
                     'ongkos_kirim': ongkos_kirim,
-                    'total': total+ongkos_kirim,
+                    'total': keranjang.total+ongkos_kirim,
                }
+
+          data = {
+               'user': request.user,
+               'nama': request.POST['nama'],
+               'telepon': request.POST['telepon'],
+               'alamat': request.POST['alamat'],
+               'metode_pembayaran': models.MetodePembayaran.objects.filter(id=request.POST['metode_pembayaran']).first(),
+               'subtotal': keranjang.total,
+               'status_pembayaran': 0,
+               'jumlah_item': keranjang.jumlah_item,
+               **_data
+          }
+          
+          # if WORKSPACE is None:
+          #      # Belum cek kosong
+          #      id_provinsi = request.POST['id_provinsi']
+          #      nama_provinsi = rajaOngkirAPI('provinsi', id_provinsi=id_provinsi)['province']
+          #      id_kota = request.POST['id_kota']
+          #      kota = rajaOngkirAPI('kota', id_provinsi=id_provinsi, id_kota=id_kota)
+          #      nama_kota = kota['type']+' '+kota['city_name']
+          #      service = request.POST['service']
+          #      # cost = [d for d in rajaOngkirAPI('ongkir', id_kota=id_kota)[0]['costs'] if d['service'] == service]
+          #      cost = next((x for x in rajaOngkirAPI('ongkir', id_kota=id_kota)[0]['costs'] if x['service'] == service), None)
+          #      if cost is None:
+          #           return http.HttpResponseBadRequest()
+          #      ongkos_kirim = cost['cost'][0]['value']
+          #      estimasi = cost['cost'][0]['etd']
+          #      data = {
+          #           **data,
+          #           'id_provinsi': id_provinsi,
+          #           'nama_provinsi': nama_provinsi,
+          #           'id_kota': id_kota,
+          #           'nama_kota': nama_kota,
+          #           'kodepos': request.POST['kodepos'],
+          #           'service': service,
+          #           'ongkos_kirim': ongkos_kirim,
+          #           'total': total+ongkos_kirim,
+          #      }
 
           # save to db
           transaksi = models.Transaksi(**data)
           transaksi.save()
 
-          # HAPUS KERANJANG
-          models.IsiKeranjang.objects.filter(keranjang=keranjang).all().delete()
-          keranjang.total=0
-          keranjang.jumlah_item=0
-          keranjang.save()
+          if WORKSPACE:
+               del request.session['WORKSPACE']
+               del request.session['id_item']
+               request.session.modified = True
+          else:
+               # RESET KERANJANG
+               models.IsiKeranjang.objects.filter(keranjang=keranjang).all().delete()
+               keranjang.total=0
+               keranjang.jumlah_item=0
+               keranjang.save()
 
           request.session['id_transaksi'] = str(transaksi.id)
           request.session['total'] = transaksi.total
-
-          del request.session['SEWA']
-          request.session.modified = True
           
           print(data)
           print('==SAVED==')
-          # return http.HttpResponseRedirect('/terimakasih')
-          return redirect('/terimakasih', permanent=True)
+          return http.HttpResponseRedirect('/terimakasih')
+          # return redirect('/terimakasih', permanent=True)
      
      # return http.HttpResponseNotFound()
 
 @login_required
 def terimakasih(request):
-     print('pesanan:', request.session.get('id_transaksi', ''))
      data = {
           'id_transaksi': request.session.get('id_transaksi', ''),
           'total': request.session.get('total', '')
