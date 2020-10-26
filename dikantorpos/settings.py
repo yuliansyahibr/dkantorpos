@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'website',
 ]
 
+# config/settings.py
+DEFAULT_FROM_EMAIL = 'dkantorpos01@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
