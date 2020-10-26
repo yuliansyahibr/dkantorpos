@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'website/css/daftar_transaksi.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container py-5 mt-2 mb-4">
+    <div class="row">
+        <div class="col text-center">
+            <h4>Daftar Transaksi</h4>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col border">
+            <div class="row">
+                <div class="col">
+                    <img src="{{ '/media/Materai_1.jpg' }}" style="object-fit: cover;">
+                </div>
+                <div class="col">
+                    <div>
+                        <h5>Produk 1</h5>
+                    </div>
+                    <div>
+                        <p>Deskripsi Produk</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary">Konfirmasi</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-lg-11 col-12 mx-auto" style="font-size:14px">
+            <div class="table-responsive px-3">
+                <table class="table table-borderless table-sm">
+                    <tr>
+                        <td scope="col" class="" style="min-width:560px"></td>
+                        <!-- <td scope="col" class="pl-4" style="max-width:480px"></td> -->
+						<!-- <th scope="col" class="text-center">Total</th> -->
+						<td scope="col" style="min-width:190px;">&nbsp;</td>
+                    </tr>
+                    
+                    {% for order in orders %}
+                    <tr class="border border-bottom-0 bg-light">
+                        <td colspan="2">
+                            <div class="row py-3 px-3">
+                                <div class="col-lg-3 col-4">
+                                    <span>WAKTU</span><br>
+                                    <span class="font-weight-bold">{{order.created_at}}</span>
+                                </div>
+                                <div class="col-lg-2 col-4">
+                                    <span>NOMOR PESANAN</span><br>
+                                    <span class="font-weight-bold">{{order.kode}}</span>
+                                </div>
+                                <div class="col-lg-2 col-4">
+                                    <span>TOTAL</span><br>
+                                    <span class="convert-rupiah font-weight-bold">{{order.total}}</span>
+                                </div>
+                                <div class="col-lg-2 col-4">
+                                    <span>PEMBAYARAN</span><br>
+                                    <span class="font-weight-bold">{{order.metode_pembayaran.nama_metode}}</span>
+                                </div>
+                                <div class="col-lg-3 col-4">
+                                    <span>STATUS</span><br>
+                                    {% if order.status_pembayaran == 0 %}
+                                        <span class="text-danger font-weight-bold">Menunggu pembayaran.</span>
+                                    {% elif order.status_pembayaran == 1 %}
+                                        <span class="text-orange font-weight-bold">Menunggu konfirmasi Pos Indonesia.</span>
+                                    {% elif order.status_pembayaran == 2 %}
+                                        <span class="text-success font-weight-bold">Pesanan diproses.</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="" class="padded-row border border-top-0">
+                        <td class="pl-2 pb-4">
+                            {% for detail in order.details %}
+                            <div class="row px-4 py-2 ">
+                                <div class="col-lg-2 col-md-2 col-3">
+                                    <div class="img-wrapper">
+                                        <a href="{% url 'detail_product' detail.produk.id.hex %}">
+                                            <img src="{{ detail.produk.foto.url }}" alt="..."/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <a href="{% url 'detail_product' detail.produk.id.hex %}"><h6 class="nomargin">{{ detail.produk.nama_produk }}</h6></a>
+                                    <!-- <p>{{ detail.produk.deskripsi}}</p> -->
+                                    <span class="convert-rupiah">{{ detail.subtotal}}</span><span>, {{detail.qty}} produk</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </td>
+                        <!-- <td>
+                            <span  id='total-item-{{item_keranjang.id}}' class="convert-rupiah">{{ item_keranjang.subtotal }}</span>
+                        </td> -->
+                        <td class="text-right pr-4">
+                            <!-- <div class="col-lg-10 col-12 mx-auto"> -->
+                                <!-- <button class="btn btn-secondary btn-sm btn-block py-2">Detail</button> -->
+                                {% if order.status_pembayaran == 0 %}
+                                    <button type="button" class="btn btn-success btn-sm py-2" data-toggle="modal" data-target="#modal-konfirmasi" 
+                                    data-url="{% url 'konfirmasi_pembayaran' order.id.hex %}">
+                                        Konfirmasi Pembayaran
+                                    </button>
+                                {% endif %}
+                            <!-- </div> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+
+                </table>	
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'modal_konfirmasi_pembayaran.html' %}
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'website/js/format-rupiah.js' %}"></script>
+{% endblock %}

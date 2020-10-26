@@ -1,0 +1,65 @@
+{% load static %}
+{% block css %}
+<link href="{% static 'website/css/konfirmasi_pembayaran.css' %}" rel="stylesheet">
+{% endblock %}
+
+<!-- Modal -->
+<div class="modal fade" id="modal-konfirmasi" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Upload Bukti Pembayaran</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<form action="" enctype="multipart/form-data" method="post" id="form-img" class="" novalidate="">
+			<div class="modal-body container">
+				<div class="row px-3">
+					<div class="col mx-auto mb-2 py-0 px-0">
+						<div class="row">
+							<div class="col">
+								<div class="form-konfirmasi">
+									<!-- <input type="file" name="foto" accept="image/*" required="" id="id_foto"> -->
+									{% csrf_token %} 
+									<!-- {{ form }} -->
+									{{ form.bukti_pembayaran }}
+									<div class="content_center mx-auto text-center">
+										Drag your files here or click in this area.<br>
+										({{form.bukti_pembayaran.help_text}})
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-orange btn-sm">Upload</button>
+			</div>
+		</form>
+	  </div>
+	</div>
+</div>
+
+
+<!-- <div class="container py-5 my-5">
+	
+</div> -->
+
+{% block js %}
+<script>
+	$(document).ready(function(){
+		$('.form-konfirmasi input[type=file]').change(function () {
+		  $('.content_center').text(this.files.length + " file(s) selected");
+		});
+		$('#modal-konfirmasi').on('show.bs.modal', function(e){
+			let btn = e.relatedTarget
+			let urlaction =  $(btn).data('url')
+			$('#form-img').attr('action', urlaction);
+			console.log($('#form-img').attr('action'))
+		})
+	  });
+</script>
+{% endblock %}

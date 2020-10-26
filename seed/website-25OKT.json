@@ -1,0 +1,129 @@
+[
+{
+    "model": "website.keranjang",
+    "pk": "4ba3298c-d2b6-4c6d-80ed-56cbce974b83",
+    "fields": {
+        "jumlah_item": 0,
+        "total": 0
+    }
+},
+{
+    "model": "website.user",
+    "pk": "c0b51a84-c475-4b9d-a762-5bd54258fcfd",
+    "fields": {
+        "last_login": "2020-10-25T06:15:34.589Z",
+        "is_superuser": true,
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-10-25T06:15:22.208Z",
+        "email": "admin",
+        "first_name": "",
+        "last_name": "",
+        "hp": "",
+        "password": "pbkdf2_sha256$216000$tDaUcByVfFuY$YRUOuAfXJXpm1CJQNPXOlieKePdwb/Xta8y0D/vrLgw=",
+        "keranjang": "4ba3298c-d2b6-4c6d-80ed-56cbce974b83",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "website.kategori",
+    "pk": "560f698e-712c-45ac-aae8-4df5f1517b50",
+    "fields": {
+        "nama_kategori": "Prangko"
+    }
+},
+{
+    "model": "website.kategori",
+    "pk": "6835d27f-3e8d-4516-8b6e-010cb57ed003",
+    "fields": {
+        "nama_kategori": "Materai"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "1d109e1d-4666-47a7-8770-30449528128e",
+    "fields": {
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko Andong 1000",
+        "harga": 6000,
+        "deskripsi": "Prangko Andong 1000 tahun 2001",
+        "stok": 25,
+        "foto": "images/produk/103fb2da838e46e1b129299da3cb5713.jpg",
+        "created_at": "2020-10-25T08:47:01.927Z",
+        "updated_at": "2020-10-25T08:47:01.927Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "2df270f3-a3e9-41c0-a79b-2f8c5cdfa950",
+    "fields": {
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko Dilan",
+        "harga": 8000,
+        "deskripsi": "Prangko Dilan tahun 2018",
+        "stok": 50,
+        "foto": "images/produk/60c178045c2c498691bb96557385cfb5.jpg",
+        "created_at": "2020-10-25T08:43:11.200Z",
+        "updated_at": "2020-10-25T08:46:09.474Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "3cda9381-434e-44c2-9bf8-a4ef5f2b8a31",
+    "fields": {
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko keraton",
+        "harga": 7500,
+        "deskripsi": "Prangko Keraton Ratu Boko",
+        "stok": 200,
+        "foto": "images/produk/8c0fed1cd92e4c63bcdf4c43916e74d8.jpg",
+        "created_at": "2020-10-25T08:44:09.868Z",
+        "updated_at": "2020-10-25T08:44:09.868Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "c4bcb14b-15c9-4f57-aa8b-9e54793c14be",
+    "fields": {
+        "kategori": "6835d27f-3e8d-4516-8b6e-010cb57ed003",
+        "nama_produk": "Materai 6000",
+        "harga": 6500,
+        "deskripsi": "Materai 6000",
+        "stok": 2000,
+        "foto": "images/produk/0b52f89179c54b87b3cf4c9142098c89.jpg",
+        "created_at": "2020-10-25T08:47:28.675Z",
+        "updated_at": "2020-10-25T08:47:28.675Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "de655c10-02d2-4cf7-964e-cda857c90984",
+    "fields": {
+        "kategori": "6835d27f-3e8d-4516-8b6e-010cb57ed003",
+        "nama_produk": "Materai 3000",
+        "harga": 3000,
+        "deskripsi": "Materai 3000",
+        "stok": 100,
+        "foto": "images/produk/4e98b00878f54a2eb249d84f8095fb56.jpeg",
+        "created_at": "2020-10-25T08:45:58.443Z",
+        "updated_at": "2020-10-25T08:45:58.443Z"
+    }
+},
+{
+    "model": "website.metodepembayaran",
+    "pk": "86d6343a-fb58-4681-9f68-26e926a2cb85",
+    "fields": {
+        "nama_metode": "Giro Pos Mobile",
+        "deskripsi": "Giro Pos Mobile"
+    }
+},
+{
+    "model": "website.metodepembayaran",
+    "pk": "f0a39c2c-5e14-4d93-ae95-803c62c8a8c9",
+    "fields": {
+        "nama_metode": "Tunai",
+        "deskripsi": "Pembayaran tunai di kantor pos."
+    }
+}
+]

@@ -1,0 +1,52 @@
+
+.form-konfirmasi{
+    border: 4px dashed rgb(112, 112, 112);
+    background-color: #f0f0f0;
+    position: relative;
+    /* max-width: 500px; */
+    width: 100%;
+    height: 240px;
+}
+/* .form-konfirmasi p{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-top:50%;
+    line-height: 170px;
+    color: #0c0c0c;
+    font-family: Arial;
+} */
+.form-konfirmasi input[type=file]:hover{
+    cursor: pointer;
+}
+.form-konfirmasi input[type=file]{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+}
+/* .form-konfirmasi input{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    height: 100%;
+    color: #0c0c0c;
+    font-family: Arial;
+    opacity: 0;
+} */
+.content_center {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    height: 100%;
+    color: #0c0c0c;
+    font-family: Arial;
+    /* border : 1px solid black; */
+}

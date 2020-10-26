@@ -38,14 +38,14 @@
                     {% for item_keranjang in items %}
 					<tr id="row-item-keranjang-{{ item_keranjang.id }}" class="padded-row">
 						<td scope="col" class="hidden-xs text-center" style="width:200px">
-							<a href="{% url 'detail_product' item_keranjang.item.id %}"><img src="{{ item_keranjang.item.foto.url }}" alt="..." class="img-responsive" style="object-fit: cover; max-height:180px;max-width:180px" /></a>
+							<a href="{% url 'detail_product' item_keranjang.produk.id.hex %}"><img src="{{ item_keranjang.produk.foto.url }}" alt="..." class="img-responsive" style="object-fit: cover; max-height:180px;max-width:180px" /></a>
                         </td>
                         <td class="pl-4">
-                            <a href="{% url 'detail_product' item_keranjang.item.id %}"><h5 class="nomargin">{{ item_keranjang.item.nama_item }}</h5></a>
-                            <p>{{ item_keranjang.item.deskripsi}}</p>
+                            <a href="{% url 'detail_product' item_keranjang.produk.id.hex %}"><h5 class="nomargin">{{ item_keranjang.produk.nama_item }}</h5></a>
+                            <p>{{ item_keranjang.produk.deskripsi}}</p>
                         </td>
 						<td class="text-center">
-                            <span class="convert-rupiah font-weight-bold">{{ item_keranjang.item.harga}}</span>
+                            <span class="convert-rupiah font-weight-bold">{{ item_keranjang.produk.harga}}</span>
                         </td>
 						<td class="text-center">
 							<div class="input-group flex-nowrap mx-auto" style="width: 90px;">
@@ -87,7 +87,9 @@
 					<a class="btn btn-warning text-white" style="height:60px; width: 100px;" href="{% url 'index' %}">Lanjutkan Belanja</a>
 				</div>
 				<div class="col text-right" >
-					<a  class="btn btn-primary" style="height:60px; width: 100px;" href="{% url 'checkout' %}">Checkout</a>
+					<a  class="btn btn-primary" style="height:60px; width: 100px;" href="{% url 'checkout' %}">
+                        Checkout
+                    </a>
 				</div>
 			</div>
 		</div>			
@@ -178,6 +180,7 @@
                             $(`#row-item-keranjang-${id_item_keranjang}`).remove()
                         }
                         updateRupiah($('#total-keranjang'), data['total'])
+                        $('#jumlah-item').text(data['jumlah_item'])
                     },
                     error: function(){
                         alert('Terjadi kesalahan saat menghapus item')

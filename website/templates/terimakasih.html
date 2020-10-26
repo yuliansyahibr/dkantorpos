@@ -4,42 +4,83 @@
 
 {% block content %}
 
-<div class="loader"></div>
-<div class="container py-5">
-    <div class="row py-5">
-        <div class="col-10 px-4 py-3 mx-auto bg-light">
+<div class="container py-5" style="font-size: 14px;">
+    <div class="row pt-5">
+        <div class="col text-center">
+            <h5>Checkout Complete</h5>
+        </div>
+    </div>
+    <div class="row pt-4 pb-5">
+        <div class="col-lg-8 col-md-8 col-10 px-5 py-4 mx-auto bg-light">
             <div class="row">
-                <div class="col text-center pt-2 pb-3">
-                    <p class="text-success mb-2 h5 font-weight-bold">
+                <div class="col pt-2 pb-4">
+                    <p class="text-success mb-3 h5">
                         <span class="mr-2"><i class="fa fa-check fa-2x"></i></span>
-                        <span class="h5 font-weight-bold"></span>Terima kasih, pesanan Anda sedang diproses...
-                    </p>
-                    <p>
-                        <!-- Mohon selesaikan pembayaran dengan rincian sebagai berikut -->
+                        <span class="h5 font-weight-bold">Terima kasih telah melakukan pembelian.</span><br>
                     </p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-7 mx-auto py-4">
-                    <p class="font-weight-bold">
-                        Nomor pesanan: {{id_transaksi}}
-                    </p>
-                    <!-- <p>
-                        <ul style="list-style-position: inside;">
-                            <li>__produk Rp__harga</li>
-                            <li>__produk Rp__harga</li>
-                        </ul>
-                    </p> -->
-                    <p class="my-3">
-                        Total: {{total}}
-                    </p>
+                <div class="col">
+                    <div class="row">
+                        <div class="col mb-1">
+                            <p>
+                                <!-- Mohon selesaikan pembayaran dengan rincian sebagai berikut -->
+                                Berikut ini adalah detail dari pesanan Anda.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row py-2 border-top">
+                        <div class="col-6">
+                            <span class="">
+                                Nomor Pesanan
+                            </span>
+                        </div>
+                        <div class="col-6">{{order.kode}}</div>
+                    </div>
+                    <div class="row py-2 border-top">
+                        <div class="col-6">
+                            <span class="">Total Pembayaran</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="convert-rupiah">{{total}}</span>
+                        </div>
+                    </div>
+                    <div class="row py-2 border-top">
+                        <div class="col-6">
+                            <span>
+                                Metode Pembayaran
+                            </span>
+                        </div>
+                        <div class="col-6">{{metode}}</div>
+                    </div>
+                    <div class="row py-2 border-top">
+                        <div class="col-6">
+                            <span class="">Status Pembayaran</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="">Belum dibayar.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5 pb-3">
+                <div class="col text-center">
+                    <span class="font-weight-bold">Mohon selesaikan pembayaran dalam waktu ... jam</span>
+                </div>
+            </div>
+            <div class="row mt-4 mb-4">
+                <div class="col text-center">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-konfirmasi"
+                    data-url="{% url 'konfirmasi_pembayaran' order.id.hex %}">
+                        Konfirmasi Pembayaran
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-{% csrf_token %}
+{% include 'modal_konfirmasi_pembayaran.html' %}
 
 <script>
 

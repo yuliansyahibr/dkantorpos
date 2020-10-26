@@ -120,7 +120,8 @@ LOGOUT_REDIRECT_URL = '/'
 LANGUAGE_CODE = 'en-us'
 # LANGUAGE_CODE = 'id'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Jakarta'
 
 USE_I18N = True
 

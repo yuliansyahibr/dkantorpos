@@ -1,22 +1,30 @@
-<div class="produk col-lg-2 col-md-3 col-sm-4 col-6 mb-4 py-4" >
-	<a href="{% url 'detail_product' item.id %}">
+<div class="produk {% firstof colclass 'col-lg-2 col-md-3 col-sm-4 col-6 mb-4 py-4' %}" >
+	{% if PROPERTI %}
+		{% url 'detail_properti' item.id.hex as detail_url %}
+	{% else %}
+		{% url 'detail_product' item.id.hex as detail_url %}
+	{% endif %}
+	<a href="{{detail_url}}">
 		<div class="img-wrapper">
 			<img src="{{ item.foto.url }}" style="object-fit: cover;">
 		</div>
 		<div class="text-center">
-			<p class="text-dark nama-produk">{{ item.nama_item }}</p>
-			<p class="stars" style="font-size: 11px;">
+			<p class="text-dark nama-produk">{% firstof item.nama_produk item.nama %}</p>
+			<!-- <p class="stars" style="font-size: 11px;">
 				<i class="fa fa-star gold-star" aria-hidden="true"></i>
 				<i class="fa fa-star gold-star" aria-hidden="true"></i>
 				<i class="fa fa-star gray-star" aria-hidden="true"></i>
 				<i class="fa fa-star gray-star" aria-hidden="true"></i>
 				<i class="fa fa-star gray-star" aria-hidden="true"></i>
-			</p>
+			</p> -->
 			<p class="text-danger font-weight-bold" style="font-size: 14px;">
 				<span class="convert-rupiah">{{ item.harga }}</span>
 			</p>
 		</div>
 		<div class="d-block">
+			{% if PROPERTI %}
+			<button class="btn btn-orange2 btn-beli col-9 mx-auto">Lihat detail</button>
+			{% else %}
 			<form id="form-keranjang" action="{% url 'keranjang' %}" method="POST">
 				{% csrf_token %}
 				<input type="text" name="action" id="" value="add" hidden>
@@ -24,6 +32,7 @@
 				<input type="text" name="id_item" id="input-id-item" value="{{ item.id }}" hidden>
 				<input type="submit" name="submit" value="Beli" class="btn btn-orange2 btn-beli col-9 mx-auto">
 			</form>
+			{% endif %}
 		</div>
 	</a>
 </div>
