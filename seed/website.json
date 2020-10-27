@@ -1,217 +1,629 @@
 [
 {
-    "model": "website.keranjang",
-    "pk": "0bd68760-f156-4563-a9f9-ea22a7f85816",
+    "model": "website.kantorpos",
+    "pk": "25b62745-8fe3-4ef6-854c-4c156644d7c1",
     "fields": {
+        "kode": "34500",
+        "regional": "3",
+        "nama": "Kota Bumi"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "2ba3ee9b-a157-4700-aaee-a273da2366a5",
+    "fields": {
+        "kode": "36000",
+        "regional": "3",
+        "nama": "Jambi"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "32ef2058-d986-4f3a-a209-e8484ea5bd8e",
+    "fields": {
+        "kode": "34100",
+        "regional": "3",
+        "nama": "Metro"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "47b282e4-c82a-467a-9188-3df9b60ee190",
+    "fields": {
+        "kode": "33400",
+        "regional": "3",
+        "nama": "Tanjung Pandan"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "59ca00eb-5c4c-4818-abc7-87f1f5ce1d58",
+    "fields": {
+        "kode": "31300",
+        "regional": "3",
+        "nama": "Muara Enim"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "640040e3-a219-4f99-bbc3-116cb69312f7",
+    "fields": {
+        "kode": "32100",
+        "regional": "3",
+        "nama": "Baturaja"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "83560968-d53a-4091-9dfe-2b0b1019cd63",
+    "fields": {
+        "kode": "33100",
+        "regional": "3",
+        "nama": "Pangkal Pinang"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "85e421b1-8318-4437-a961-e7b226110e1e",
+    "fields": {
+        "kode": "30000",
+        "regional": "3",
+        "nama": "Palembang"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "98fbd1a0-2234-4f75-99d0-0724c76313e9",
+    "fields": {
+        "kode": "37100",
+        "regional": "3",
+        "nama": "Sungai Penuh"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "99b96acb-995b-491f-87a2-21ec45d27fdd",
+    "fields": {
+        "kode": "31400",
+        "regional": "3",
+        "nama": "Lahat"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "bfea7253-e2dc-4db0-8f1a-edabc2f4341f",
+    "fields": {
+        "kode": "31600",
+        "regional": "3",
+        "nama": "Lubuk Linggau"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "cbbc748c-f1ab-42cd-ad9e-b8ae890fa246",
+    "fields": {
+        "kode": "37200",
+        "regional": "3",
+        "nama": "Muara Bungo"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "d50b2721-2dcc-4a4d-a92b-02bea5ea26ce",
+    "fields": {
+        "kode": "38000",
+        "regional": "3",
+        "nama": "Bengkulu"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "e224b8f2-c379-4a55-9386-20dafa7c273b",
+    "fields": {
+        "kode": "35000",
+        "regional": "3",
+        "nama": "Bandar Lampung"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "e28f2dc5-728d-4ce3-b07c-b7b5bcaf4730",
+    "fields": {
+        "kode": "39000",
+        "regional": "3",
+        "nama": "Curup"
+    }
+},
+{
+    "model": "website.kantorpos",
+    "pk": "e480b600-00c6-4245-8651-ca3aa4575073",
+    "fields": {
+        "kode": "31100",
+        "regional": "3",
+        "nama": "Prabumulih"
+    }
+},
+{
+    "model": "website.keranjang",
+    "pk": "4ba3298c-d2b6-4c6d-80ed-56cbce974b83",
+    "fields": {
+        "jumlah_item": 1,
+        "total": 7500
+    }
+},
+{
+    "model": "website.keranjang",
+    "pk": "5f45c127-a4a5-488a-991c-192bf827b683",
+    "fields": {
+        "jumlah_item": 0,
         "total": 0
     }
 },
 {
     "model": "website.keranjang",
-    "pk": "14b0c6a5-5388-4c01-a829-23c29459a0f1",
+    "pk": "c3acd143-b25c-40f9-bbe5-1ded94239947",
     "fields": {
+        "jumlah_item": 0,
         "total": 0
     }
 },
 {
     "model": "website.user",
-    "pk": "2d8a33e2-fe6e-4fe5-858e-a7604924a79d",
+    "pk": "737d3170-835f-4d82-835a-ada8a5114920",
     "fields": {
-        "last_login": null,
+        "last_login": "2020-10-26T08:12:08.437Z",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-10-26T02:53:59.116Z",
+        "email": "user1",
+        "first_name": "user1",
+        "last_name": null,
+        "hp": "0812345",
+        "password": "pbkdf2_sha256$216000$HyRYJbzGnOaH$F9hdLpbHr3XzjzNlc9pYtZJO7zV/c76FMAaYHuZUA9o=",
+        "created_at": "2020-10-27T04:13:55.137Z",
+        "keranjang": "5f45c127-a4a5-488a-991c-192bf827b683",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "website.user",
+    "pk": "c0b51a84-c475-4b9d-a762-5bd54258fcfd",
+    "fields": {
+        "last_login": "2020-10-27T04:10:21.721Z",
         "is_superuser": true,
         "is_staff": true,
         "is_active": true,
-        "date_joined": "2020-10-02T08:45:17.497Z",
+        "date_joined": "2020-10-25T06:15:22.208Z",
         "email": "admin",
         "first_name": "",
         "last_name": "",
         "hp": "",
-        "password": "pbkdf2_sha256$216000$qg1MuNf0vgJK$gOXHdzhR+Hx/e+UAxF5cI/RnzAvlicfY8JyV2kwMus4=",
-        "keranjang": "14b0c6a5-5388-4c01-a829-23c29459a0f1",
+        "password": "pbkdf2_sha256$216000$tDaUcByVfFuY$YRUOuAfXJXpm1CJQNPXOlieKePdwb/Xta8y0D/vrLgw=",
+        "created_at": "2020-10-27T04:13:55.137Z",
+        "keranjang": "4ba3298c-d2b6-4c6d-80ed-56cbce974b83",
         "groups": [],
         "user_permissions": []
     }
 },
 {
     "model": "website.user",
-    "pk": "bce1d2ca-d3e6-42f7-a828-d72f5d65298e",
+    "pk": "d1841d4e-a1a3-4de1-8131-657959a9f914",
     "fields": {
-        "last_login": "2020-10-02T08:48:42.973Z",
+        "last_login": "2020-10-27T04:28:46.225Z",
         "is_superuser": false,
         "is_staff": false,
         "is_active": true,
-        "date_joined": "2020-10-02T08:48:42.307Z",
-        "email": "user1",
-        "first_name": "user1",
-        "last_name": "",
-        "hp": "08123456789",
-        "password": "pbkdf2_sha256$216000$cB3sCCKvV3n3$6kmuFL6A4zDY0sn6gOgvHyjyVFJLWClYt0OJZ/C4nuA=",
-        "keranjang": "0bd68760-f156-4563-a9f9-ea22a7f85816",
+        "date_joined": "2020-10-27T04:28:45.568Z",
+        "email": "user2@gmail.com",
+        "first_name": "User2",
+        "last_name": "aaaaa",
+        "hp": "08123456",
+        "password": "pbkdf2_sha256$216000$4652UswH3rnq$iD5KsHkNkNZ0skP+x8RJKMBE/LNSKgHA7bBvAxKkqsI=",
+        "created_at": "2020-10-27T04:28:45.864Z",
+        "keranjang": "c3acd143-b25c-40f9-bbe5-1ded94239947",
         "groups": [],
         "user_permissions": []
     }
 },
 {
-    "model": "website.jenisitem",
-    "pk": "872ba526-e128-42eb-9b07-2c12f0201ee3",
+    "model": "website.kategori",
+    "pk": "560f698e-712c-45ac-aae8-4df5f1517b50",
     "fields": {
-        "jenis": "workspace"
-    }
-},
-{
-    "model": "website.jenisitem",
-    "pk": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
-    "fields": {
-        "jenis": "barang"
+        "nama_kategori": "Prangko"
     }
 },
 {
     "model": "website.kategori",
-    "pk": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
+    "pk": "6835d27f-3e8d-4516-8b6e-010cb57ed003",
     "fields": {
-        "nama_kategori": "prangko"
+        "nama_kategori": "Materai"
     }
 },
 {
-    "model": "website.kategori",
-    "pk": "c89f36a7-f92f-4403-9328-a0c696549e68",
+    "model": "website.produk",
+    "pk": "1d109e1d-4666-47a7-8770-30449528128e",
     "fields": {
-        "nama_kategori": "materai"
-    }
-},
-{
-    "model": "website.kategori",
-    "pk": "d32a57e1-dc25-480e-bf1b-3e94078fc5f0",
-    "fields": {
-        "nama_kategori": "workspace"
-    }
-},
-{
-    "model": "website.item",
-    "pk": "f9090229-a2f0-48f8-983b-d45f15dfdb5c",
-    "fields": {
-        "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
-        "kategori": "c89f36a7-f92f-4403-9328-a0c696549e68",
-        "nama_item": "Materai 6000",
-        "harga": 8000,
-        "deskripsi": "Materai 6000",
-        "jumlah_tersedia": 99,
-        "foto": "Materai_1.jpg",
-        "created_at": "2020-09-16T04:34:38.333Z",
-        "updated_at": "2020-09-16T08:08:00.143Z"
-    }
-},
-{
-    "model": "website.item",
-    "pk": "33d344e5-22af-4dc6-b1b0-4f122e6c5982",
-    "fields": {
-        "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
-        "kategori": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
-        "nama_item": "Prangko Dilan",
-        "harga": 8000,
-        "deskripsi": "Prangko dilan",
-        "jumlah_tersedia": 99,
-        "foto": "Prangko_3.jpg",
-        "created_at": "2020-09-16T06:24:58.134Z",
-        "updated_at": "2020-09-16T08:08:38.111Z"
-    }
-},
-{
-    "model": "website.item",
-    "pk": "452ab934-92cf-4d00-ac83-9e8ed996b9d0",
-    "fields": {
-        "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
-        "kategori": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
-        "nama_item": "Prangko Keraton Ratu Boko",
-        "harga": 7500,
-        "deskripsi": "Prangko keraton",
-        "jumlah_tersedia": 99,
-        "foto": "Prangko_2.jpg",
-        "created_at": "2020-09-16T06:24:28.912Z",
-        "updated_at": "2020-09-16T08:08:30.544Z"
-    }
-},
-{
-    "model": "website.item",
-    "pk": "60480730-05ef-4a91-818a-d462c7ddd0fb",
-    "fields": {
-        "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
-        "kategori": "7152c185-9f6a-4135-a7e6-cf37ca2170d5",
-        "nama_item": "Prangko Andong 1000",
-        "harga": 7500,
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko Andong 1000",
+        "harga": 6000,
         "deskripsi": "Prangko Andong 1000 tahun 2001",
-        "jumlah_tersedia": 99,
-        "foto": "Prangko_1.jpg",
-        "created_at": "2020-09-16T06:23:11.583Z",
-        "updated_at": "2020-09-16T08:08:20.829Z"
+        "stok": 25,
+        "foto": "images/produk/103fb2da838e46e1b129299da3cb5713.jpg",
+        "created_at": "2020-10-25T08:47:01.927Z",
+        "updated_at": "2020-10-25T08:47:01.927Z"
     }
 },
 {
-    "model": "website.item",
-    "pk": "a0a54561-90ce-4841-bfe6-8a100b6278b6",
+    "model": "website.produk",
+    "pk": "2df270f3-a3e9-41c0-a79b-2f8c5cdfa950",
     "fields": {
-        "jenis_item": "a1a65f28-5ab7-4755-aa84-6cf30af0520d",
-        "kategori": "c89f36a7-f92f-4403-9328-a0c696549e68",
-        "nama_item": "Materai 3000",
-        "harga": 5000,
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko Dilan",
+        "harga": 8000,
+        "deskripsi": "Prangko Dilan tahun 2018",
+        "stok": 50,
+        "foto": "images/produk/60c178045c2c498691bb96557385cfb5.jpg",
+        "created_at": "2020-10-25T08:43:11.200Z",
+        "updated_at": "2020-10-25T08:46:09.474Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "3cda9381-434e-44c2-9bf8-a4ef5f2b8a31",
+    "fields": {
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko keraton",
+        "harga": 7500,
+        "deskripsi": "Prangko Keraton Ratu Boko",
+        "stok": 182,
+        "foto": "images/produk/8c0fed1cd92e4c63bcdf4c43916e74d8.jpg",
+        "created_at": "2020-10-25T08:44:09.868Z",
+        "updated_at": "2020-10-27T04:34:09.581Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "9af0b44c-36e0-48bd-bbc9-cb63bbdb47e3",
+    "fields": {
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko Presiden & Wakil Presiden 2020",
+        "harga": 8000,
+        "deskripsi": "Prangko Presiden Jokowi & Wakil Presiden Ma'ruf Amin",
+        "stok": 15,
+        "foto": "images/produk/6e755153efb64bbbbaf86bc13a247339.jpg",
+        "created_at": "2020-10-27T02:01:48.078Z",
+        "updated_at": "2020-10-27T04:34:09.558Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "c4bcb14b-15c9-4f57-aa8b-9e54793c14be",
+    "fields": {
+        "kategori": "6835d27f-3e8d-4516-8b6e-010cb57ed003",
+        "nama_produk": "Materai 6000",
+        "harga": 6500,
+        "deskripsi": "Materai 6000",
+        "stok": 1999,
+        "foto": "images/produk/0b52f89179c54b87b3cf4c9142098c89.jpg",
+        "created_at": "2020-10-25T08:47:28.675Z",
+        "updated_at": "2020-10-27T02:25:43.835Z"
+    }
+},
+{
+    "model": "website.produk",
+    "pk": "de655c10-02d2-4cf7-964e-cda857c90984",
+    "fields": {
+        "kategori": "6835d27f-3e8d-4516-8b6e-010cb57ed003",
+        "nama_produk": "Materai 3000",
+        "harga": 3000,
         "deskripsi": "Materai 3000",
-        "jumlah_tersedia": 99,
-        "foto": "Materai_2.jpg",
-        "created_at": "2020-09-16T05:02:18.818Z",
-        "updated_at": "2020-09-16T08:08:12.059Z"
+        "stok": 45,
+        "foto": "images/produk/4e98b00878f54a2eb249d84f8095fb56.jpeg",
+        "created_at": "2020-10-25T08:45:58.443Z",
+        "updated_at": "2020-10-27T02:25:43.786Z"
     }
 },
 {
-    "model": "website.item",
-    "pk": "192568fd-4da7-42b1-b561-36f00d49a83f",
+    "model": "website.produk",
+    "pk": "e41e18a9-0d7f-4b0d-99ac-09fab42771fe",
     "fields": {
-        "jenis_item": "872ba526-e128-42eb-9b07-2c12f0201ee3",
-        "kategori": "d32a57e1-dc25-480e-bf1b-3e94078fc5f0",
-        "nama_item": "Event Space",
-        "harga": 500000,
-        "deskripsi": "Event Space",
-        "jumlah_tersedia": 1,
-        "foto": "Event_Space.jpg",
-        "created_at": "2020-09-16T06:27:19.720Z",
-        "updated_at": "2020-09-16T08:09:13.049Z"
+        "kategori": "560f698e-712c-45ac-aae8-4df5f1517b50",
+        "nama_produk": "Prangko Asian Games 2018",
+        "harga": 10000,
+        "deskripsi": ".....",
+        "stok": 25,
+        "foto": "images/produk/6cbdcd6a22e84d50a5ece44ffccf4269.jpg",
+        "created_at": "2020-10-27T02:06:56.180Z",
+        "updated_at": "2020-10-27T02:06:56.180Z"
     }
 },
 {
-    "model": "website.item",
-    "pk": "2c2b0add-956d-4a95-89b6-abb8c2fe1848",
+    "model": "website.isikeranjang",
+    "pk": "128bfa53-a0ca-487d-ac64-2c05a892703d",
     "fields": {
-        "jenis_item": "872ba526-e128-42eb-9b07-2c12f0201ee3",
-        "kategori": "d32a57e1-dc25-480e-bf1b-3e94078fc5f0",
-        "nama_item": "Open Space",
-        "harga": 100000,
-        "deskripsi": "Open Space",
-        "jumlah_tersedia": 3,
-        "foto": "Open_Space.jpg",
-        "created_at": "2020-09-16T06:26:54.847Z",
-        "updated_at": "2020-09-16T08:09:02.977Z"
-    }
-},
-{
-    "model": "website.item",
-    "pk": "c45644d7-94ce-4885-9bee-262d2c34767e",
-    "fields": {
-        "jenis_item": "872ba526-e128-42eb-9b07-2c12f0201ee3",
-        "kategori": "d32a57e1-dc25-480e-bf1b-3e94078fc5f0",
-        "nama_item": "Private Space",
-        "harga": 500000,
-        "deskripsi": "Private Space",
-        "jumlah_tersedia": 10,
-        "foto": "Private_Space.jpg",
-        "created_at": "2020-09-16T06:25:57.927Z",
-        "updated_at": "2020-09-16T08:08:46.685Z"
+        "keranjang": "4ba3298c-d2b6-4c6d-80ed-56cbce974b83",
+        "produk": "3cda9381-434e-44c2-9bf8-a4ef5f2b8a31",
+        "qty": 1,
+        "subtotal": 7500,
+        "created_at": "2020-10-25T15:05:19.726Z",
+        "updated_at": "2020-10-25T15:05:19.726Z"
     }
 },
 {
     "model": "website.metodepembayaran",
-    "pk": "da835eea-2a8c-42e6-887f-bf64eaa50524",
+    "pk": "86d6343a-fb58-4681-9f68-26e926a2cb85",
     "fields": {
-        "nama_metode": "Giro Pos",
-        "deskripsi": ""
+        "nama_metode": "Pos Giro Mobile",
+        "deskripsi": "Pos Giro Mobile"
+    }
+},
+{
+    "model": "website.metodepembayaran",
+    "pk": "f0a39c2c-5e14-4d93-ae95-803c62c8a8c9",
+    "fields": {
+        "nama_metode": "Tunai",
+        "deskripsi": "Pembayaran tunai di kantor pos."
+    }
+},
+{
+    "model": "website.order",
+    "pk": "58110850-e487-45b2-8d88-c0d6c2ba9a4e",
+    "fields": {
+        "kode": "C0E8FF74E2C0",
+        "user": "737d3170-835f-4d82-835a-ada8a5114920",
+        "metode_pembayaran": "86d6343a-fb58-4681-9f68-26e926a2cb85",
+        "nama_penerima": "user1",
+        "telepon_penerima": "0812345",
+        "alamat_pengiriman": "Alamat",
+        "subtotal": 171500,
+        "ongkos_kirim": 10000,
+        "total": 181500,
+        "status_pembayaran": 0,
+        "jumlah_item": 56,
+        "kantorpos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "created_at": "2020-10-27T02:25:43.724Z",
+        "bukti_pembayaran": "",
+        "uploaded_at": null
+    }
+},
+{
+    "model": "website.order",
+    "pk": "83ee1a8c-cd7a-4d85-9913-a3a302347630",
+    "fields": {
+        "kode": "614E92F4ED2E",
+        "user": "737d3170-835f-4d82-835a-ada8a5114920",
+        "metode_pembayaran": "86d6343a-fb58-4681-9f68-26e926a2cb85",
+        "nama_penerima": "user1",
+        "telepon_penerima": "0812345",
+        "alamat_pengiriman": "Alamatttt",
+        "subtotal": 42000,
+        "ongkos_kirim": 10000,
+        "total": 52000,
+        "status_pembayaran": 0,
+        "jumlah_item": 6,
+        "kantorpos": "e224b8f2-c379-4a55-9386-20dafa7c273b",
+        "created_at": "2020-10-26T14:41:58.881Z",
+        "bukti_pembayaran": "",
+        "uploaded_at": null
+    }
+},
+{
+    "model": "website.order",
+    "pk": "a3be3679-f2de-483a-8289-9f58d917d23a",
+    "fields": {
+        "kode": "6EE97C4A8B07",
+        "user": "737d3170-835f-4d82-835a-ada8a5114920",
+        "metode_pembayaran": "86d6343a-fb58-4681-9f68-26e926a2cb85",
+        "nama_penerima": "user1",
+        "telepon_penerima": "0812345",
+        "alamat_pengiriman": "alamat",
+        "subtotal": 77000,
+        "ongkos_kirim": 10000,
+        "total": 87000,
+        "status_pembayaran": 2,
+        "jumlah_item": 10,
+        "kantorpos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "created_at": "2020-10-26T04:42:41.314Z",
+        "bukti_pembayaran": "images/bukti_pembayaran/7330e5a9edda44ab9cd09b6bf746693d.jpeg",
+        "uploaded_at": "2020-10-26T15:13:27Z"
+    }
+},
+{
+    "model": "website.order",
+    "pk": "cd1855ad-01f1-40fb-8bb0-2df5f034c986",
+    "fields": {
+        "kode": "FDBB2E575C83",
+        "user": "d1841d4e-a1a3-4de1-8131-657959a9f914",
+        "metode_pembayaran": "86d6343a-fb58-4681-9f68-26e926a2cb85",
+        "nama_penerima": "User2",
+        "telepon_penerima": "08123456",
+        "alamat_pengiriman": "Alamat222",
+        "subtotal": 175000,
+        "ongkos_kirim": 10000,
+        "total": 185000,
+        "status_pembayaran": 2,
+        "jumlah_item": 23,
+        "kantorpos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "created_at": "2020-10-27T04:34:09.515Z",
+        "bukti_pembayaran": "images/bukti_pembayaran/7f1cc8e87f314e3699b809c191cabb48.jpg",
+        "uploaded_at": "2020-10-27T04:34:38Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "0ae84563-08b1-488d-96c9-993ee3ecd808",
+    "fields": {
+        "order": "a3be3679-f2de-483a-8289-9f58d917d23a",
+        "produk": "3cda9381-434e-44c2-9bf8-a4ef5f2b8a31",
+        "qty": 3,
+        "subtotal": 22500,
+        "created_at": "2020-10-26T04:42:41.379Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "15d876ad-7e5b-42bd-baa4-b413c75abdb6",
+    "fields": {
+        "order": "83ee1a8c-cd7a-4d85-9913-a3a302347630",
+        "produk": "c4bcb14b-15c9-4f57-aa8b-9e54793c14be",
+        "qty": 3,
+        "subtotal": 19500,
+        "created_at": "2020-10-26T14:41:58.949Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "34ca8920-d451-4a10-9c7e-94d49ec1a460",
+    "fields": {
+        "order": "58110850-e487-45b2-8d88-c0d6c2ba9a4e",
+        "produk": "de655c10-02d2-4cf7-964e-cda857c90984",
+        "qty": 55,
+        "subtotal": 165000,
+        "created_at": "2020-10-27T02:25:43.762Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "3d9c13d5-1555-46b4-a751-f0c162056748",
+    "fields": {
+        "order": "a3be3679-f2de-483a-8289-9f58d917d23a",
+        "produk": "c4bcb14b-15c9-4f57-aa8b-9e54793c14be",
+        "qty": 1,
+        "subtotal": 6500,
+        "created_at": "2020-10-26T04:42:41.403Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "a71e6574-95a4-4727-966f-46e915963b65",
+    "fields": {
+        "order": "cd1855ad-01f1-40fb-8bb0-2df5f034c986",
+        "produk": "9af0b44c-36e0-48bd-bbc9-cb63bbdb47e3",
+        "qty": 5,
+        "subtotal": 40000,
+        "created_at": "2020-10-27T04:34:09.547Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "c060f208-d942-443c-abfd-50905b96af24",
+    "fields": {
+        "order": "83ee1a8c-cd7a-4d85-9913-a3a302347630",
+        "produk": "3cda9381-434e-44c2-9bf8-a4ef5f2b8a31",
+        "qty": 3,
+        "subtotal": 22500,
+        "created_at": "2020-10-26T14:41:58.917Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "c0dbcbad-087c-4efa-8245-152911d4cb80",
+    "fields": {
+        "order": "58110850-e487-45b2-8d88-c0d6c2ba9a4e",
+        "produk": "c4bcb14b-15c9-4f57-aa8b-9e54793c14be",
+        "qty": 1,
+        "subtotal": 6500,
+        "created_at": "2020-10-27T02:25:43.813Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "e82389ba-baa0-453b-88b9-f3c2ea99425f",
+    "fields": {
+        "order": "cd1855ad-01f1-40fb-8bb0-2df5f034c986",
+        "produk": "3cda9381-434e-44c2-9bf8-a4ef5f2b8a31",
+        "qty": 18,
+        "subtotal": 135000,
+        "created_at": "2020-10-27T04:34:09.572Z"
+    }
+},
+{
+    "model": "website.detailorder",
+    "pk": "fc6f1e0f-06aa-45d0-a783-091cfa583843",
+    "fields": {
+        "order": "a3be3679-f2de-483a-8289-9f58d917d23a",
+        "produk": "2df270f3-a3e9-41c0-a79b-2f8c5cdfa950",
+        "qty": 6,
+        "subtotal": 48000,
+        "created_at": "2020-10-26T04:42:41.346Z"
+    }
+},
+{
+    "model": "website.properti",
+    "pk": "08a0720e-3442-4e83-ada7-2dc707309c66",
+    "fields": {
+        "nama": "Gedung untuk Kantor IT, Bank, Asuransi",
+        "deskripsi": "Gedung untuk Kantor IT, Bank, Asuransi",
+        "alamat": "Jln. Setiabudi",
+        "luas_tanah": 770,
+        "luas_bangunan": 500,
+        "lantai": 1,
+        "listrik": 3000,
+        "harga": 250,
+        "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "ketersediaan": 1,
+        "foto": "images/properti/c506f113e15a40b784338e44b39a3f49.jpeg",
+        "created_at": "2020-10-27T01:58:50.549Z",
+        "updated_at": "2020-10-27T02:04:05.493Z"
+    }
+},
+{
+    "model": "website.properti",
+    "pk": "5c28aff0-5708-4a5b-802a-39ffabc9c21e",
+    "fields": {
+        "nama": "Open Space",
+        "deskripsi": "........",
+        "alamat": "Jln. Soekarno Hatta",
+        "luas_tanah": 600,
+        "luas_bangunan": 600,
+        "lantai": 1,
+        "listrik": 5000,
+        "harga": 100,
+        "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "ketersediaan": 1,
+        "foto": "images/properti/bf65eb297f234fa6ad10484de1b6e105.jpg",
+        "created_at": "2020-10-27T02:03:06.900Z",
+        "updated_at": "2020-10-27T02:03:06.900Z"
+    }
+},
+{
+    "model": "website.properti",
+    "pk": "7dfcd6cc-9a56-446e-9ce6-7a18cf6077b9",
+    "fields": {
+        "nama": "Event Space",
+        "deskripsi": "...",
+        "alamat": "Jln. Setiabudi",
+        "luas_tanah": 600,
+        "luas_bangunan": 600,
+        "lantai": 1,
+        "listrik": 4000,
+        "harga": 88,
+        "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "ketersediaan": 1,
+        "foto": "images/properti/16326011adb344198cc228cb946ae778.jpg",
+        "created_at": "2020-10-27T02:08:47.705Z",
+        "updated_at": "2020-10-27T02:08:47.705Z"
+    }
+},
+{
+    "model": "website.properti",
+    "pk": "cbcaff4d-e8a0-4e7f-a44c-08fd0c734772",
+    "fields": {
+        "nama": "Gedung Serbaguna",
+        "deskripsi": "Ruang dengan air condition\r\nGrand Ballroom Full Karpet\r\nPilihan menu prasmanan\r\n2 (dua) set meja resepsi\r\n6 (enam) buah buku tamu\r\n1 (satu) ruang tunggu pengantin\r\n2 (dua) ruang persiapan untuk panitia\r\n3 (tiga) ruang rias panitia\r\nSound System Standard untuk MC\r\nPanggung Musik ukuran 4m x 4m tinggi 40cm\r\nListrik sebesar 10.000 watt\r\nVoucher parkir untuk keluarga 50 (lima puluh) lembar\r\nTechnical Meeting 1x sebelum acara dengan fasilitas teh dan\r\nkopi untuk 30 orang",
+        "alamat": "Jln. Sudirman",
+        "luas_tanah": 300,
+        "luas_bangunan": 220,
+        "lantai": 1,
+        "listrik": 2000,
+        "harga": 210,
+        "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "ketersediaan": 1,
+        "foto": "images/properti/819686c458804538ab8cae76ceccb485.jpg",
+        "created_at": "2020-10-25T12:56:27.471Z",
+        "updated_at": "2020-10-25T12:56:27.471Z"
     }
 }
 ]

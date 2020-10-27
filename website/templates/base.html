@@ -37,29 +37,7 @@
     <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
         {% block css %}{% endblock %}
-        <!--Search CSS-->
-        <style> 
-            input[type=text].search-bar {
-              width: 130px;
-              box-sizing: border-box;
-              border: 2px solid #ccc;
-              border-radius: 4px;
-              font-size: 16px;
-              background-color: white;
-              background-image: url('searchicon.png');
-              background-position: 10px 10px; 
-              background-repeat: no-repeat;
-              padding: 8px 20px 8px 40px;
-              -webkit-transition: width 0.3s ease-in-out;
-              transition: width 0.3s ease-in-out;
-          }
-
-          input[type=text].search-bar:focus {
-              width: 100%;
-          }
-      </style>
-      <!--//Search CSS-->
-  </head>
+</head>
 
 <body>
 <!-- navigation -->
@@ -100,11 +78,11 @@
                         <li class="nav-item"><a class="nav-link text-white" href="{% url 'daftar_transaksi' %}"> Daftar Transaksi</a></li>
                     {% endif %}
             </ul>
-            <form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
+            <!-- <form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
                     {% csrf_token %}
                     <input type="text" name="name" placeholder="Search.." class="form-control-sm search-bar">
-            </form>
-            <!--form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
+            </form> -->
+            <form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
                 {% csrf_token %}
                 <div class="input-group">
                     <input type="text" class="form-control form-control-sm" placeholder="Search" name="name">
@@ -112,7 +90,7 @@
                         <button class="btn btn-sm btn-light" type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
-            </form-->
+            </form>
             <ul class="navbar-nav ml-auto align-items-center">
                     {% if user.is_authenticated %}
                     <li class="dropdown nav-item">
