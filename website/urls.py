@@ -9,6 +9,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('produk/<str:pk>', views.detail_product, name='detail_product'),
     path('properti/<str:pk>', views.detail_properti, name='detail_properti'),
+    path('properti2/<str:pk>', views.detail_properti2, name='detail_properti2'),
     path('kategori/<str:nama_kategori>', views.kategori_list, name='kategori'),
 	# path('benda_pos_list/', views.kategori_list, kwargs={'kategori': 'Materai'}, name='benda_pos_list'),
     # path('co_working_list/', views.kategori_list, kwargs={'kategori': 'Workspace'}, name='co_working_list'),

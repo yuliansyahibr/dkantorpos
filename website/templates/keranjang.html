@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="loader"></div>
+<!-- <div class="loader"></div> -->
 
 <!-- breadcrumbs -->
 <div class="breadcrumbs">
@@ -36,7 +36,7 @@
 				</thead>
 				<tbody>
                     {% for item_keranjang in items %}
-					<tr id="row-item-keranjang-{{ item_keranjang.id }}" class="padded-row">
+					<tr id="row-item-keranjang-{{ item_keranjang.id.hex }}" class="padded-row">
 						<td scope="col" class="hidden-xs text-center" style="width:200px">
 							<a href="{% url 'detail_product' item_keranjang.produk.id.hex %}"><img src="{{ item_keranjang.produk.foto.url }}" alt="..." class="img-responsive" style="object-fit: cover; max-height:180px;max-width:180px" /></a>
                         </td>
@@ -48,23 +48,30 @@
                             <span class="convert-rupiah font-weight-bold">{{ item_keranjang.produk.harga}}</span>
                         </td>
 						<td class="text-center">
-							<div class="input-group flex-nowrap mx-auto" style="width: 90px;">
+							<div class="input-group flex-nowrap mx-auto" style="width: 70px;">
 								<div class="input-group-prepend">
-								  <button id="" class="btn-qty-{{item_keranjang.id}} btn-kurang-qty btn btn-sm btn-light border" onclick="changeQty(this, -1)" data-item-keranjang="{{item_keranjang.id}}"> − </button>
+								  <!-- <button id="" class="btn-qty-{{item_keranjang.id}} btn-kurang-qty btn btn-sm btn-light border" onclick="changeQty(this, -1)" data-item-keranjang="{{item_keranjang.id}}"> − </button> -->
 								  <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
 								</div>
-								<input id='qty-{{item_keranjang.id}}' type="text" class="form-control form-control-sm text-center px-2 bg-white" value="{{item_keranjang.qty }}" data-server-qty="{{ item_keranjang.qty}}" disabled>
-								<div class="input-group-append">
-								  <button id="" class="btn-qty-{{item_keranjang.id}} btn-tambah-qty btn btn-sm btn-light border" onclick="changeQty(this, 1)" data-item-keranjang="{{item_keranjang.id}}"> + </button>
-								  <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
-								</div>
-							</div>
+								<input type="number" min="1" id='qty-{{item_keranjang.id.hex}}' data-qty-id="{{item_keranjang.id.hex}}" class="input-qty form-control form-control-sm text-center px-2 bg-white" value="{{item_keranjang.qty }}" data-server-qty="{{ item_keranjang.qty}}">
+								<!-- <div class="input-group-append"> -->
+								  <!-- <button id="" class="btn-qty-{{item_keranjang.id}} btn-tambah-qty btn btn-sm btn-light border" onclick="changeQty(this, 1)" data-item-keranjang="{{item_keranjang.id}}"> + </button> -->
+                                  <!-- <span class="input-group-text" id="addon-wrapping"><</span> -->
+                                <!-- </div> -->
+                            </div>
+                            <div id="qty-button-{{item_keranjang.id.hex}}" class="qty-btn" style="display: none;">
+                                <a id="" class="cancel-qty ml-1 small align-middle my-auto" href="" data-qty-id="{{item_keranjang.id.hex}}">
+                                    Cancel</a>
+                                <a id="" class="update-qty ml-1 small align-middle my-auto" href="" data-qty-id="{{item_keranjang.id.hex}}"
+                                data-item-keranjang="{{item_keranjang.id.hex}}">Update</a>
+                            </div>
+                            
 						</td>
 						<!-- <td>
                             <span  id='total-item-{{item_keranjang.id}}' class="convert-rupiah">{{ item_keranjang.subtotal }}</span>
                         </td> -->
 						<td class="text-right pr-4">
-							<button class="btn btn-danger btn_hapus" data-item-keranjang="{{ item_keranjang.id }}"><i class="fa fa-trash"></i></button>
+							<button class="btn btn-danger btn_hapus" data-item-keranjang="{{ item_keranjang.id.hex }}"><i class="fa fa-trash"></i></button>
 						</td>
                     </tr>
                     {% endfor %}
@@ -123,13 +130,16 @@
                     updateRupiah($('#total-keranjang'), data['total'])
                     updateRupiah($(`#total-item-${id_item_keranjang}`), data['subtotal'])
                     $('#jumlah-item').text(data['jumlah_item'])
+                    $('#qty-'+id_item_keranjang).attr('data-server-qty', qty)
                 },
                 error: function(data){
-                    alert("Terjadi kesalahan saat mengubah kuantitas")
+                    let oldval = $('#qty-'+id_item_keranjang).attr('data-server-qty')
+                    $('#qty-'+id_item_keranjang).val(oldval)
+                    alert("Jumlah qty tidak tersedia")
                 }
             });
             $(btn_checkout).removeClass("disabled");
-        }, 200)        
+        }, 200)
     }
     function changeQty(btn, num) {
         let id_item_keranjang = $(btn).data('item-keranjang')
@@ -149,7 +159,7 @@
             $(this).attr("disabled", true);
         }); 
 
-        // ubah qty di database
+        // ubah qty di server
         updateQty(btn)
 
         $(document).ajaxStop(function(){
@@ -161,6 +171,46 @@
     }
 
     $('document').ready(function (){
+        $('.input-qty').bind('input', function(e) {
+            let inputObj = e.target
+            let qtyid = $(inputObj).data('qty-id')
+            window.clearTimeout($(this).data("timeout"));
+            $(this).data("timeout", setTimeout(function () {
+                // Do your thing here
+                $('#qty-button-'+qtyid).show()
+            }, 300));
+            
+        })
+        $('.update-qty').on('click', function(e){
+            e.preventDefault()
+            let qtyid = $(this).data('qty-id')
+            let inputObj = $('#qty-'+qtyid)
+
+            $(inputObj).prop("disabled", true);
+            $('body').addClass("loading");
+            // ubah qty di server
+            updateQty(this)
+            //$(inputObj).attr('data-server')
+            setTimeout(function () {
+                $('body').removeClass("loading");
+            }, 300)
+            $(inputObj).prop("disabled", false);
+            $('#qty-button-'+qtyid).hide()
+            
+            //console.log($('#qty-button-'+qtyid))
+            //$(inputObj).prop("disabled", false);
+        })
+
+        $('.cancel-qty').on('click', function(e){
+            e.preventDefault()
+            let qtyid = $(this).data('qty-id')
+            let inputObj = $('#qty-'+qtyid)
+            let oldval = $(inputObj).attr('data-server-qty')
+            $(inputObj).val(oldval)
+            $('#qty-button-'+qtyid).hide()
+            
+        })
+
         // delete item di keranjang
         $('.btn_hapus').on('click', function(){
             $('body').addClass("loading");

@@ -113,7 +113,7 @@ class Produk(models.Model):
         Kategori,
         on_delete=models.CASCADE
     )
-    nama_produk = models.CharField(max_length=32)
+    nama_produk = models.CharField(max_length=64)
     harga = models.IntegerField()
     deskripsi = models.TextField(null=True)
     stok = models.IntegerField()
@@ -239,7 +239,6 @@ class DetailOrder(models.Model):
 
 class Properti(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    kode = models.CharField(max_length=16, unique=True)
     nama = models.CharField(max_length=64)
     deskripsi = models.TextField()
     alamat = models.CharField(max_length=128)
@@ -279,7 +278,10 @@ class Properti(models.Model):
         if os.path.isfile(self.foto.path):
             os.remove(self.foto.path)
         super(Properti, self).delete()
-    
+    @property
+    def harga_asli(self):
+        return self.harga*1000000
+
     class Meta:
         verbose_name_plural = 'Properti'
 

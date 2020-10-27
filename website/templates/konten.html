@@ -10,6 +10,11 @@
 		</div>
 		<div class="text-center">
 			<p class="text-dark nama-produk">{% firstof item.nama_produk item.nama %}</p>
+			{% if not PROPERTI %}
+				<p class="text-success" style="font-size: 14px;">
+					Tersedia {{item.stok}} buah
+				</p>
+			{% endif %}
 			<!-- <p class="stars" style="font-size: 11px;">
 				<i class="fa fa-star gold-star" aria-hidden="true"></i>
 				<i class="fa fa-star gold-star" aria-hidden="true"></i>
@@ -18,7 +23,11 @@
 				<i class="fa fa-star gray-star" aria-hidden="true"></i>
 			</p> -->
 			<p class="text-danger font-weight-bold" style="font-size: 14px;">
+				{% if PROPERTI %}
+				<span class="convert-rupiah">{{ item.harga_asli }}</span>
+				{% else %}
 				<span class="convert-rupiah">{{ item.harga }}</span>
+				{% endif %}
 			</p>
 		</div>
 		<div class="d-block">

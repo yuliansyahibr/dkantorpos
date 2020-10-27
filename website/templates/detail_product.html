@@ -45,22 +45,22 @@
             <div class="col-md-7 col-sm-12 col-xs-12">
             <h2 class="name">
               {{ item.nama_item }}
-			</h2>
-              <small>Product by <a href="javascript:void(0);">PT. Pos Indonesia</a></small>
-			  <br />
-              <i class="fa fa-star gold-star"></i>
-              <i class="fa fa-star gold-star"></i>
-              <i class="fa fa-star gold-star"></i>
-              <i class="fa fa-star gold-star"></i>
-              <i class="fa fa-star greystar"></i>
-              <span class="fa fa-2x"><h5>(109) Votes</h5></span>
-              <a href="javascript:void(0);">109 customer reviews</a>
+			      </h2>
+            <small>Product by <a href="javascript:void(0);">PT. Pos Indonesia</a></small>
+            <!-- <br />
+            <i class="fa fa-star gold-star"></i>
+            <i class="fa fa-star gold-star"></i>
+            <i class="fa fa-star gold-star"></i>
+            <i class="fa fa-star gold-star"></i>
+            <i class="fa fa-star greystar"></i>
+            <span class="fa fa-2x"><h5>(109) Votes</h5></span>
+            <a href="javascript:void(0);">109 customer reviews</a> -->
             <hr />
             <h3 class="price-container">
               <span class="convert-rupiah" >{{ item.harga }}</span>
               <small>*includes tax</small>
             </h3>
-			<br />
+            <p class="mt-2 text-success">Tersedia {{item.stok}} buah</p>
             <div class="certified">
               <ul>
                 <li>
@@ -75,7 +75,7 @@
             <div class="description description-tabs">
               <ul id="myTab" class="nav nav-pills nav-justified">
                 <li class="nav-item"><a class="nav-link active" href="#more-information" data-toggle="tab" class="no-margin">Deskripsi Produk</a></li>
-                <li class="nav-item"><a class="nav-link" href="#specifications" data-toggle="tab">Spesifikasi</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="#specifications" data-toggle="tab">Spesifikasi</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="#reviews" data-toggle="tab">Ulasan</a></li>
               </ul>
               <div id="myTabContent" class="tab-content">
@@ -183,7 +183,7 @@
                 <!-- <div class="input-group-prepend">
                   <button id="btn-kurang-qty" class="btn btn-light border"> − </button>
                 </div> -->
-                <input id="qty" type="text" class="form-control text-center px-2" value="1" disabled>
+                <input id="qty" type="number" class="form-control text-center px-2" value="1" min="1">
                 <!-- <div class="input-group-append">
                   <button id="btn-tambah-qty" class="btn btn-light border"> + </button>
                 </div> -->
@@ -193,8 +193,8 @@
 				        <input id="btn-keranjang" class="btn button shadow-sm ml-2" value="Beli">
               </div>
             </div>
-            <button class="btn btn-white btn-default pull-right col-lg-6"><i class="fa fa-star"></i> Add to wishlist</button>
-			      <button class="btn btn-white btn-default col-lg-6"><i class="fa fa-envelope"></i> Contact Seller</button>
+            <!-- <button class="btn btn-white btn-default pull-right col-lg-6"><i class="fa fa-star"></i> Add to wishlist</button> -->
+			      <!-- <button class="btn btn-white btn-default col-lg-6"><i class="fa fa-envelope"></i> Contact Seller</button> -->
           </div>
         </div>
       </div>
@@ -220,6 +220,7 @@
         qty = 1
       }
       $('#input-qty').val(qty)
+      console.log($('#input-qty').val())
       $('#form-keranjang').submit()
     })
 

@@ -63,6 +63,13 @@ def detail_properti(request, pk):
         raise http.Http404('Properti tidak ditemukan.')    
     return render(request, 'detail_properti.html', {'item': item})
 
+def detail_properti2(request, pk):
+    try:
+        item = Properti.objects.get(pk=pk)
+    except Properti.DoesNotExist:
+        raise http.Http404('Properti tidak ditemukan.')    
+    return render(request, 'detail_product.html', {'item': item})
+
 def kategori_list(request, nama_kategori):
     item_list = models.Produk.objects.filter(kategori__nama_kategori=nama_kategori)
 	
@@ -108,8 +115,15 @@ def keranjangAjax(request, action):
                # return error jika qty kurang dari 1
                if new_qty < 1:
                     return http.HttpResponseServerError('Error')
+
                # update item keranjang di db
                item_keranjang = models.IsiKeranjang.objects.get(id=id_item_keranjang)
+
+               print(new_qty, item_keranjang.produk.stok)
+
+               if new_qty >=  item_keranjang.produk.stok:
+                    return http.HttpResponseServerError('Error')
+
                item_keranjang.qty = new_qty
                item_keranjang.subtotal = item_keranjang.produk.harga*item_keranjang.qty
                item_keranjang.save()
@@ -127,6 +141,9 @@ def keranjangAjax(request, action):
           data['jumlah_item']= item_keranjang.keranjang.jumlah_item
 
           return http.JsonResponse(data)
+
+def checkQty():
+     pass
 
 @login_required
 def keranjang(request):
@@ -146,10 +163,14 @@ def keranjang(request):
                #      request.session['WORKSPACE'] = True
                #      request.session['id_item'] = id_item
                #      return http.HttpResponseRedirect('/checkout')
+               if qty >= item.stok:
+                    return http.HttpResponseBadRequest()
 
                if models.IsiKeranjang.objects.filter(keranjang=keranjang, produk=item):
                     item_keranjang = models.IsiKeranjang.objects.filter(keranjang=keranjang, produk=item).first()
                     item_keranjang.qty += qty
+                    if item_keranjang.qty >= item.stok:
+                         return http.HttpResponseBadRequest()
                     item_keranjang.subtotal = item.harga*item_keranjang.qty
                     item_keranjang.save()
                else:
@@ -371,6 +392,12 @@ def makeorder(request):
                detail_order.qty = item.qty
                detail_order.subtotal = item.subtotal
                detail_order.save()
+
+               produk = detail_order.produk
+               produk.stok -= detail_order.qty
+               if(produk.stok < 0):
+                    produk.stop = 0
+               produk.save()
 
           if WORKSPACE:
                del request.session['WORKSPACE']
