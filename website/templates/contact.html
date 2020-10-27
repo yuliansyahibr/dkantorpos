@@ -23,21 +23,22 @@
 				<h2 class="w3_agile_header">
 						Kirim<span> Pesan</span>
 					</h2>
-					<form action="#" method="post">
+					<form action="{% url 'sendEmail' %}" method="POST">
+						{% csrf_token %}
 						<span class="input input--pos">
-							<input class="input__field input__field--pos" type="text" id="input-25" name="Name" placeholder=" " required="" />
+							<input class="input__field input__field--pos" type="text" id="input-25" name="subject" placeholder=" " required="" />
 							<label class="input__label input__label--pos" for="input-25">
-								<span class="input__label-content input__label-content--pos">Nama</span>
+								<span class="input__label-content input__label-content--pos">Subject</span>
 							</label>
 						</span>
 						<span class="input input--pos">
-							<input class="input__field input__field--pos" type="email" id="input-26" name="Email" placeholder=" " required="" />
+							<input class="input__field input__field--pos" type="email" id="input-26" name="email" placeholder=" " required="" />
 							<label class="input__label input__label--pos" for="input-26">
 								<span class="input__label-content input__label-content--pos">Email</span>
 							</label>
 						</span>
-						<textarea name="Message" placeholder="Ketikkan Pesanmu..." required=""></textarea>
-						<input type="submit" value="Kirim">
+						<textarea name="message" placeholder="Ketikkan Pesanmu..." required=""></textarea>
+						<button type="submit">Kirim</button>
 					</form>
 			</div>
 			</div>

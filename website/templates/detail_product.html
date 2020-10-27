@@ -60,6 +60,18 @@
               <span class="convert-rupiah" >{{ item.harga }}</span>
               <small>*includes tax</small>
             </h3>
+			<!-- <br /> -->
+			<!-- <table style="width:100%"> -->
+				<!-- <tr> -->
+					<!-- <td><input type="checkbox" name="" value="1"><label for="1">Biaya Listrik</label></td> -->
+					<!-- <td><input type="checkbox" name="" value="2"><label for="2">Biaya Keamanan</label></td> -->
+					<!-- <td><input type="checkbox" name="" value="3"><label for="3">Biaya Kebersihan</label></td> -->
+				<!-- </tr> -->
+				<!-- <tr> -->
+					<!-- <td><input type="checkbox" name="" value="4"><label for="4">Biaya Air</label></td> -->
+					<!-- <td><input type="checkbox" name="" value="5"><label for="5">Biaya Lain-Lain</label></td> -->
+				<!-- </tr> -->
+			<!-- </table> -->
 			<br />
             <div class="certified">
               <ul>
@@ -87,21 +99,31 @@
                   </p>
                 </div>
                 <div class="tab-pane fade" id="specifications">
-                  <br />
-                  <dl class="">
-                    <dt>Gravina</dt>
-                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                    <dd>Eget lacinia odio sem nec elit.</dd>
-                    <br />
+                  <!-- <br /> -->
+                  <!-- <dl class=""> -->
+                    <!-- <dt>Gravina</dt> -->
+                    <!-- <dd>Etiam porta sem malesuada magna mollis euismod.</dd> -->
+                    <!-- <dd>Donec id elit non mi porta gravida at eget metus.</dd> -->
+                    <!-- <dd>Eget lacinia odio sem nec elit.</dd> -->
+                    <!-- <br /> -->
 
-                    <dt>Test lists</dt>
-                    <dd>A description list is perfect for defining terms.</dd>
-                    <br />
+                    <!-- <dt>Test lists</dt> -->
+                    <!-- <dd>A description list is perfect for defining terms.</dd> -->
+                    <!-- <br /> -->
 
-                    <dt>Altra porta</dt>
-                    <dd>Vestibulum id ligula porta felis euismod semper</dd>
-                  </dl>
+                    <!-- <dt>Altra porta</dt> -->
+                    <!-- <dd>Vestibulum id ligula porta felis euismod semper</dd> -->
+                  <!-- </dl> -->
+				  <table class="table table-striped">
+					<tbody>
+					  <tr class="techSpecRow"><td class="techSpecTD1">Color :</td><td class="techSpecTD2">Black</td></tr>
+					  <tr class="techSpecRow"><td class="techSpecTD1">Style :</td><td class="techSpecTD2">Apparel,Sports</td></tr>
+					  <tr class="techSpecRow"><td class="techSpecTD1">Season :</td><td class="techSpecTD2">spring/summer</td></tr>
+					  <tr class="techSpecRow"><td class="techSpecTD1">Usage :</td><td class="techSpecTD2">fitness</td></tr>
+					  <tr class="techSpecRow"><td class="techSpecTD1">Sport :</td><td class="techSpecTD2">122855031</td></tr>
+					  <tr class="techSpecRow"><td class="techSpecTD1">Brand :</td><td class="techSpecTD2">Shock Absorber</td></tr>
+					</tbody>
+				  </table>
                 </div>
                 <div class="tab-pane fade" id="reviews">
                   <br />
@@ -237,18 +259,5 @@
     })
   })
 </script>
-
-{% if item_list %}
-	<div class="newproducts-w3agile">
-		<div class="container">
-			<h3 class="mb-5">Produk List</h3>
-			<div class="row">
-				{% for item in item_list %}
-					{% include 'konten.html' %}
-				{% endfor %}
-			</div>
-		</div>
-	</div>
-{% endif %}
 
 {% endblock %} 

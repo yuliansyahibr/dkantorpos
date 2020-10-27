@@ -139,3 +139,11 @@ STATIC_URL = '/static/'
 # DataFlair #Uploaded_Files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'dkantorpos@gmail.com'
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'postmaster@sandbox2114d706a89e4669a8cfc1e4ae463997.mailgun.org'
+EMAIL_HOST_PASSWORD = '891f5cdfe9dac29a740935e7ed7c7333-53c13666-a431c7ca'
+EMAIL_USE_TLS = True

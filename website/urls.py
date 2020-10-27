@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
     path('contact/', views.contact, name='contact'),
+	path('success/', views.success, name='success'),
     path('item/<uuid:pk>', views.detail_product, name='detail_product'),
     path('kategori/<str:nama_kategori>', views.kategori_list, name='kategori'),
 	# path('benda_pos_list/', views.kategori_list, kwargs={'kategori': 'Materai'}, name='benda_pos_list'),
@@ -21,5 +22,6 @@ urlpatterns = [
     path('api/<str:param>', views.api, name='api'),
     path('checkout/', views.checkout, name='checkout'),
     path('order/', views.order, name='order'),
+	path('sendEmail/', views.sendEmail, name='sendEmail'),
     path('terimakasih/', views.terimakasih, name='terimakasih'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -32,3 +32,4 @@ class SignUpForm(UserCreationForm):
 
 # class TagStatusForm(forms.Form):
 #     id_produk = {'tag': forms.HiddenInput()}
+
