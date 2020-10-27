@@ -14,7 +14,7 @@
 <!-- //breadcrumbs -->
 
 <!--Product Page-->
-<div class="container py-3 px-4">
+<div class="container py-4 px-4">
   <div class="row">
     <div class="col-sm-11 col-md-12 col-lg-12" style="padding-right: 0; padding-left: 0;">
       <!-- product -->
@@ -23,8 +23,8 @@
           <div class="col-md-5 col-sm-12 col-xs-12 px-4">
             <div class="product-image py-2">
               <img class="w-100" style="height: 270px;" src="{{ item.foto.url }}">
-           </div>
-         </div>
+            </div>
+          </div>
          <div class="col-md-7 col-sm-12 col-xs-12">
           <h2 class="name">
             {{ item.nama_item }}
@@ -64,13 +64,11 @@
               {% endif %}
               <li class="nav-item"><a class="nav-link" href="#reviews" data-toggle="tab">Ulasan</a></li>
             </ul>
-            <div id="myTabContent" class="tab-content">
+            <div id="myTabContent" class="tab-content px-2">
               <div class="tab-pane fade show active" id="more-information">
-                <br />
-                <strong>Description</strong>
-                <p>
-                  {{ item.deskripsi}}
-                </p>
+                <!-- <br /> -->
+                <!-- <strong>Description</strong> -->
+                <p>{{ item.deskripsi}}</p>
               </div>
               <div class="tab-pane fade" id="specifications">
                 <br />
@@ -165,11 +163,12 @@
           <hr />
           <div class="row mb-4">
 
-            <div class="input-group flex-nowrap col-3">
+            <label class="my-auto" for="">Qty</label>
+            <div class="input-group flex-nowrap col-2">
                 <!-- <div class="input-group-prepend">
                   <button id="btn-kurang-qty" class="btn btn-light border"> − </button>
                 </div> -->
-                <input id="qty" type="number" class="form-control text-center px-2" value="1" min="1">
+                <input id="qty" type="number" class="form-control text-center px-1" value="1" min="1">
                 <!-- <div class="input-group-append">
                   <button id="btn-tambah-qty" class="btn btn-light border"> + </button>
                 </div> -->

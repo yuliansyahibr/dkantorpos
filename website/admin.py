@@ -25,7 +25,7 @@ class UserAdmin(DjangoUserAdmin):
     )
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name', 'hp')
-    ordering = ('email',)
+    ordering = ('created_at',)
 
     def save_model(self, request, obj, form, change):
         keranjang = models.Keranjang()
@@ -48,6 +48,7 @@ class OrderAdmin(admin.ModelAdmin):
     # list_display = ('id', 'jenis_item', 'kategori', 'nama_item', 'harga', 'deskripsi', 'jumlah_tersedia')
     list_filter = ('user', 'total', 'status_pembayaran', 'created_at', 'uploaded_at')
     actions = ['delete_selected']
+    ordering = ('-created_at',)
     def delete_queryset(self, request, queryset):
         for obj in queryset:
             os.remove(obj.bukti_pembayaran.path)

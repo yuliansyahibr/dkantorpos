@@ -77,6 +77,7 @@ class User(AbstractUser):
     last_name = models.CharField(_('nama belakang'), max_length=64, null=True, blank=True)
     hp = models.CharField(_('hp'), max_length=14)
     password = models.CharField(_('password'), max_length=64)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     keranjang = models.ForeignKey(
         Keranjang,
