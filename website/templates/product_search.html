@@ -7,11 +7,30 @@
 <div class="newproducts-w3agile">
 	<div class="container">
 		<h3 class="mb-5">Hasil Pencarian</h3>
+		{% if results1 %}
 		<div class="row">
-			{% for item in results %}
-				{% include 'konten.html' %}
-			{% endfor %}
+			<div class="col pb-5">
+				<h5 class="mb-1">Produk</h5>
+				<div class="row">
+					{% for item in results1 %}
+						{% include 'konten.html' %}
+					{% endfor %}
+				</div>
+			</div>
 		</div>
+		{% endif %}
+		{% if results2 %}
+		<div class="row">
+			<div class="col pb-5">
+				<h5 class="mb-2">Workspace</h5>
+				<div class="row">
+					{% for item in results2 %}
+						{% include 'konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

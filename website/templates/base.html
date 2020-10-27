@@ -39,7 +39,7 @@
         {% block css %}{% endblock %}
         <!--Search CSS-->
         <style> 
-            input[type=text] {
+            input[type=text].search-bar {
               width: 130px;
               box-sizing: border-box;
               border: 2px solid #ccc;
@@ -54,7 +54,7 @@
               transition: width 0.3s ease-in-out;
           }
 
-          input[type=text]:focus {
+          input[type=text].search-bar:focus {
               width: 100%;
           }
       </style>
@@ -102,7 +102,7 @@
             </ul>
             <form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
                     {% csrf_token %}
-                    <input type="text" name="name" placeholder="Search.." class="form-control-sm">
+                    <input type="text" name="name" placeholder="Search.." class="form-control-sm search-bar">
             </form>
             <!--form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
                 {% csrf_token %}

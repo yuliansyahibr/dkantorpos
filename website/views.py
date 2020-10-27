@@ -82,8 +82,9 @@ def search_product(request):
           if query_name:
                # contains => case sensitive
                # icontains => case insensitive
-               results = Produk.objects.filter(nama_item__icontains=query_name)
-               return render(request, 'product_search.html', {"results":results})
+               results1 = Produk.objects.filter(nama_produk__icontains=query_name).all()
+               results2 = Properti.objects.filter(nama__icontains=query_name).all()
+               return render(request, 'product_search.html', {"results1":results1, "results2":results2})
 
     return render(request, 'product_search.html')
 
