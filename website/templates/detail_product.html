@@ -225,17 +225,4 @@
   })
 </script>
 
-{% if item_list %}
-<div class="newproducts-w3agile">
-  <div class="container">
-   <h3 class="mb-5">Produk List</h3>
-   <div class="row">
-    {% for item in item_list %}
-    {% include 'konten.html' %}
-    {% endfor %}
-  </div>
-</div>
-</div>
-{% endif %}
-
 {% endblock %} 

@@ -1,5 +1,6 @@
 from django.contrib.auth import login as authlogin, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from . import forms
 from .forms import SignUpForm
@@ -7,8 +8,7 @@ from . import models
 from .models import Produk
 from .models import Properti
 from django import http
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 import uuid
 
@@ -49,7 +49,7 @@ def register(request):
 def profil(request):
      return render(request, 'user/profil.html')
 
-def detail_product(request, pk):			
+def detail_product(request, pk):	
     try:
         item = Produk.objects.get(pk=pk)
     except Produk.DoesNotExist:
@@ -472,7 +472,21 @@ def daftar_transaksi(request):
      return render(request, 'daftar_transaksi.html', data)
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, "contact.html")
+	
+def sendEmail(request):
+    if request.method == 'POST':
+        subject = request.POST['subject']
+        from_email = request.POST['email']
+        message = request.POST['message']
+        try:
+            send_mail(subject, message, from_email, ['kemasravi6789@gmail.com'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        return redirect('/success') # Redirect Sementara Ketika Berhasil Kirim Pesan
+
+def success(request):
+    return HttpResponse('Success! Thank you for your message.')
 
 def kategori(request):
      return render(request, 'kategoribendapos.html')
