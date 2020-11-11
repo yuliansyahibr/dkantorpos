@@ -481,10 +481,10 @@ def sendEmail(request):
         from_email = request.POST['email']
         message = request.POST['message']
         try:
-            send_mail(subject, message, from_email, ['kemasravi6789@gmail.com'])
+            send_mail(subject, message, from_email, ['dkantorpos01@gmail.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
-        return redirect('/success') # Redirect Sementara Ketika Berhasil Kirim Pesan
+        return redirect('/contact') # Redirect Sementara Ketika Berhasil Kirim Pesan
 
 def success(request):
     return HttpResponse('Success! Thank you for your message.')
