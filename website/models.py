@@ -20,7 +20,7 @@ class PathAndRename(object):
         return os.path.join(self.path, filename)
 # path_and_rename = PathAndRename("images/item")
 
-IMAGE_SIZE_LIMIT = 3 #Mb
+IMAGE_SIZE_LIMIT = 3 #MB
 def validate_image(fieldfile_obj):
     filesize = fieldfile_obj.file.size
     megabyte_limit = IMAGE_SIZE_LIMIT
@@ -72,11 +72,11 @@ class User(AbstractUser):
 
     email = CustomEmailField(_('email'), unique=True, max_length=64)
     # uncomment kode dibawah supaya email jadi char, untuk mempermudah register/login
-    # email = models.CharField(_('email'), unique=True, max_length=64)
+    # email = models.CharField(_('email'), unique=True, max_length=66)
     first_name = models.CharField(_('nama depan'), max_length=64)
     last_name = models.CharField(_('nama belakang'), max_length=64, null=True, blank=True)
     hp = models.CharField(_('hp'), max_length=14)
-    password = models.CharField(_('password'), max_length=64)
+    password = models.CharField(_('password'), max_length=128)
     created_at = models.DateTimeField(auto_now_add=True)
 
     keranjang = models.ForeignKey(
@@ -120,7 +120,7 @@ class Produk(models.Model):
     stok = models.IntegerField()
     # foto = models.ImageField()
     path_and_rename = PathAndRename("images/produk")
-    help_text = 'Maximum file size allowed is {}Mb'.format(IMAGE_SIZE_LIMIT)
+    help_text = 'Maximum file size allowed is {}MB'.format(IMAGE_SIZE_LIMIT)
     foto = models.ImageField("Foto produk", upload_to=path_and_rename, validators=[validate_image], help_text=help_text)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -212,7 +212,7 @@ class Order(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     path_and_rename = PathAndRename("images/bukti_pembayaran")
-    help_text = 'Maximum file size allowed is {}Mb'.format(IMAGE_SIZE_LIMIT)
+    help_text = 'Maximum file size allowed is {}MB'.format(IMAGE_SIZE_LIMIT)
     bukti_pembayaran = models.ImageField(upload_to=path_and_rename, null=True, validators=[validate_image], help_text=help_text, )
     uploaded_at = models.DateTimeField(null=True)
 
@@ -265,8 +265,21 @@ class Properti(models.Model):
         default=ADA,
     )
 
+    HARI = 0
+    MINGGU = 1
+    BULAN = 2
+    CHOICES = [
+        (HARI, 'Hari'),
+        (MINGGU, 'Minggu'),
+        (BULAN, 'Bulan')
+    ]
+    satuan_bayar = models.IntegerField(
+        choices=CHOICES,
+        default=HARI,
+    )
+
     path_and_rename = PathAndRename("images/properti")
-    help_text = 'Maximum file size allowed is {}Mb'.format(IMAGE_SIZE_LIMIT)
+    help_text = 'Maximum file size allowed is {}MB'.format(IMAGE_SIZE_LIMIT)
     foto = models.ImageField("Foto properti", upload_to=path_and_rename, validators=[validate_image], help_text=help_text)
 
     created_at = models.DateTimeField(auto_now_add=True)

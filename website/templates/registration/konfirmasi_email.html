@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container py-5" style="font-size: 14px;">
+    <div class="row pt-5">
+        <div class="col text-center">
+            <h4>Akun Anda telah terdaftar</h4>
+        </div>
+    </div>
+    <div class="row pt-4 pb-5">
+        <div class="col-lg-8 col-md-8 col-10 px-5 py-4 mx-auto bg-light">
+            <!-- <div class="row">
+                <div class="col pt-2 pb-4">
+                    <p class="text-success mb-3">
+                        <span class="h6 ">Silahkan cek email Anda untuk konfirmasi akun.</span><br>
+                    </p>
+                </div>
+            </div> -->
+            <div class="row pt-2 pb-3">
+                <div class="col text-center">
+                    <p class=" ">
+                        Kami telah mengirim email konfirmasi ke <span class="font-weight-bold">{{email}}</span>.
+                        <br>
+                        Silahkan cek email Anda dan klik link yang disediakan untuk aktivasi akun.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+{% endblock %}

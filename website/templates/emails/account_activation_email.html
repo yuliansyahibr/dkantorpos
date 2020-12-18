@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hi {{ user }},
+
+
+Selamat bergabung di website e-commerce Kantorpos Regional III. Silahkan klik link dibawah untuk mengkonfirmasi registrasi Anda:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

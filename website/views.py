@@ -12,6 +12,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 import uuid
 
+from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+# from django.core.mail import EmailMessage
+
 def index(request):
      shelf_barang = Produk.objects.order_by('-created_at').all()[:6]
      shelf_workspace = Properti.objects.order_by('-created_at').all()[:4]
@@ -21,6 +29,14 @@ def index(request):
           'shelf_workspace': shelf_workspace
      }
      return render(request, 'index.html', data)
+def browse(request, jenis):
+     if jenis.lower() == 'produk':
+          BROWSE_PROPERTI = False
+          item_list =  Produk.objects.order_by('-created_at').all()
+     elif jenis.lower() == 'properti':
+          BROWSE_PROPERTI = True
+          item_list = Properti.objects.order_by('-created_at').all()
+     return render(request,'index.html', {'item_list': item_list, 'BROWSE_PROPERTI':BROWSE_PROPERTI})
 
 def register(request):
      if request.user.is_authenticated:
@@ -32,18 +48,56 @@ def register(request):
                keranjang = models.Keranjang(total=0)
                keranjang.save()
                user.keranjang = keranjang
+               user.is_active = False # Deactivate account
                user.save()
                form.save_m2m()
+               print('=======user', user)
 
-               # username = form.cleaned_data.get('username')
-               email = form.cleaned_data.get('email')
-               raw_password = form.cleaned_data.get('password1')
-               user = authenticate(username=email, password=raw_password)
-               authlogin(request, user)
-               return redirect('index')
+               current_site = get_current_site(request)
+
+               # email = form.cleaned_data.get('email')
+               # raw_password = form.cleaned_data.get('password1')
+               # user = authenticate(username=email, password=raw_password)
+               # authlogin(request, user)
+               # return redirect('index')
+
+               current_site = get_current_site(request)
+               subject = 'Aktivasi akun website kantorpos'
+               message = render_to_string('emails/account_activation_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk.hex)),
+                    'token': account_activation_token.make_token(user),
+               })
+               user.email_user(subject, message)
+
+               # messages.success(request, ('Please Confirm your email to complete registration.'))
+               request.session['email'] = user.email
+               return redirect('konfirmasi_email')
+
      else:
           form = SignUpForm()
      return render(request, 'registration/register.html', {'form': form})
+def konfirmasi_email(request):
+     email = request.session.get('email')
+     if not email:
+          return http.HttpResponseBadRequest()
+     return render(request, 'registration/konfirmasi_email.html', {'email':email})
+def activate_account(request, uidb64, token):
+    try:
+          uid = force_text(urlsafe_base64_decode(uidb64))
+          user = models.User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError,  models.User.DoesNotExist):
+          user = None
+    if user is not None and account_activation_token.check_token(user, token):
+          user.is_active = True
+          user.save()
+          authlogin(request, user)
+        # return redirect('home')
+     #    return HttpResponse('Your registration is complete. .')
+          return render(request, 'registration/activated.html')
+    else:
+        return HttpResponse('Activation link is invalid!')
 
 @login_required
 def profil(request):
@@ -57,18 +111,19 @@ def detail_product(request, pk):
     return render(request, 'detail_product.html', {'item': item})
 
 def detail_properti(request, pk):
-    try:
+     try:
         item = Properti.objects.get(pk=pk)
-    except Properti.DoesNotExist:
-        raise http.Http404('Properti tidak ditemukan.')    
-    return render(request, 'detail_properti.html', {'item': item})
+     except Properti.DoesNotExist:
+        raise http.Http404('Properti tidak ditemukan.')   
+     print(item.deskripsi)
+     return render(request, 'detail_properti.html', {'item': item})
 
-def detail_properti2(request, pk):
-    try:
-        item = Properti.objects.get(pk=pk)
-    except Properti.DoesNotExist:
-        raise http.Http404('Properti tidak ditemukan.')    
-    return render(request, 'detail_product.html', {'item': item})
+# def detail_properti2(request, pk):
+#     try:
+#         item = Properti.objects.get(pk=pk)
+#     except Properti.DoesNotExist:
+#         raise http.Http404('Properti tidak ditemukan.')    
+#     return render(request, 'detail_product.html', {'item': item})
 
 def kategori_list(request, nama_kategori):
     item_list = models.Produk.objects.filter(kategori__nama_kategori=nama_kategori)
@@ -459,6 +514,10 @@ def konfirmasi_pembayaran(request, id_order):
                order.status_pembayaran = 1
                order.save()
                return http.HttpResponseRedirect('/daftar-transaksi')
+          else:
+               request.session['error_upload'] = True
+               return http.HttpResponseRedirect('/daftar-transaksi')
+               
 @login_required
 def daftar_transaksi(request):
      user = request.user
@@ -466,10 +525,17 @@ def daftar_transaksi(request):
      for order in orders:
           order.details = models.DetailOrder.objects.filter(order=order).all()
      # print(orders[1].detail)
+     error = request.session.get('error_upload')
+     try:
+        del request.session['error_upload']
+     except KeyError:
+        pass
      data = {
           'orders': orders,
-          'form': forms.KonfirmasiPembayaranForm()
+          'form': forms.KonfirmasiPembayaranForm(),
      }
+     if error:
+          data['error'] = error
      return render(request, 'daftar_transaksi.html', data)
 
 def contact(request):

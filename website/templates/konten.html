@@ -24,7 +24,7 @@
 			</p> -->
 			<p class="text-danger font-weight-bold" style="font-size: 14px;">
 				{% if PROPERTI %}
-				<span class="convert-rupiah">{{ item.harga_asli }}</span>
+				<span class="convert-rupiah">{{ item.harga_asli }}</span>/{{item.get_satuan_bayar_display}}
 				{% else %}
 				<span class="convert-rupiah">{{ item.harga }}</span>
 				{% endif %}

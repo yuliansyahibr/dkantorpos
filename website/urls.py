@@ -9,7 +9,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('produk/<str:pk>', views.detail_product, name='detail_product'),
     path('properti/<str:pk>', views.detail_properti, name='detail_properti'),
-    path('properti2/<str:pk>', views.detail_properti2, name='detail_properti2'),
+    # path('properti2/<str:pk>', views.detail_properti2, name='detail_properti2'),
 	path('success/', views.success, name='success'),
     path('item/<uuid:pk>', views.detail_product, name='detail_product'),
     path('kategori/<str:nama_kategori>', views.kategori_list, name='kategori'),
@@ -29,4 +29,9 @@ urlpatterns = [
     path('terimakasih/', views.terimakasih, name='terimakasih'),
     path('konfirmasi-pembayaran/<str:id_order>', views.konfirmasi_pembayaran, name='konfirmasi_pembayaran'),
     path('daftar-transaksi/', views.daftar_transaksi, name='daftar_transaksi'),
+    path('konfirmasi-email/', views.konfirmasi_email, name='konfirmasi_email'),
+    path('activate/<slug:uidb64>/<slug:token>', views.activate_account, name='activate'),
+    path('b/<str:jenis>', views.browse, name='browse'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',

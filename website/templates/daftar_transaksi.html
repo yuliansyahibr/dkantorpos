@@ -5,6 +5,19 @@
 {% endblock %}
 {% block content %}
 <div class="container py-5 mt-2 mb-4">
+    {% if error %}
+    <div class="row">
+        <div class="col-9 mx-auto">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Upload error!</strong> Pastikan file yang diupload merupakan file 
+                foto dengan size di bawah 3MB
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
     <div class="row">
         <div class="col text-center">
             <h4>Daftar Transaksi</h4>
@@ -88,7 +101,7 @@
                                 <div class="col">
                                     <a href="{% url 'detail_product' detail.produk.id.hex %}"><h6 class="nomargin">{{ detail.produk.nama_produk }}</h6></a>
                                     <!-- <p>{{ detail.produk.deskripsi}}</p> -->
-                                    <span class="convert-rupiah">{{ detail.subtotal}}</span><span>, {{detail.qty}} produk</span>
+                                    <span class="convert-rupiah">{{ detail.subtotal}}</span><span>, {{detail.qty}} item</span>
                                 </div>
                             </div>
                             {% endfor %}

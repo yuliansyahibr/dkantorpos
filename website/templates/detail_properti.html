@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--Product Page-->
+<div class="container py-4 px-2">
+  <div class="row">
+    <div class="col-sm-11 col-md-12 col-lg-12" style="padding-right: 0; padding-left: 0;">
+      <!-- product -->
+      <div class="product-content product-wrap clearfix product-deatil">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 px-3">
+                <div class="product-image py-2 pr-3">
+                    <img class="" style="height:auto;width:100%;object-fit:cover;" src="{{ item.foto.url }}">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-lg-6 col-12">
+                <h2 class="name">
+                    {{ item.nama }}
+                </h2>
+                <!-- <small>Product by <a href="javascript:void(0);">PT. Pos Indonesia</a></small> -->
+                <!-- <br /> -->
+                <hr />
+                <p class="h3">
+                    <span class="convert-rupiah" >{{ item.harga_asli }}</span>/{{item.get_satuan_bayar_display}}
+                </p>
+                <br>
+                
+                <div class="row py-2 border-0">
+                    <div class="col-5">
+                        <span class="">
+                            Luas tanah
+                        </span>
+                    </div>
+                    <div class="col">{{item.luas_tanah}}m²</div>
+                </div>
+                <div class="row py-2 border-0">
+                    <div class="col-5">
+                        <span class="">Luas Bangunan</span>
+                    </div>
+                    <div class="col">
+                        <span class="">{{item.luas_bangunan}}m²</span>
+                    </div>
+                </div>
+                <div class="row py-2 border-0">
+                    <div class="col-5">
+                        <span>Jumlah lantai</span>
+                    </div>
+                    <div class="col">{{item.lantai}}</div>
+                </div>
+                <div class="row py-2 border-0">
+                    <div class="col-5">
+                        <span>Kapasitas listrik</span>
+                    </div>
+                    <div class="col">{{item.listrik}} watts</div>
+                </div>
+                <div class="row py-2 border-0">
+                    <div class="col-5">
+                        <span>Alamat</span>
+                    </div>
+                    <div class="col">{{item.alamat}}</div>
+                </div>
+
+                <br />
+                <p class="mt-2">
+                    {{item.deskripsi|safe|escape|linebreaks}}
+                </p>
+                <hr />
+                <div class="row pr-3">
+                    <div class="h5 my-1 py-4 col-12 text-center">
+                        <i class="fa fa-envelope"></i>
+                        <a href="mailto:kantorpos3.website@gmail.com">kantorpos3.website@gmail.com</a>
+                        <!-- <input id="btn-keranjang" class="btn button shadow-sm ml-2" value="Kontak"> -->
+                    </div>
+                </div>
+            <!-- <button class="btn btn-white btn-default pull-right col-lg-6"><i class="fa fa-star"></i> Add to wishlist</button> -->
+			      <!-- <button class="btn btn-white btn-default col-lg-6"><i class="fa fa-envelope"></i> Contact Seller</button> -->
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<!-- <form id="form-keranjang" action="{% url 'keranjang' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="action" id="" value="add" hidden>
+  <input type="number" name="qty" id="input-qty" value="" hidden>
+  <input type="text" name="id_item" id="input-id-item" value="{{ item.id }}" hidden>
+  <input type="submit" hidden>
+</form> -->
+
+<script src="{% static 'website/js/format-rupiah.js' %}"></script>
+
+{% endblock %} 

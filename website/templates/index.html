@@ -7,13 +7,25 @@
 
 {% block content %}
 	{% if item_list %}
-	<div class="newproducts-w3agile">
-		<div class="container">
-			<h3 class="mb-5">Produk List</h3>
+	<div class="newproducts-w3agile ">
+		<div class="container py-5">
+			<h3 class="mb-5">
+				{% if BROWSE_PROPERTI %}
+					Properti
+				{% else %}
+					Produk
+				{% endif %}
+			</h3>
 			<div class="row">
-				{% for item in item_list %}
-					{% include 'konten.html' %}
-				{% endfor %}
+				{% if BROWSE_PROPERTI %}
+					{% for item in item_list %}
+						{% include 'konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
+					{% endfor %}
+				{% else %}
+					{% for item in item_list %}
+						{% include 'konten.html' %}
+					{% endfor %}
+				{% endif %}
 			</div>
 		</div>
 	</div>	

@@ -145,18 +145,50 @@
 },
 {
     "model": "website.keranjang",
+    "pk": "3ca131e8-ccb8-4876-a19a-8bfa971d5707",
+    "fields": {
+        "jumlah_item": 0,
+        "total": 0
+    }
+},
+{
+    "model": "website.keranjang",
     "pk": "4ba3298c-d2b6-4c6d-80ed-56cbce974b83",
     "fields": {
-        "jumlah_item": 1,
-        "total": 7500
+        "jumlah_item": 2,
+        "total": 14000
+    }
+},
+{
+    "model": "website.keranjang",
+    "pk": "54e75815-a254-475b-8fb9-10159d67e71b",
+    "fields": {
+        "jumlah_item": 0,
+        "total": 0
+    }
+},
+{
+    "model": "website.keranjang",
+    "pk": "57e7ad1b-4420-4419-8fe6-1f6c005ecd9c",
+    "fields": {
+        "jumlah_item": 0,
+        "total": 0
+    }
+},
+{
+    "model": "website.keranjang",
+    "pk": "5da36bca-bbba-4e64-99df-c4b897f9fc7f",
+    "fields": {
+        "jumlah_item": 0,
+        "total": 0
     }
 },
 {
     "model": "website.keranjang",
     "pk": "5f45c127-a4a5-488a-991c-192bf827b683",
     "fields": {
-        "jumlah_item": 0,
-        "total": 0
+        "jumlah_item": 33,
+        "total": 107500
     }
 },
 {
@@ -168,10 +200,46 @@
     }
 },
 {
+    "model": "website.keranjang",
+    "pk": "d3e598e5-9f33-4afa-8bfd-93b34b405b67",
+    "fields": {
+        "jumlah_item": 0,
+        "total": 0
+    }
+},
+{
+    "model": "website.keranjang",
+    "pk": "e5528b46-9c2e-41f8-bf04-9f8c697ff245",
+    "fields": {
+        "jumlah_item": 0,
+        "total": 0
+    }
+},
+{
+    "model": "website.user",
+    "pk": "6ae46f20-b9a5-46c7-86d0-03b44ba971ca",
+    "fields": {
+        "last_login": "2020-11-12T14:26:44.456Z",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-11-12T14:15:48.587Z",
+        "email": "kantorpos3.manager@gmail.com",
+        "first_name": "kantorpos",
+        "last_name": "regional3",
+        "hp": "081234",
+        "password": "pbkdf2_sha256$216000$3ZcOuumUqThJ$2snW55+8yXRoGmXywnHyY/tOIRAtLUBa/7e7xSl0QoQ=",
+        "created_at": "2020-11-12T14:15:48.832Z",
+        "keranjang": "57e7ad1b-4420-4419-8fe6-1f6c005ecd9c",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
     "model": "website.user",
     "pk": "737d3170-835f-4d82-835a-ada8a5114920",
     "fields": {
-        "last_login": "2020-10-26T08:12:08.437Z",
+        "last_login": "2020-10-27T05:59:28.669Z",
         "is_superuser": false,
         "is_staff": false,
         "is_active": true,
@@ -191,7 +259,7 @@
     "model": "website.user",
     "pk": "c0b51a84-c475-4b9d-a762-5bd54258fcfd",
     "fields": {
-        "last_login": "2020-10-27T04:10:21.721Z",
+        "last_login": "2020-11-12T02:30:15.107Z",
         "is_superuser": true,
         "is_staff": true,
         "is_active": true,
@@ -291,10 +359,10 @@
         "nama_produk": "Prangko Presiden & Wakil Presiden 2020",
         "harga": 8000,
         "deskripsi": "Prangko Presiden Jokowi & Wakil Presiden Ma'ruf Amin",
-        "stok": 15,
+        "stok": 14,
         "foto": "images/produk/6e755153efb64bbbbaf86bc13a247339.jpg",
         "created_at": "2020-10-27T02:01:48.078Z",
-        "updated_at": "2020-10-27T04:34:09.558Z"
+        "updated_at": "2020-10-27T06:01:50.899Z"
     }
 },
 {
@@ -352,6 +420,54 @@
     }
 },
 {
+    "model": "website.isikeranjang",
+    "pk": "6fc57be5-77c1-4766-aaf0-eda76cbda92d",
+    "fields": {
+        "keranjang": "5f45c127-a4a5-488a-991c-192bf827b683",
+        "produk": "c4bcb14b-15c9-4f57-aa8b-9e54793c14be",
+        "qty": 1,
+        "subtotal": 6500,
+        "created_at": "2020-10-27T06:07:02.579Z",
+        "updated_at": "2020-10-27T06:07:02.579Z"
+    }
+},
+{
+    "model": "website.isikeranjang",
+    "pk": "881b7398-180a-47d9-b652-4014bd8f94c2",
+    "fields": {
+        "keranjang": "5f45c127-a4a5-488a-991c-192bf827b683",
+        "produk": "9af0b44c-36e0-48bd-bbc9-cb63bbdb47e3",
+        "qty": 1,
+        "subtotal": 8000,
+        "created_at": "2020-10-27T06:06:48.378Z",
+        "updated_at": "2020-10-27T06:06:48.378Z"
+    }
+},
+{
+    "model": "website.isikeranjang",
+    "pk": "bb0d4591-9a42-47c3-922f-623e80dc265b",
+    "fields": {
+        "keranjang": "5f45c127-a4a5-488a-991c-192bf827b683",
+        "produk": "de655c10-02d2-4cf7-964e-cda857c90984",
+        "qty": 31,
+        "subtotal": 93000,
+        "created_at": "2020-10-27T06:07:06.634Z",
+        "updated_at": "2020-10-27T06:07:25.229Z"
+    }
+},
+{
+    "model": "website.isikeranjang",
+    "pk": "c352fdd9-d372-423d-a804-77f1d48fa737",
+    "fields": {
+        "keranjang": "4ba3298c-d2b6-4c6d-80ed-56cbce974b83",
+        "produk": "c4bcb14b-15c9-4f57-aa8b-9e54793c14be",
+        "qty": 1,
+        "subtotal": 6500,
+        "created_at": "2020-11-13T03:03:32.719Z",
+        "updated_at": "2020-11-13T03:03:32.719Z"
+    }
+},
+{
     "model": "website.metodepembayaran",
     "pk": "86d6343a-fb58-4681-9f68-26e926a2cb85",
     "fields": {
@@ -365,6 +481,27 @@
     "fields": {
         "nama_metode": "Tunai",
         "deskripsi": "Pembayaran tunai di kantor pos."
+    }
+},
+{
+    "model": "website.order",
+    "pk": "18424458-5e20-4f67-a94f-0d72e13c16d2",
+    "fields": {
+        "kode": "C539E3D9D38E",
+        "user": "737d3170-835f-4d82-835a-ada8a5114920",
+        "metode_pembayaran": "86d6343a-fb58-4681-9f68-26e926a2cb85",
+        "nama_penerima": "user1",
+        "telepon_penerima": "0812345",
+        "alamat_pengiriman": "j",
+        "subtotal": 8000,
+        "ongkos_kirim": 10000,
+        "total": 18000,
+        "status_pembayaran": 2,
+        "jumlah_item": 1,
+        "kantorpos": "85e421b1-8318-4437-a961-e7b226110e1e",
+        "created_at": "2020-10-27T06:01:50.849Z",
+        "bukti_pembayaran": "images/bukti_pembayaran/35dc60a2fd39458e97bfdcf0ba01ca0c.jpg",
+        "uploaded_at": "2020-10-27T06:03:16Z"
     }
 },
 {
@@ -497,6 +634,17 @@
 },
 {
     "model": "website.detailorder",
+    "pk": "7a9a51e0-8402-4632-87df-b96ad79719d4",
+    "fields": {
+        "order": "18424458-5e20-4f67-a94f-0d72e13c16d2",
+        "produk": "9af0b44c-36e0-48bd-bbc9-cb63bbdb47e3",
+        "qty": 1,
+        "subtotal": 8000,
+        "created_at": "2020-10-27T06:01:50.869Z"
+    }
+},
+{
+    "model": "website.detailorder",
     "pk": "a71e6574-95a4-4727-966f-46e915963b65",
     "fields": {
         "order": "cd1855ad-01f1-40fb-8bb0-2df5f034c986",
@@ -555,7 +703,7 @@
     "pk": "08a0720e-3442-4e83-ada7-2dc707309c66",
     "fields": {
         "nama": "Gedung untuk Kantor IT, Bank, Asuransi",
-        "deskripsi": "Gedung untuk Kantor IT, Bank, Asuransi",
+        "deskripsi": "<b>Dekat Sarana Umum Menuju :</b>\r\n\r\n•  Pusat Perbelanjaan\r\n\r\n•  Pusat Pendidikan\r\n\r\n•  Pusat Perbankan\r\n\r\n•  Hotel Berbintang\r\n\r\n•  Rumah Sakit\r\n\r\n•  SPBU\r\n\r\n•  Rumah Ibadah\r\n\r\n•  Pintu Tol Pasteur\r\n\r\n\r\n\r\n<b>Sangat Cocok Untuk :</b>\r\n\r\n•  Kantor, Restaurant, Dealer Motor, dll.\r\n\r\n•  Investasi ( Daerah Berkembang, Banyak Perumahan/Ruko baru,)",
         "alamat": "Jln. Setiabudi",
         "luas_tanah": 770,
         "luas_bangunan": 500,
@@ -564,17 +712,18 @@
         "harga": 250,
         "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
         "ketersediaan": 1,
+        "satuan_bayar": 2,
         "foto": "images/properti/c506f113e15a40b784338e44b39a3f49.jpeg",
         "created_at": "2020-10-27T01:58:50.549Z",
-        "updated_at": "2020-10-27T02:04:05.493Z"
+        "updated_at": "2020-11-13T03:42:05.669Z"
     }
 },
 {
     "model": "website.properti",
     "pk": "5c28aff0-5708-4a5b-802a-39ffabc9c21e",
     "fields": {
-        "nama": "Open Space",
-        "deskripsi": "........",
+        "nama": "Kantor",
+        "deskripsi": "------------\r\n\r\nTOWER: B\r\nL. BANGUNAN: 48 M2\r\nTINGKAT: LANTAI 19\r\nHADAP: UTARA\r\nLISTRIK: 2.200 W\r\nHARGA: 40 JUTA/TAHUN\r\nSERTIFIKAT: SH,\r\n\r\n2 KAMAR TIDUR, 1 KAMAR MANDI\r\n\r\nUntuk informasi jangan sungkan untuk menghubungi saya. Dengan senang hati membantu Anda\r\n\r\nSpecification:\r\n Listing ID: 295391\r\n Building Size : 48m2\r\n Land Size : 0m2\r\n Listing Date: 12 Nov 2020\r\n Harga Sewa",
         "alamat": "Jln. Soekarno Hatta",
         "luas_tanah": 600,
         "luas_bangunan": 600,
@@ -583,9 +732,10 @@
         "harga": 100,
         "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
         "ketersediaan": 1,
+        "satuan_bayar": 2,
         "foto": "images/properti/bf65eb297f234fa6ad10484de1b6e105.jpg",
         "created_at": "2020-10-27T02:03:06.900Z",
-        "updated_at": "2020-10-27T02:03:06.900Z"
+        "updated_at": "2020-11-13T03:20:35.689Z"
     }
 },
 {
@@ -593,7 +743,7 @@
     "pk": "7dfcd6cc-9a56-446e-9ce6-7a18cf6077b9",
     "fields": {
         "nama": "Event Space",
-        "deskripsi": "...",
+        "deskripsi": "<b>Fasilitas :</b>\r\n\r\nPemakaian ruang selama 8 jam, 400 kursi, 12 kursi VIP, 4 Meja VIP, 1 Screen Projector dan Sound System dengan 4 Microphone & 2 Wireless Mic.",
         "alamat": "Jln. Setiabudi",
         "luas_tanah": 600,
         "luas_bangunan": 600,
@@ -602,9 +752,10 @@
         "harga": 88,
         "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
         "ketersediaan": 1,
+        "satuan_bayar": 0,
         "foto": "images/properti/16326011adb344198cc228cb946ae778.jpg",
         "created_at": "2020-10-27T02:08:47.705Z",
-        "updated_at": "2020-10-27T02:08:47.705Z"
+        "updated_at": "2020-11-13T02:14:45.921Z"
     }
 },
 {
@@ -621,6 +772,7 @@
         "harga": 210,
         "kantropos": "85e421b1-8318-4437-a961-e7b226110e1e",
         "ketersediaan": 1,
+        "satuan_bayar": 0,
         "foto": "images/properti/819686c458804538ab8cae76ceccb485.jpg",
         "created_at": "2020-10-25T12:56:27.471Z",
         "updated_at": "2020-10-25T12:56:27.471Z"
