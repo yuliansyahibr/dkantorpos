@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>D'Kantor Pos</title>
+    <title>{% block title %}{% endblock %} | D'KantorPOS</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,42 +52,16 @@
         </button>
         <div class="collapse navbar-collapse" id="main_nav">
             <ul class="navbar-nav">
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Kategori
-                        </a>
-                        <div class="dropdown-menu multi-column columns-3">
-                            <div class="row">
-                                <div class="multi-gd-img">
-                                    <ul class="multi-column-dropdown">
-                                        <h6>Semua Kategori</h6>
-                                        {% for k in daftar_kategori %}
-                                        <li>
-                                            <a href="{% url 'kategori' k.nama_kategori %}">{{k.nama_kategori}}</a>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li> -->
                     <li class="nav-item"><a class="nav-link text-white" href="{% url 'browse' 'produk' %}">Browse Produk</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{% url 'browse' 'properti' %}">Browse Properti</a></li>
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link text-white" href="{% url 'daftar_transaksi' %}"> Daftar Transaksi</a></li>
                     {% endif %}
                     <li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Kontak</a></li>
-                    <li class="nav-item"><a class="nav-link text-white"> </a></li>
             </ul>
-            <!-- <form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
-                    {% csrf_token %}
-                    <input type="text" name="name" placeholder="Search.." class="form-control-sm search-bar">
-            </form> -->
-            <form action="{% url 'search' %}" method="POST" class="form-inline ml-4 lg-form my-2 my-lg-0">
-                {% csrf_token %}
+            <form action="{% url 'search' %}" method="GET" class="form-inline ml-4 lg-form my-2 my-lg-0">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm" placeholder="Search" name="name">
+                    <input type="text" class="form-control form-control-sm" placeholder="Search" name="q">
                     <div class="input-group-append">
                         <button class="btn btn-sm btn-light" type="submit"><i class="fa fa-search"></i></button>
                     </div>
@@ -135,52 +109,10 @@
 <!-- footer -->
 <div class="footer">
     <div class="container">
-        <div class="row ml-3">
-            <div class="col-sm-12 col-md-3 w3_footer_grid">
-                <h3>Kontak</h3>
-                <ul class="address">
-                    <li>
-                        <i class="fa fa-map-marker" style="font-size: 22px;" aria-hidden="true"></i>
-                        Jln. K. A. Rivai No. 63, Palembang 30135.
-                    </li>
-                    <li><i class="fa fa-phone" style="font-size: 20px;" aria-hidden="true"></i>0711-350228</li>
-                </ul>
-            </div>
-            <div class="col-sm-12 col-md-3 w3_footer_grid">
-                <h3>Informasi</h3>
-                <ul class="info">
-                    <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="{% url 'contact' %}">Hubungi
-                    Kami</a></li>
-                    <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">FAQ's</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-12 col-md-3 w3_footer_grid">
-                <h3>Kategori</h3>
-                <ul class="info">
-                    <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Benda POS</a></li>
-                    <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">Co-Working Space</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>Profil</h3>
-                <ul class="info">
-                    <li><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        <a href="{% url 'checkout' %}">Keranjang</a>
-                    </li>
-                    <li><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        <a href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                        <a href="{% url 'register' %}">Registrasi</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
     </div>
     <div class="footer-copy">
         <div class="container">
-            <p>© 2020 Di Kantor POS. All rights reserved | Design by <a href="#">Pakem</a></p>
+            <p>© 2020 D'KantorPOS. All rights reserved</p>
         </div>
     </div>
 </div>

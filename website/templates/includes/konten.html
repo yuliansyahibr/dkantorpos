@@ -5,15 +5,20 @@
 		{% url 'detail_product' item.id.hex as detail_url %}
 	{% endif %}
 	<a href="{{detail_url}}">
-		<div class="img-wrapper">
+		<div class="img-wrapper mb-2">
 			<img src="{{ item.foto.url }}" style="object-fit: cover;">
 		</div>
+		{% if PROPERTI %}
+		<div class="mb-2 font-weight-normal text-muted" style="font-size: 14px;">
+			{{item.alamat}}
+		</div>
+		{% endif %}
 		<div class="text-center">
-			<p class="text-dark nama-produk">{% firstof item.nama_produk item.nama %}</p>
+			<div class="text-dark nama-produk mb-2">{% firstof item.nama_produk item.nama %}</div>
 			{% if not PROPERTI %}
-				<p class="text-success" style="font-size: 14px;">
+				<div class="text-success mb-2" style="font-size: 14px;">
 					Tersedia {{item.stok}} buah
-				</p>
+				</div>
 			{% endif %}
 			<!-- <p class="stars" style="font-size: 11px;">
 				<i class="fa fa-star gold-star" aria-hidden="true"></i>
@@ -22,7 +27,7 @@
 				<i class="fa fa-star gray-star" aria-hidden="true"></i>
 				<i class="fa fa-star gray-star" aria-hidden="true"></i>
 			</p> -->
-			<p class="text-danger font-weight-bold" style="font-size: 14px;">
+			<p class="text-red1 font-weight-bold" style="font-size: 16px;">
 				{% if PROPERTI %}
 				<span class="convert-rupiah">{{ item.harga_asli }}</span>/{{item.get_satuan_bayar_display}}
 				{% else %}

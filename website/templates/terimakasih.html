@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
+{% block title %}
+Terimakasih 
+{% endblock %}
 {% block content %}
-
 <div class="container py-5" style="font-size: 14px;">
     <div class="row pt-5">
         <div class="col text-center">
@@ -66,7 +67,7 @@
             </div>
             <div class="row pt-5 pb-3">
                 <div class="col text-center">
-                    <span class="font-weight-bold">Mohon selesaikan pembayaran dalam waktu ... jam</span>
+                    <span class="font-weight-bold">Mohon selesaikan pembayaran dalam waktu 24 jam</span>
                 </div>
             </div>
             <div class="row mt-4 mb-4">
@@ -80,7 +81,7 @@
         </div>
     </div>
 </div>
-{% include 'modal_konfirmasi_pembayaran.html' %}
+{% include 'includes/modal_konfirmasi_pembayaran.html' %}
 
 <script>
 

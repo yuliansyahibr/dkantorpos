@@ -1152,9 +1152,9 @@ ul.paging {
     background-color:#ffc229;
     border-color:#EDB62B;
 }
-.pagination > li > a{
+/* .pagination > li > a{
 	color:#212121;
-}
+} */
 .categories,.new-products{
 	border:1px solid #999;
 }
@@ -2730,7 +2730,7 @@ body.loading .loader {
     display: block;
 }
 
-body{background:url(assets/img/white_leather.png) repeat 0 0; }
+/* body{background:url(assets/img/white_leather.png) repeat 0 0; } */
 #header{padding:8px 0 8px;}
 #header a{text-decoration:none}
 #header p{padding:0; margin:0; line-height:1em; font-size:100%}

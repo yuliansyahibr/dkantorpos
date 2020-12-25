@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}
+Daftar Transaksi
+{% endblock %}
 {% block css %}
 <link href="{% static 'website/css/daftar_transaksi.css' %}" rel="stylesheet">
 {% endblock %}
@@ -9,7 +12,7 @@
     <div class="row">
         <div class="col-9 mx-auto">
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Upload error!</strong> Pastikan file yang diupload merupakan file 
+                <strong>Upload error!</strong> Pastikan file yang diupload merupakan file
                 foto dengan size di bawah 3MB
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -50,10 +53,10 @@
                     <tr>
                         <td scope="col" class="" style="min-width:560px"></td>
                         <!-- <td scope="col" class="pl-4" style="max-width:480px"></td> -->
-						<!-- <th scope="col" class="text-center">Total</th> -->
-						<td scope="col" style="min-width:190px;">&nbsp;</td>
+                        <!-- <th scope="col" class="text-center">Total</th> -->
+                        <td scope="col" style="min-width:190px;">&nbsp;</td>
                     </tr>
-                    
+
                     {% for order in orders %}
                     <tr class="border border-bottom-0 bg-light">
                         <td colspan="2">
@@ -77,11 +80,11 @@
                                 <div class="col-lg-3 col-4">
                                     <span>STATUS</span><br>
                                     {% if order.status_pembayaran == 0 %}
-                                        <span class="text-danger font-weight-bold">Menunggu pembayaran.</span>
+                                    <span class="text-danger font-weight-bold">Menunggu pembayaran.</span>
                                     {% elif order.status_pembayaran == 1 %}
-                                        <span class="text-orange font-weight-bold">Menunggu konfirmasi Pos Indonesia.</span>
+                                    <span class="text-orange font-weight-bold">Menunggu konfirmasi Pos Indonesia.</span>
                                     {% elif order.status_pembayaran == 2 %}
-                                        <span class="text-success font-weight-bold">Pesanan diproses.</span>
+                                    <span class="text-success font-weight-bold">Pesanan diproses.</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -94,14 +97,17 @@
                                 <div class="col-lg-2 col-md-2 col-3">
                                     <div class="img-wrapper">
                                         <a href="{% url 'detail_product' detail.produk.id.hex %}">
-                                            <img src="{{ detail.produk.foto.url }}" alt="..."/>
+                                            <img src="{{ detail.produk.foto.url }}" alt="..." />
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <a href="{% url 'detail_product' detail.produk.id.hex %}"><h6 class="nomargin">{{ detail.produk.nama_produk }}</h6></a>
+                                    <a href="{% url 'detail_product' detail.produk.id.hex %}">
+                                        <h6 class="nomargin">{{ detail.produk.nama_produk }}</h6>
+                                    </a>
                                     <!-- <p>{{ detail.produk.deskripsi}}</p> -->
-                                    <span class="convert-rupiah">{{ detail.subtotal}}</span><span>, {{detail.qty}} item</span>
+                                    <span class="convert-rupiah">{{ detail.subtotal}}</span><span>, {{detail.qty}}
+                                        item</span>
                                 </div>
                             </div>
                             {% endfor %}
@@ -111,13 +117,14 @@
                         </td> -->
                         <td class="text-right pr-4">
                             <!-- <div class="col-lg-10 col-12 mx-auto"> -->
-                                <!-- <button class="btn btn-secondary btn-sm btn-block py-2">Detail</button> -->
-                                {% if order.status_pembayaran == 0 %}
-                                    <button type="button" class="btn btn-success btn-sm py-2" data-toggle="modal" data-target="#modal-konfirmasi" 
-                                    data-url="{% url 'konfirmasi_pembayaran' order.id.hex %}">
-                                        Konfirmasi Pembayaran
-                                    </button>
-                                {% endif %}
+                            <!-- <button class="btn btn-secondary btn-sm btn-block py-2">Detail</button> -->
+                            {% if order.status_pembayaran == 0 %}
+                            <button type="button" class="btn btn-success btn-sm py-2" data-toggle="modal"
+                                data-target="#modal-konfirmasi"
+                                data-url="{% url 'konfirmasi_pembayaran' order.id.hex %}">
+                                Konfirmasi Pembayaran
+                            </button>
+                            {% endif %}
                             <!-- </div> -->
                         </td>
                     </tr>
@@ -126,15 +133,18 @@
                     </tr>
                     {% endfor %}
 
-                </table>	
+                </table>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="mx-auto">
+            {% include 'includes/pagination.html' with pag_obj=orders %}
+        </div>
+    </div>
 </div>
-{% include 'modal_konfirmasi_pembayaran.html' %}
-
+{% include 'includes/modal_konfirmasi_pembayaran.html' %}
 {% endblock %}
-
 {% block js %}
 <script src="{% static 'website/js/format-rupiah.js' %}"></script>
 {% endblock %}

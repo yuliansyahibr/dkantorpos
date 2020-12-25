@@ -18,7 +18,16 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
+from django.core.paginator import Paginator
+from django.views.generic import ListView
 # from django.core.mail import EmailMessage
+
+# class ItemListView(ListView):
+#      paginate_by = 2
+#      model = models.Produk
+#      template_name = 'index.html'  # Default: <app_label>/<model_name>_list.html
+#      context_object_name = 'item_list'  # Default: object_list
+#      queryset = model.objects.order_by('-created_at').all()  # Default: Model.objects.all()
 
 def index(request):
      shelf_barang = Produk.objects.order_by('-created_at').all()[:6]
@@ -36,7 +45,10 @@ def browse(request, jenis):
      elif jenis.lower() == 'properti':
           BROWSE_PROPERTI = True
           item_list = Properti.objects.order_by('-created_at').all()
-     return render(request,'index.html', {'item_list': item_list, 'BROWSE_PROPERTI':BROWSE_PROPERTI})
+     paginator = Paginator(item_list, 8)
+     page_number = request.GET.get('page')
+     items = paginator.get_page(page_number)
+     return render(request,'index.html', {'items': items, 'BROWSE_PROPERTI':BROWSE_PROPERTI})
 
 def register(request):
      if request.user.is_authenticated:
@@ -51,16 +63,6 @@ def register(request):
                user.is_active = False # Deactivate account
                user.save()
                form.save_m2m()
-               print('=======user', user)
-
-               current_site = get_current_site(request)
-
-               # email = form.cleaned_data.get('email')
-               # raw_password = form.cleaned_data.get('password1')
-               # user = authenticate(username=email, password=raw_password)
-               # authlogin(request, user)
-               # return redirect('index')
-
                current_site = get_current_site(request)
                subject = 'Aktivasi akun website kantorpos'
                message = render_to_string('emails/account_activation_email.html', {
@@ -118,30 +120,44 @@ def detail_properti(request, pk):
      print(item.deskripsi)
      return render(request, 'detail_properti.html', {'item': item})
 
-# def detail_properti2(request, pk):
-#     try:
-#         item = Properti.objects.get(pk=pk)
-#     except Properti.DoesNotExist:
-#         raise http.Http404('Properti tidak ditemukan.')    
-#     return render(request, 'detail_product.html', {'item': item})
-
-def kategori_list(request, nama_kategori):
-    item_list = models.Produk.objects.filter(kategori__nama_kategori=nama_kategori)
+# def kategori_list(request, nama_kategori):
+#     item_list = models.Produk.objects.filter(kategori__nama_kategori=nama_kategori)
 	
-    return render(request,'index.html', {'item_list': item_list})
+#     return render(request,'index.html', {'item_list': item_list})
 	
 """ search function  """
 def search_product(request):
-    if request.method == "POST":
-          query_name = request.POST.get('name', None)
-          if query_name:
-               # contains => case sensitive
-               # icontains => case insensitive
-               results1 = Produk.objects.filter(nama_produk__icontains=query_name).all()
-               results2 = Properti.objects.filter(nama__icontains=query_name).all()
-               return render(request, 'product_search.html', {"results1":results1, "results2":results2})
+     # request.POST.get('name', None)
+     print(request.GET)
+     search_query = request.GET.get('q', None)
+     if search_query:
+          # contains => case sensitive
+          # icontains => case insensitive
+          results1 = Produk.objects.filter(nama_produk__icontains=search_query).all()
+          results2 = Properti.objects.filter(nama__icontains=search_query).all()
 
-    return render(request, 'product_search.html')
+          from itertools import chain
+          from operator import attrgetter
+          results = sorted(chain(results1, results2),
+                    key=attrgetter('created_at'), reverse=True)
+          paginator = Paginator(results, 16)
+          page_number = request.GET.get('page')
+          results = paginator.get_page(page_number)
+
+          data = {
+               "search_query": search_query,
+               # "results1":results1, 
+               # "results2":results2,
+               'results':results
+          }
+          return render(request, 'product_search.html', data)
+
+     BROWSE_PROPERTI = False
+     item_list =  Produk.objects.order_by('-created_at').all()
+     paginator = Paginator(item_list, 24)
+     page_number = request.GET.get('page')
+     items = paginator.get_page(page_number)
+     return render(request,'index.html', {'items': items, 'BROWSE_PROPERTI':BROWSE_PROPERTI})
 
 def updateKeranjang(keranjang):
      items = models.IsiKeranjang.objects.filter(keranjang=keranjang)
@@ -272,10 +288,6 @@ def checkout(request):
           # provinsi = rajaOngkirAPI('provinsi')
           kantorpos = models.Kantorpos.objects.all()
           provinsi = []
-     
-     # flag item workspace di keranjang
-     # SEWA = True if 'workspace' in [str(item_keranjang.produk.jenis_item.jenis).lower() for item_keranjang in items] else False
-     # request.session['SEWA'] = SEWA
 
      data = {
           'items': items,
@@ -286,65 +298,6 @@ def checkout(request):
           'metode_pembayaran': models.MetodePembayaran.objects.all()
      }
      return render(request, 'checkout.html', data)
-
-"""
-api request
-"""
-def api(request, param):
-     if request.method == 'POST':
-          # result = rajaOngkirAPI(param, request.POST)
-          result = rajaOngkirAPI(param, **request.POST)
-          if result is not None:
-               return http.JsonResponse(result, safe=False)
-     return http.HttpResponseBadRequest()     
-"""
-doc: https://rajaongkir.com/dokumentasi/starter
-"""
-def rajaOngkirAPI(param, **kwargs):
-     """
-     Note: 
-     request.POST values are in list, get the 1st index [0] only
-     """
-     from http import client
-     import ast, json
-     
-     # load api key
-     API_KEY = ''
-     with open('./website/rajaOngkir.json') as f:
-          API_KEY = json.load(f)['API_KEY']
-     
-     # rajaOngkir api request
-     conn = client.HTTPSConnection("api.rajaongkir.com")
-     headers = { 'key': API_KEY }
-     if param == 'provinsi':
-          id_provinsi = kwargs.get('id_provinsi', "")
-          conn.request("GET", "/starter/province?id={}".format(id_provinsi), headers=headers)
-     elif param == 'kota':
-          id_kota = kwargs.get('id_kota',"")
-          if type(kwargs['id_provinsi']) == list:
-               id_provinsi = kwargs['id_provinsi'][0]
-          else:
-               id_provinsi = kwargs['id_provinsi']
-          conn.request("GET", "/starter/city?id={}&province={}".format(id_kota, id_provinsi), headers=headers)
-     elif param == 'ongkir':
-          if type(kwargs['id_kota']) == list:
-               id_kota_tujuan = kwargs['id_kota'][0]
-          else:
-               id_kota_tujuan = kwargs['id_kota']
-          headers['content-type'] = "application/x-www-form-urlencoded"
-          id_kota_asal = '327' # ID KOTA PALEMBANG
-          courier = 'pos' # kuris pos
-          weight = 1400 # WEIGHT, hardcoded
-          payload = "origin={}&destination={}&weight={}&courier={}".format(id_kota_asal, id_kota_tujuan, weight, courier)
-          conn.request("POST", "/starter/cost", payload, headers)
-     # get & decode api response
-     res = conn.getresponse()
-     data = res.read()
-     data = ast.literal_eval(data.decode("utf-8"))
-
-     if data['rajaongkir']['status']['code'] == 200:
-          return data['rajaongkir']['results']
-     return None
 
 @login_required
 def makeorder(request):
@@ -364,25 +317,8 @@ def makeorder(request):
                }
           else:
                keranjang = user.keranjang
-               # Belum cek kosong
-
-               #################### ONGKIR
-               # id_provinsi = request.POST['id_provinsi']
-               # nama_provinsi = rajaOngkirAPI('provinsi', id_provinsi=id_provinsi)['province']
-               # id_kota = request.POST['id_kota']
-               # kota = rajaOngkirAPI('kota', id_provinsi=id_provinsi, id_kota=id_kota)
-               # nama_kota = kota['type']+' '+kota['city_name']
-               # service = request.POST['service']
-               # # cost = [d for d in rajaOngkirAPI('ongkir', id_kota=id_kota)[0]['costs'] if d['service'] == service]
-               # cost = next((x for x in rajaOngkirAPI('ongkir', id_kota=id_kota)[0]['costs'] if x['service'] == service), None)
-               # if cost is None:
-               #      return http.HttpResponseBadRequest()
-               # ongkos_kirim = cost['cost'][0]['value']
-               # estimasi = cost['cost'][0]['etd']
-               ##################
-               # kurir = request.POST['kurir']
                kurir = "pos"
-               ongkos_kirim = 10000 # HARDCODE
+               ongkos_kirim = 10000 
                kantorpos = models.Kantorpos.objects.filter(id=request.POST['kantorpos']).first()
                metode_pembayaran = models.MetodePembayaran.objects.filter(id=request.POST['metode_pembayaran']).first()
 
@@ -521,10 +457,13 @@ def konfirmasi_pembayaran(request, id_order):
 @login_required
 def daftar_transaksi(request):
      user = request.user
-     orders = models.Order.objects.filter(user=user).order_by('-created_at').all()
+     order_list = models.Order.objects.filter(user=user).order_by('-created_at').all()
+     paginator = Paginator(order_list, 3) # Show 3 contacts per page.
+     page_number = request.GET.get('page')
+     orders = paginator.get_page(page_number)
+     # for order in order_list:
      for order in orders:
           order.details = models.DetailOrder.objects.filter(order=order).all()
-     # print(orders[1].detail)
      error = request.session.get('error_upload')
      try:
         del request.session['error_upload']
@@ -554,6 +493,3 @@ def sendEmail(request):
 
 def success(request):
     return HttpResponse('Success! Thank you for your message.')
-
-def kategori(request):
-     return render(request, 'kategoribendapos.html')

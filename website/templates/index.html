@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}
+Home
+{% endblock %}
 {% block css %}
 <link href="{% static 'website/css/produk.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-	{% if item_list %}
+	{% if items %}
 	<div class="newproducts-w3agile ">
 		<div class="container py-5">
 			<h3 class="mb-5">
@@ -18,14 +21,19 @@
 			</h3>
 			<div class="row">
 				{% if BROWSE_PROPERTI %}
-					{% for item in item_list %}
-						{% include 'konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
+					{% for item in items %}
+						{% include 'includes/konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
 					{% endfor %}
 				{% else %}
-					{% for item in item_list %}
-						{% include 'konten.html' %}
+					{% for item in items %}
+						{% include 'includes/konten.html' %}
 					{% endfor %}
 				{% endif %}
+			</div>
+			<div class="row">
+				<div class="mx-auto">
+					{% include 'includes/pagination.html' with pag_obj=items %}
+				</div>
 			</div>
 		</div>
 	</div>	
@@ -63,7 +71,7 @@
 					<h3 class="mb-3">Produk</h3>
 					<div class="row">
 						{% for item in shelf_barang %}
-							{% include 'konten.html' %}
+							{% include 'includes/konten.html' %}
 						{% endfor %}
 					</div>
 				</div>
@@ -73,7 +81,7 @@
 					<h3 class="mb-3">Work space</h3>
 					<div class="row">
 						{% for item in shelf_workspace %}
-							{% include 'konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
+							{% include 'includes/konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
 						{% endfor %}
 					</div>
 				</div>

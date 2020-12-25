@@ -110,6 +110,7 @@ class Kategori(models.Model):
 
 class Produk(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    is_properti = False
     kategori = models.ForeignKey(
         Kategori,
         on_delete=models.CASCADE
@@ -240,6 +241,7 @@ class DetailOrder(models.Model):
 
 class Properti(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    is_properti = True
     nama = models.CharField(max_length=64)
     deskripsi = models.TextField()
     alamat = models.CharField(max_length=128)
@@ -251,7 +253,7 @@ class Properti(models.Model):
     listrik = models.IntegerField()
     harga = models.IntegerField()
 
-    kantropos = models.ForeignKey(
+    kantorpos = models.ForeignKey(
         Kantorpos, on_delete=models.CASCADE
     )
     TIDAK_ADA = 0

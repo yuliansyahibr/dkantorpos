@@ -1,33 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}
+Hasil Pencarian ''
+{% endblock %}
 {% block css %}
 <link href="{% static 'website/css/produk.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
 <div class="newproducts-w3agile">
 	<div class="container">
-		<h3 class="mb-5">Hasil Pencarian</h3>
-		{% if results1 %}
-		<div class="row">
-			<div class="col pb-5">
-				<h5 class="mb-1">Produk</h5>
-				<div class="row">
-					{% for item in results1 %}
-						{% include 'konten.html' %}
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-		{% endif %}
-		{% if results2 %}
+		<h3 class="mb-5">Hasil Pencarian "{{search_query}}"</h3>
+		{% if results %}
 		<div class="row">
 			<div class="col pb-5">
 				<h5 class="mb-2">Properti</h5>
 				<div class="row">
-					{% for item in results2 %}
-						{% include 'konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
+					{% for item in results %}
+						{% if item.is_properti %}
+							{% include 'includes/konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4' PROPERTI=True %}
+						{% else %}
+							{% include 'includes/konten.html' with colclass='col-lg-3 col-md-3 col-sm-4 col-6 mb-4 py-4'%}
+						{% endif %}
 					{% endfor %}
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="mx-auto">
+				{% include 'includes/pagination.html' with pag_obj=results %}
+			</div>
+		</div>
+		{% else %}
+		<div class="row">
+			<div class="col mx-auto">
+				
 			</div>
 		</div>
 		{% endif %}

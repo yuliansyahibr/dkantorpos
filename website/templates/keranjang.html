@@ -4,9 +4,11 @@
 {% block css %}
 <link href="{% static 'website/css/keranjang.css' %}" rel="stylesheet">
 {% endblock %}
-
+{% block title %}
+Keranjang
+{% endblock %}
 {% block content %}
-<!-- <div class="loader"></div> -->
+<div class="loader"></div>
 
 <!-- breadcrumbs -->
 <div class="breadcrumbs">
@@ -71,7 +73,10 @@
                             <span  id='total-item-{{item_keranjang.id}}' class="convert-rupiah">{{ item_keranjang.subtotal }}</span>
                         </td> -->
 						<td class="text-right pr-4">
-							<button class="btn btn-danger btn_hapus" data-item-keranjang="{{ item_keranjang.id.hex }}"><i class="fa fa-trash"></i></button>
+                            <button type="button" class="btn btn-danger btn-modal-hapus" data-toggle="modal" data-target="#modalhapus" data-item-keranjang="{{ item_keranjang.id.hex }}">
+                                <i class="fa fa-trash"></i>
+                            </button>
+							<!-- <button class="btn btn-danger btn_hapus" data-item-keranjang="{{ item_keranjang.id.hex }}"></button> -->
 						</td>
                     </tr>
                     {% endfor %}
@@ -103,7 +108,25 @@
 	</div>
 </div>
 <!-- //checkout -->
-
+<!-- Modal -->
+<div class="modal fade" id="modalhapus" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hapus item?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- <div class="modal-body">
+            </div> -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                <button type="button" id="btn-hapus" class="btn btn-danger" data-item-keranjang="">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% csrf_token %}
 
 <script src="{% static 'website/js/format-rupiah.js' %}"></script>
@@ -211,12 +234,19 @@
             
         })
 
+        $('.btn-modal-hapus').on('click', function(e){
+            let id_item = $(this).data('item-keranjang')
+            console.log(id_item)
+            $('#btn-hapus').attr('data-item-keranjang', id_item)
+        })
+
         // delete item di keranjang
-        $('.btn_hapus').on('click', function(){
+        $('#btn-hapus').on('click', function(){
             $('body').addClass("loading");
             let csrfmiddlewaretoken = $('input[name="csrfmiddlewaretoken"]').val()
             let id_item_keranjang = $(this).data('item-keranjang')
             setTimeout(function () {
+                $('#modalhapus').modal('hide')
                 $.ajax({
                     url: `{% url 'keranjang_ajax' 'delete' %}`,
                     type: 'POST',
@@ -225,7 +255,6 @@
                         id_item_keranjang: id_item_keranjang
                     },
                     success: function(data) {
-                        console.log(data)
                         if (data['status'] === 200) {
                             $(`#row-item-keranjang-${id_item_keranjang}`).remove()
                         }
