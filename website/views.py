@@ -22,13 +22,6 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView
 # from django.core.mail import EmailMessage
 
-# class ItemListView(ListView):
-#      paginate_by = 2
-#      model = models.Produk
-#      template_name = 'index.html'  # Default: <app_label>/<model_name>_list.html
-#      context_object_name = 'item_list'  # Default: object_list
-#      queryset = model.objects.order_by('-created_at').all()  # Default: Model.objects.all()
-
 def index(request):
      shelf_barang = Produk.objects.order_by('-created_at').all()[:6]
      shelf_workspace = Properti.objects.order_by('-created_at').all()[:4]
@@ -119,11 +112,6 @@ def detail_properti(request, pk):
         raise http.Http404('Properti tidak ditemukan.')   
      print(item.deskripsi)
      return render(request, 'detail_properti.html', {'item': item})
-
-# def kategori_list(request, nama_kategori):
-#     item_list = models.Produk.objects.filter(kategori__nama_kategori=nama_kategori)
-	
-#     return render(request,'index.html', {'item_list': item_list})
 	
 """ search function  """
 def search_product(request):
