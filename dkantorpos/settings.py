@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = os.getenv("secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("development", False)
 
-ALLOWED_HOSTS = os.getenv("host_ip").rstrip(";").split(";")
+ALLOWED_HOSTS = os.getenv("allowed_hosts").rstrip(";").split(";")
 
 # Application definition
 
@@ -41,10 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'website',
 ]
-
-# config/settings.py
-DEFAULT_FROM_EMAIL = 'dkantorpos01@gmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,11 +146,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'kantorpos3.website@gmail.com'
+DEFAULT_FROM_EMAIL = os.getenv("email")
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'kantorpos3.website@gmail.com'
-EMAIL_HOST_PASSWORD = 'kantorpos123'
+EMAIL_HOST_USER = os.getenv("email")
+EMAIL_HOST_PASSWORD = os.getenv("email_password")
 EMAIL_USE_TLS = True
 
 

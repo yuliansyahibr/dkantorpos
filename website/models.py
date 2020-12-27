@@ -4,7 +4,17 @@ import os
 import uuid
 from django.utils.deconstruct import deconstructible
 from django.core.exceptions import ValidationError
-
+from . import managers
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
 """
     FUNCTIONS
 """
@@ -20,12 +30,49 @@ class PathAndRename(object):
         return os.path.join(self.path, filename)
 # path_and_rename = PathAndRename("images/item")
 
-IMAGE_SIZE_LIMIT = 3 #MB
+IMAGE_SIZE_LIMIT = 2.0 #Mb
 def validate_image(fieldfile_obj):
     filesize = fieldfile_obj.file.size
     megabyte_limit = IMAGE_SIZE_LIMIT
     if filesize > megabyte_limit*1024*1024:
         raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
+RESIZED_IMG_SIZE = 720 #px
+RESIZED_IMG_QUALITY = 95
+def resize_and_compress(instance, img_attr):
+    # Opening the uploaded image
+    img = getattr(instance, img_attr)
+    # print('--', (not img))
+    if not img:
+        return None
+
+    # delete old image from storage
+    try:
+        old = type(instance).objects.get(pk=instance.pk)
+    except instance.DoesNotExist:
+        pass # Object is new,
+    else:
+        old_img = getattr(old, img_attr)
+        if (old_img == img): # Nothing changed
+            return img
+        if (old_img) and (old_img != img): # Field has changed
+            if os.path.isfile( old_img.path):
+                os.remove(old_img.path)
+
+    im = Image.open(img)
+    output = BytesIO()
+    # Resize the image, maintains aspect ratio
+    size = (RESIZED_IMG_SIZE, RESIZED_IMG_SIZE)
+    im.thumbnail(size, Image.ANTIALIAS)
+
+    # after modifications, save it to the output
+    im.save(output, format='JPEG', quality=RESIZED_IMG_QUALITY)
+    output.seek(0)
+    
+    print("COMPRESSED, size=", sys.getsizeof(output))
+
+    # change the imagefield value to be the newley modifed image value
+    return InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % img.name.split('.')[0], 'image/jpeg',
+                                    sys.getsizeof(output), None)
 
 """
     Custom Fields
@@ -39,14 +86,6 @@ class CustomEmailField(models.CharField):
 """ 
     MODELS
 """
-from . import managers
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-
 class Kantorpos(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     kode = models.CharField(max_length=8, null=True)
@@ -72,11 +111,11 @@ class User(AbstractUser):
 
     email = CustomEmailField(_('email'), unique=True, max_length=64)
     # uncomment kode dibawah supaya email jadi char, untuk mempermudah register/login
-    # email = models.CharField(_('email'), unique=True, max_length=66)
+    # email = models.CharField(_('email'), unique=True, max_length=64)
     first_name = models.CharField(_('nama depan'), max_length=64)
     last_name = models.CharField(_('nama belakang'), max_length=64, null=True, blank=True)
     hp = models.CharField(_('hp'), max_length=14)
-    password = models.CharField(_('password'), max_length=128)
+    password = models.CharField(_('password'), max_length=64)
     created_at = models.DateTimeField(auto_now_add=True)
 
     keranjang = models.ForeignKey(
@@ -128,11 +167,15 @@ class Produk(models.Model):
 
     def __str__(self):
         return self.nama_produk
-    def delete(self):
+    def delete(self, *args, **kwargs):
         # self.foto.delete()
         if os.path.isfile(self.foto.path):
             os.remove(self.foto.path)
-        super(self, Produk).delete()
+        super(Produk, self).delete()
+    def save(self, *args, **kwargs):
+        img_attr = 'foto'
+        self.foto = resize_and_compress(self, img_attr)
+        super(Produk, self).save(*args,**kwargs)
     
     class Meta:
         verbose_name_plural = 'Produk'
@@ -217,11 +260,15 @@ class Order(models.Model):
     bukti_pembayaran = models.ImageField(upload_to=path_and_rename, null=True, validators=[validate_image], help_text=help_text, )
     uploaded_at = models.DateTimeField(null=True)
 
-    def delete(self):
+    def delete(self, *args, **kwargs):
         # self.bukti_pembayaran.delete()
         if os.path.isfile(self.bukti_pembayaran.path):
             os.remove(self.bukti_pembayaran.path)
         super(Order, self).delete()
+    def save(self, *args, **kwargs):
+        img_attr = 'bukti_pembayaran'
+        self.bukti_pembayaran = resize_and_compress(self, img_attr)
+        super(Order, self).save(*args,**kwargs)
     class Meta:
         verbose_name_plural='order'
 
@@ -289,11 +336,15 @@ class Properti(models.Model):
 
     def __str__(self):
         return self.nama
-    def delete(self):
+    def delete(self, *args,**kwargs):
         # self.foto.delete()
         if os.path.isfile(self.foto.path):
             os.remove(self.foto.path)
         super(Properti, self).delete()
+    def save(self, *args, **kwargs):
+        img_attr = 'foto'
+        self.foto = resize_and_compress(self, img_attr)
+        super(Properti, self).save(*args,**kwargs)
     @property
     def harga_asli(self):
         return self.harga*1000000
