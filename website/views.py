@@ -24,11 +24,11 @@ from django.views.generic import ListView
 
 def index(request):
      shelf_barang = Produk.objects.order_by('-created_at').all()[:6]
-     shelf_workspace = Properti.objects.order_by('-created_at').all()[:4]
+     shelf_properti = Properti.objects.order_by('-created_at').all()[:4]
 	#	request.session.flush()
      data = {
           'shelf_barang': shelf_barang,
-          'shelf_workspace': shelf_workspace
+          'shelf_properti': shelf_properti
      }
      return render(request, 'index.html', data)
 def browse(request, jenis):
@@ -50,12 +50,13 @@ def register(request):
           form = SignUpForm(request.POST)
           if form.is_valid():
                user = form.save(commit=False)
-               keranjang = models.Keranjang(total=0)
-               keranjang.save()
-               user.keranjang = keranjang
-               user.is_active = False # Deactivate account
-               user.save()
-               form.save_m2m()
+               print(user)
+               # keranjang = models.Keranjang(total=0)
+               # keranjang.save()
+               # user.keranjang = keranjang
+               # user.is_active = False # Deactivate account
+               # user.save()
+               # form.save_m2m()
                current_site = get_current_site(request)
                subject = 'Aktivasi akun website kantorpos'
                message = render_to_string('emails/account_activation_email.html', {
@@ -65,7 +66,14 @@ def register(request):
                     'token': account_activation_token.make_token(user),
                })
                user.email_user(subject, message)
-
+               
+               keranjang = models.Keranjang(total=0)
+               keranjang.save()
+               user.keranjang = keranjang
+               user.is_active = False # Deactivate account
+               user.save()
+               form.save_m2m()
+               
                # messages.success(request, ('Please Confirm your email to complete registration.'))
                request.session['email'] = user.email
                return redirect('konfirmasi_email')
@@ -218,7 +226,7 @@ def keranjang(request):
                qty = int(request.POST['qty'])
                if item is None:
                     return http.HttpResponseNotFound()
-               # jika item workspace
+               # jika item properti
                # if item._meta.model_name == 'properti':
                #      request.session['WORKSPACE'] = True
                #      request.session['id_item'] = id_item
@@ -248,7 +256,7 @@ def keranjang(request):
      return render(request, 'keranjang.html', data)
 
 """return object yg sama seperti itemkeranjang model obj"""
-def get_item_keranjang_workspace(id_item, qty=1):
+def get_item_keranjang_properti(id_item, qty=1):
      if id_item is None:
           return None
      from collections import namedtuple
@@ -261,7 +269,7 @@ def get_item_keranjang_workspace(id_item, qty=1):
 def checkout(request):
      WORKSPACE = request.session.get('WORKSPACE')
      if WORKSPACE:
-          item_keranjang = get_item_keranjang_workspace(request.session.get('id_item'))
+          item_keranjang = get_item_keranjang_properti(request.session.get('id_item'))
           items = [item_keranjang]
           keranjang = {'total':item_keranjang.produk.harga, 'jumlah_item':item_keranjang.qty}
           kantorpos = []
@@ -297,7 +305,7 @@ def makeorder(request):
           WORKSPACE = request.session.get('WORKSPACE')
           if WORKSPACE:
                id_item = request.session.get('id_item')
-               item_keranjang = get_item_keranjang_workspace(request.session.get('id_item'))
+               item_keranjang = get_item_keranjang_properti(request.session.get('id_item'))
                # items = [item_keranjang]
                keranjang = models.Keranjang(**{'total':item_keranjang.produk.harga, 'jumlah_item':item_keranjang.qty})
                _data = {

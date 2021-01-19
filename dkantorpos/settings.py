@@ -116,7 +116,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 if DEBUG:
-    AUTH_PASSWORD_VALIDATORS = []
+    # AUTH_PASSWORD_VALIDATORS = []    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

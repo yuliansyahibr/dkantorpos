@@ -26,3 +26,5 @@ urlpatterns = [
     path('activate/<slug:uidb64>/<slug:token>', views.activate_account, name='activate'),
     path('b/<str:jenis>', views.browse, name='browse'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

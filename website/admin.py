@@ -43,6 +43,16 @@ class ProdukAdmin(admin.ModelAdmin):
             os.remove(obj.foto.path)
             obj.delete()
 
+class PropertiAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in models.Properti._meta.fields]
+    list_display.remove('deskripsi')
+    list_filter = ('harga', 'ketersediaan', 'created_at', 'updated_at')
+    actions = ['delete_selected']
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            os.remove(obj.foto.path)
+            obj.delete()
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = [field.name for field in models.Order._meta.fields]
     # list_display = ('id', 'jenis_item', 'kategori', 'nama_item', 'harga', 'deskripsi', 'jumlah_tersedia')
@@ -58,5 +68,5 @@ admin.site.register(models.Kategori)
 admin.site.register(models.Produk, ProdukAdmin)
 admin.site.register(models.Order, OrderAdmin)
 admin.site.register(models.Kantorpos)
-admin.site.register(models.Properti)
+admin.site.register(models.Properti, PropertiAdmin)
 admin.site.register(models.MetodePembayaran)
